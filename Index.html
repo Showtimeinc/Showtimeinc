@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It's Showtime Inc. | Luxury Home Theater Design & Installation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f0f1a;
+            --secondary: #1e1e2d;
+            --accent: #e50914;
+            --text: #f5f5f5;
+            --text-secondary: #b3b3b3;
+            --glass: rgba(31, 31, 46, 0.5);
+            --highlight: rgba(255, 255, 255, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(20, 100, 229, 0.15) 0%, transparent 50%);
+        }
+        
+        /* Glass Morphism Containers */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid var(--highlight);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Light Box CTA Buttons */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent), #b20710);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.6);
+        }
+        
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover:before {
+            left: 100%;
+        }
+        
+        /* Header/Navigation */
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 15, 26, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 10;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1586899028174-e09c81c6c6a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.7;
+            z-index: 1;
+        }
+        
+        /* Carousel Section */
+        .showcase {
+            padding: 5rem 5%;
+            background: var(--secondary);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease forwards;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .carousel {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+        
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .carousel-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 5rem 5%;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .service-card:nth-child(1) {
+            animation: fadeUp 1s ease forwards 0.2s;
+        }
+        
+        .service-card:nth-child(2) {
+            animation: fadeUp 1s ease forwards 0.4s;
+        }
+        
+        .service-card:nth-child(3) {
+            animation: fadeUp 1s ease forwards 0.6s;
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 5%;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 1;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease forwards;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-content p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-links a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Lazy Loading */
+        .lazy-load {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .lazy-load.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-bg {
+                width: 50%;
+                opacity: 0.5;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 5%;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 1.5rem;
+            }
+            
+            .hero {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                padding-top: 80px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-bg {
+                position: relative;
+                width: 100%;
+                height: 300px;
+                margin-top: 2rem;
+                opacity: 0.4;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .carousel-item {
+                width: 250px;
+                height: 166px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">It's <span>Showtime</span></a>
+        <nav>
+            <ul>
+                <li><a href="#showcase">Showcase</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content glass-card">
+            <h1>Elevate Your Entertainment Experience</h1>
+            <p>It's Showtime Inc. designs and installs bespoke home theater systems that transform your space into a cinematic paradise. Immerse yourself in unparalleled audiovisual perfection.</p>
+            <a href="#contact" class="cta-button">Schedule Consultation</a>
+        </div>
+        <div class="hero-bg lazy-load"></div>
+    </section>
+    
+    <!-- Showcase Carousel -->
+    <section class="showcase" id="showcase">
+        <div class="section-header lazy-load">
+            <h2>Our Signature Installations</h2>
+            <p>Each theater is meticulously crafted to match your space, style, and sensory expectations.</p>
+        </div>
+        
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-item lazy-load">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" alt="Luxury Home Theater">
+                </div>
+                <div class="carousel-item lazy-load">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Modern Home Cinema">
+                </div>
+                <div class="carousel-item lazy-load">
+                    <img src="https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Custom Theater Seating">
+                </div>
+                <div class="carousel-item lazy-load">
+                    <img src="https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="High-End Audio System">
+                </div>
+                <div class="carousel-item lazy-load">
+                    <img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Theater Lighting">
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-nav">
+            <div class="carousel-dot active"></div>
+            <div class="carousel-dot"></div>
+            <div class="carousel-dot"></div>
+            <div class="carousel-dot"></div>
+            <div class="carousel-dot"></div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header lazy-load">
+            <h2>Comprehensive Theater Solutions</h2>
+            <p>From concept to curtain call, we handle every detail of your premium home entertainment system.</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card glass-card">
+                <div class="service-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3>Custom Theater Design</h3>
+                <p>Our designers create theater layouts optimized for your space, ensuring perfect sightlines and acoustic performance tailored to your preferences.</p>
+            </div>
+            
+            <div class="service-card glass-card">
+                <div class="service-icon">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+                <h3>Premium Audio Systems</h3>
+                <p>Experience sound that moves you with our selection of world-class speakers and acoustic treatments calibrated to your room's unique characteristics.</p>
+            </div>
+            
+            <div class="service-card glass-card">
+                <div class="service-icon">
+                    <i class="fas fa-couch"></i>
+                </div>
+                <h3>Luxury Seating</h3>
+                <p>Choose from our curated collection of premium theater seating with features like motorized recline, LED lighting, and built-in cup holders.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-content glass-card">
+            <h2>Ready for Your Private Premiere?</h2>
+            <p>Contact us today to begin designing your dream home theater. Our experts will guide you through every step of the process to create a system that exceeds your expectations.</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="logo">It's <span>Showtime</span></a>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#showcase">Portfolio</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            
+            <p class="copyright">© 2023 It's Showtime Inc. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Lazy Loading Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyLoadElements = document.querySelectorAll('.lazy-load');
+            
+            const lazyLoadObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        lazyLoadObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            lazyLoadElements.forEach(element => {
+                lazyLoadObserver.observe(element);
+            });
+            
+            // Carousel Functionality
+            const carousel = document.querySelector('.carousel');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.carousel-dot');
+            let currentIndex = 0;
+            const itemWidth = 300; // Width + gap
+            const visibleItems = Math.floor(window.innerWidth / itemWidth) || 1;
+            
+            function updateCarousel() {
+                const offset = -currentIndex * itemWidth;
+                carousel.style.transform = `translateX(${offset}px)`;
+                
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+            
+            // Auto-advance carousel
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % (carouselItems.length - visibleItems + 1);
+                updateCarousel();
+            }, 5000);
+            
+            // Responsive adjustments
+            window.addEventListener('resize', function() {
+                const newVisibleItems = Math.floor(window.innerWidth / itemWidth) || 1;
+                if (newVisibleItems !== visibleItems) {
+                    currentIndex = 0;
+                    updateCarousel();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
