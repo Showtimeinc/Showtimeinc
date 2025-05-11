@@ -1,0 +1,159 @@
+<!-- In your HTML -->
+
+<!-- Add this to your CSS -->
+<style>
+.qualification-flow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--secondary);
+    padding: 2rem;
+    border-radius: 16px;
+    z-index: 10000;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+}
+
+.qualification-step {
+    display: none;
+}
+
+.qualification-step.active {
+    display: block;
+}
+
+.qualification-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.qualification-btn {
+    background: var(--glass);
+    border: 1px solid var(--highlight);
+    color: var(--text);
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.qualification-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.qualification-flow input {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: var(--glass);
+    border: 1px solid var(--highlight);
+    color: var(--text);
+    border-radius: 8px;
+}
+
+.qualification-disqualify {
+    text-align: center;
+}
+
+.qualification-disqualify a {
+    color: var(--accent);
+    text-decoration: none;
+}
+</style>
+
+<!-- Add this JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Original CTA button opens qualification flow
+    document.querySelectorAll('.cta-button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            if(this.getAttribute('href') === '#contact') {
+                e.preventDefault();
+                document.getElementById('qualificationFlow').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+    
+    // Qualification flow logic
+    const steps = document.querySelectorAll('.qualification-step');
+    let currentStep = 0;
+    let qualificationData = {};
+    
+    document.querySelectorAll('.qualification-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const step = this.closest('.qualification-step');
+            const question = step.querySelector('h3').textContent;
+            const answer = this.dataset.answer;
+            
+            // Store the answer
+            qualificationData[`q${currentStep + 1}`] = { question, answer };
+            
+            // Move to next step or finish
+            if(currentStep < steps.length - 1) {
+                steps[currentStep].classList.remove('active');
+                currentStep++;
+                steps[currentStep].classList.add('active');
+            } else {
+                evaluateQualification();
+            }
+        });
+    });
+    
+    function evaluateQualification() {
+        const isHomeowner = qualificationData.q1.answer === 'yes' || qualificationData.q1.answer === 'authorized';
+        const hasBudget = qualificationData.q2.answer !== 'unsure';
+        const isReady = qualificationData.q3.answer === '1month' || qualificationData.q3.answer === '3months';
+        
+        if(isHomeowner && hasBudget && isReady) {
+            document.getElementById('qualifiedLead').style.display = 'block';
+            document.querySelector('.qualification-step.active').style.display = 'none';
+            
+            // Send data to Facebook Pixel
+            fbq('track', 'Lead', {
+                content_name: 'Qualified Lead',
+                content_category: 'Home Theater Consultation'
+            });
+        } else {
+            document.getElementById('disqualifiedLead').style.display = 'block';
+            document.querySelector('.qualification-step.active').style.display = 'none';
+            
+            // Send data to Facebook Pixel
+            fbq('track', 'Lead', {
+                content_name: 'Disqualified Lead',
+                content_category: 'Not Right Fit'
+            });
+        }
+    }
+    
+    // Close modal when clicking outside
+    document.getElementById('qualificationFlow').addEventListener('click', function(e) {
+        if(e.target === this) {
+            this.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Form submission
+    document.getElementById('consultationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Here you would send the form data to your CRM/email
+        alert('Thank you! We\'ll contact you shortly to schedule your consultation.');
+        document.getElementById('qualificationFlow').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        
+        // Send conversion to Facebook Pixel
+        fbq('track', 'CompleteRegistration', {
+            content_name: 'Consultation Scheduled',
+            status: 'completed'
+        });
+    });
+});
+</script>
