@@ -731,6 +731,7 @@
             transform: translate(-50%, -50%);
         }
         
+          /* Updated Contact Form Styles */
         .qualification-form {
             display: grid;
             gap: 1.25rem;
@@ -743,9 +744,10 @@
             gap: 0.5rem;
         }
         
-        .form-group label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .form-group.required label:after {
+            content: '*';
+            color: var(--accent);
+            margin-left: 4px;
         }
         
         .form-control {
@@ -764,6 +766,12 @@
             box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.3);
         }
         
+        .optional-note {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: -0.5rem;
+        }
         .qualification-navigation {
             display: flex;
             justify-content: space-between;
