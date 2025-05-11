@@ -1617,57 +1617,59 @@
                 });
             });
             
-            // Form submission
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+            // Updated Form Validation - Only require name and phone
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Only gather required fields
+            qualificationData.name = document.getElementById('name').value;
+            qualificationData.phone = document.getElementById('phone').value;
+            
+            // Optional fields
+            qualificationData.email = document.getElementById('email').value || 'Not provided';
+            qualificationData.notes = document.getElementById('notes').value || 'None';
+            
+            // Determine if qualified (simplified logic)
+            const isQualified = qualificationData.homeownerStatus !== 'no';
+            
+            if (isQualified) {
+                qualificationSteps.forEach(step => step.classList.remove('active'));
+                document.getElementById('qualifiedLead').style.display = 'block';
                 
-                // Gather form data
-                qualificationData.name = document.getElementById('name').value;
-                qualificationData.email = document.getElementById('email').value;
-                qualificationData.phone = document.getElementById('phone').value;
-                qualificationData.location = document.getElementById('location').value;
-                qualificationData.notes = document.getElementById('notes').value;
-                
-                // Here you would normally send the data to your server
-                // For demo purposes, we'll just show the success screen
-                
-                // Determine if qualified (basic example)
-                const isQualified = qualificationData.homeownerStatus !== 'no' && 
-                                   qualificationData.budget !== 'unsure' && 
-                                   qualificationData.timeline !== 'planning';
-                
-                if (isQualified) {
-                    // Show success screen
-                    qualificationSteps.forEach(step => step.classList.remove('active'));
-                    document.getElementById('qualifiedLead').style.display = 'block';
-                    
-                    // Track conversion
-                    if(typeof fbq !== 'undefined') {
-                        fbq('track', 'Lead', qualificationData);
-                    }
-                    
-                    if(typeof gtag !== 'undefined') {
-                        gtag('event', 'qualified_lead', {
-                            'event_category': 'conversion',
-                            'event_label': 'Qualified Lead Submitted'
-                        });
-                    }
-                } else {
-                    // Show disqualification screen
-                    qualificationSteps.forEach(step => step.classList.remove('active'));
-                    document.getElementById('disqualifiedLead').style.display = 'block';
-                    
-                    // Track event
-                    if(typeof gtag !== 'undefined') {
-                        gtag('event', 'disqualified_lead', {
-                            'event_category': 'engagement',
-                            'event_label': 'Disqualified Lead'
-                        });
-                    }
+                // Track conversion
+                if(typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead', {
+                        content_name: 'Minimal Info Lead',
+                        content_category: 'Quick Submission'
+                    });
                 }
-                
-                // In a real implementation, you would send the data to your server here
-                console.log('Qualification data:', qualificationData);
+            } else {
+                qualificationSteps.forEach(step => step.classList.remove('active'));
+                document.getElementById('disqualifiedLead').style.display = 'block';
+            }
+            
+            console.log('Qualification data:', qualificationData);
+            
+            /* 
+            // Example minimal API call:
+            fetch('/api/quick-lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: qualificationData.name,
+                    phone: qualificationData.phone,
+                    // Optional fields only if provided
+                    ...(qualificationData.email !== 'Not provided' && { email: qualificationData.email }),
+                    ...(qualificationData.notes !== 'None' && { notes: qualificationData.notes }),
+                    metadata: {
+                        services: qualificationData.services,
+                        budget: qualificationData.budget,
+                        timeline: qualificationData.timeline
+                    }
+                })
+            })
+            */
+        });
                 
                 // Example fetch request (commented out):
                 /*
@@ -1724,7 +1726,6 @@
                 document.getElementById('name').autocomplete = 'name';
                 document.getElementById('email').autocomplete = 'email';
                 document.getElementById('phone').autocomplete = 'tel';
-                document.getElementById('location').autocomplete = 'address-level2';
             }
         });
     </script>
