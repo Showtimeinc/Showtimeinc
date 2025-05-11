@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It's Showtime Inc. | Premium Home Theater Design & Installation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* [Previous CSS remains exactly the same until the contact form section] */
+        
+        /* Updated Contact Form Styles */
+        .qualification-form {
+            display: grid;
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-group.required label:after {
+            content: '*';
+            color: var(--accent);
+            margin-left: 4px;
+        }
+        
+        .form-control {
+            background: var(--glass);
+            border: 1px solid var(--highlight);
+            color: var(--text);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.3);
+        }
+        
+        .optional-note {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: -0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- [All previous HTML remains the same until the contact form section] -->
+
+    <!-- Step 5: Contact Information - Simplified Version -->
+    <div class="qualification-step" data-step="5">
+        <div class="qualification-header">
+            <h3>Just Two Quick Details</h3>
+            <p>We only need your name and number to get started</p>
+        </div>
+        
+        <form class="qualification-form" id="contactForm">
+            <div class="form-group required">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" class="form-control" required autocomplete="given-name">
+            </div>
+            
+            <div class="form-group required">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" class="form-control" required autocomplete="tel">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email (optional)</label>
+                <input type="email" id="email" class="form-control" autocomplete="email">
+                <p class="optional-note">For appointment reminders only</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">Anything else we should know? (optional)</label>
+                <textarea id="notes" class="form-control" rows="2"></textarea>
+            </div>
+            
+            <button type="submit" class="nav-btn btn-submit">
+                Get My Free Consultation
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+        
+        <div class="qualification-navigation">
+            <button class="nav-btn btn-back"><i class="fas fa-arrow-left"></i> Back</button>
+        </div>
+    </div>
+
+    <!-- [Rest of the HTML remains the same] -->
+
+    <script>
+        // [Previous JavaScript remains the same until the form validation]
+
+        // Updated Form Validation - Only require name and phone
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Only gather required fields
+            qualificationData.name = document.getElementById('name').value;
+            qualificationData.phone = document.getElementById('phone').value;
+            
+            // Optional fields
+            qualificationData.email = document.getElementById('email').value || 'Not provided';
+            qualificationData.notes = document.getElementById('notes').value || 'None';
+            
+            // Determine if qualified (simplified logic)
+            const isQualified = qualificationData.homeownerStatus !== 'no';
+            
+            if (isQualified) {
+                qualificationSteps.forEach(step => step.classList.remove('active'));
+                document.getElementById('qualifiedLead').style.display = 'block';
+                
+                // Track conversion
+                if(typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead', {
+                        content_name: 'Minimal Info Lead',
+                        content_category: 'Quick Submission'
+                    });
+                }
+            } else {
+                qualificationSteps.forEach(step => step.classList.remove('active'));
+                document.getElementById('disqualifiedLead').style.display = 'block';
+            }
+            
+            console.log('Qualification data:', qualificationData);
+            
+            /* 
+            // Example minimal API call:
+            fetch('/api/quick-lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: qualificationData.name,
+                    phone: qualificationData.phone,
+                    // Optional fields only if provided
+                    ...(qualificationData.email !== 'Not provided' && { email: qualificationData.email }),
+                    ...(qualificationData.notes !== 'None' && { notes: qualificationData.notes }),
+                    metadata: {
+                        services: qualificationData.services,
+                        budget: qualificationData.budget,
+                        timeline: qualificationData.timeline
+                    }
+                })
+            })
+            */
+        });
+
+        // [Rest of the JavaScript remains the same]
+    </script>
+</body>
+</html>
