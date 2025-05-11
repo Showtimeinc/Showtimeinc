@@ -1301,49 +1301,45 @@
                 </div>
             </div>
             
-            <!-- Step 5: Contact Information -->
-            <div class="qualification-step" data-step="5">
-                <div class="qualification-header">
-                    <h3>Almost Done! How Can We Reach You?</h3>
-                    <p>We'll use this information to schedule your consultation</p>
-                </div>
-                
-                <form class="qualification-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" class="form-control" required autocomplete="name">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-control" required autocomplete="email">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" class="form-control" required autocomplete="tel">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="location">Property Location (City/State)</label>
-                        <input type="text" id="location" class="form-control" required autocomplete="address-level2">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="notes">Any specific requirements or notes?</label>
-                        <textarea id="notes" class="form-control" rows="3"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="nav-btn btn-submit">
-                        Submit & Schedule Consultation
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </form>
-                
-                <div class="qualification-navigation">
-                    <button class="nav-btn btn-back"><i class="fas fa-arrow-left"></i> Back</button>
-                </div>
+          <!-- Step 5: Contact Information - Simplified Version -->
+    <div class="qualification-step" data-step="5">
+        <div class="qualification-header">
+            <h3>Just Two Quick Details</h3>
+            <p>We only need your name and number to get started</p>
+        </div>
+        
+        <form class="qualification-form" id="contactForm">
+            <div class="form-group required">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" class="form-control" required autocomplete="given-name">
             </div>
+            
+            <div class="form-group required">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" class="form-control" required autocomplete="tel">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email (optional)</label>
+                <input type="email" id="email" class="form-control" autocomplete="email">
+                <p class="optional-note">For appointment reminders only</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">Anything else we should know? (optional)</label>
+                <textarea id="notes" class="form-control" rows="2"></textarea>
+            </div>
+            
+            <button type="submit" class="nav-btn btn-submit">
+                Get My Free Consultation
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+        
+        <div class="qualification-navigation">
+            <button class="nav-btn btn-back"><i class="fas fa-arrow-left"></i> Back</button>
+        </div>
+    </div>
             
             <!-- Success Screen -->
             <div class="qualification-success" id="qualifiedLead">
