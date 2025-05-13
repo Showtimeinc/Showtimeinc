@@ -1,0 +1,95 @@
+<!-- thank-you.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You!</title>
+  <link rel="stylesheet" href="styles.css" /> <!-- If your styles are in a separate file -->
+  <style>
+    :root {
+      --primary: #0a0a12;
+      --secondary: #161622;
+      --accent: #e50914;
+      --accent-light: #ff3a3a;
+      --text: #f8f8f8;
+      --glass: rgba(31, 31, 46, 0.6);
+      --highlight: rgba(255, 255, 255, 0.15);
+    }
+
+    body {
+      margin: 0;
+      background: var(--primary);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .thank-you-wrapper {
+      max-width: 500px;
+      padding: 2.5rem;
+      border-radius: 16px;
+      background: var(--glass);
+      border: 1px solid var(--highlight);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    .thank-you-wrapper h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .thank-you-wrapper p {
+      color: var(--text);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="thank-you-wrapper">
+    <h1>You're All Set!</h1>
+    <p>We’ll reach out to schedule your consultation soon.</p>
+    <a class="cta-button" href="https://facebook.com" target="_blank">Return to Facebook</a>
+  </div>
+</body>
+</html>
