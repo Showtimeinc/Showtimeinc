@@ -1447,7 +1447,7 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
     <section class="showcase" id="showcase">
         <div class="section-header lazy-load">
             <h2>Our Signature Installations</h2>
-            <p>Each theater is thoughtfully crafted to deliver an entertainment experience that reflects your style.</p>
+            <p>Each theater is thoughtfully crafted to deliver an entertainment ambiance that reflects your style.</p>
         </div>
         
         <div class="carousel-container">
@@ -1467,12 +1467,13 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 <div class="carousel-item lazy-load">
                     <img src="URC-Lifestyle-Image-Residential-01.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Theater Lighting" loading="lazy">
                 </div>
-                </div>
+              </div>
             </div>
         </div>
         
         <div class="carousel-nav">
             <div class="carousel-dot active"></div>
+            <div class="carousel-dot"></div>
             <div class="carousel-dot"></div>
             <div class="carousel-dot"></div>
             <div class="carousel-dot"></div>
@@ -1679,7 +1680,13 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                         <span>No, just exploring options</span>
                     </button>
                 </div>
-                
+                <form class="qualification-form" id="contactForm" 
+                     action="https://formspree.io/f/xjvnqkzw" method="POST">
+               <input type="hidden" name="_replyto" id="replyToInput">
+               <input type="hidden" name="_subject" value="New Theater Project Inquiry - showtimeinc.com">
+               <input type="hidden" name="_cc" value="itshowtime@msn.com">
+  <!-- rest of your form fields -->
+            
                 <div class="qualification-navigation">
                     <button class="nav-btn btn-next" disabled>Next <i class="fas fa-arrow-right"></i></button>
                 </div>
@@ -1804,8 +1811,6 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 
                 <form class="qualification-form" id="contactForm">
                     <div class="form-group required">
-                        <form  action="https://formspree.io/f/mwporqwb"
-                               method="POST">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" class="form-control" required autocomplete="given-name">
                     </div>
@@ -1872,7 +1877,6 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 </div>
             </div>
         </div>
-    </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
