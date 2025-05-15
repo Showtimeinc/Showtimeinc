@@ -36,6 +36,40 @@
             overflow-x: hidden;
         }
         
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        .video-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        
         /* Parallax Background Layers */
         .parallax-container {
             position: fixed;
@@ -57,22 +91,21 @@
         }
         
         .layer-1 {
-            background-image: url('');
-                radial-gradient(circle at 25% 25%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+            background-image: radial-gradient(circle at 25% 25%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 75% 75%, rgba(20, 100, 229, 0.1) 0%, transparent 50%);
             transform: translateZ(-4px) scale(2);
             opacity: 0.8;
         }
         
         .layer-2 {
-            background-image: url('');
+            background-image: none;
             transform: translateZ(-2px) scale(1.5);
             opacity: 0.6;
             mask-image: linear-gradient(to left, rgba(0,0,0,1) 70%, rgba(0,0,0,0));
         }
         
         .layer-3 {
-            background-image: url('');
+            background-image: none;
             transform: translateZ(0);
             opacity: 0.4;
             mask-image: linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0));
@@ -466,6 +499,64 @@
             margin-bottom: 2rem;
             font-size: 1.1rem;
             line-height: 1.6;
+        }
+        
+        /* Contact Form Section */
+        .contact-form-section {
+            padding: 6rem 5%;
+            position: relative;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--highlight);
+            background: var(--glass);
+            color: var(--text);
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+        }
+        
+        .form-status {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+        
+        .form-status.success {
+            background: rgba(74, 222, 128, 0.2);
+            color: var(--success);
+            display: block;
+        }
+        
+        .form-status.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--error);
+            display: block;
         }
         
         /* Modern Footer */
@@ -954,6 +1045,99 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* Video Modal */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .video-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+        }
+        
+        .close-video-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-video-modal:hover {
+            color: var(--accent);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Technology Partners */
+        .partners {
+            padding: 6rem 5%;
+            background: var(--secondary);
+        }
+        
+        .partners-carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .partner-logo {
+            max-width: 180px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+        }
+        
+        .partner-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+        
+        .partner-logo img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        
         /* Responsive Design */
         @media (max-width: 1024px) {
             .hero h1 {
@@ -1033,6 +1217,10 @@
             .parallax-layer {
                 opacity: 0.4;
             }
+            
+            .form-container {
+                padding: 2rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1078,314 +1266,11 @@
                 bottom: 1rem;
                 right: 1rem;
             }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
         }
-        /* Add these styles to your CSS */
-
-/* Video Modal */
-.video-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.video-modal.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.video-modal-content {
-    position: relative;
-    width: 90%;
-    max-width: 1200px;
-    max-height: 90vh;
-}
-
-.close-video-modal {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close-video-modal:hover {
-    color: var(--accent);
-}
-
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    height: 0;
-    overflow: hidden;
-}
-
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* Testimonials Section */
-.testimonials {
-    padding: 6rem 5%;
-    background: var(--primary);
-}
-
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.testimonial-card {
-    padding: 2rem;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease;
-}
-
-.testimonial-card.loaded {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.testimonial-rating {
-    color: var(--accent);
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-}
-
-.testimonial-text {
-    font-style: italic;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.testimonial-author img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.testimonial-author h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
-}
-
-.testimonial-author p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-.video-cta {
-    text-align: center;
-    margin-top: 3rem;
-}
-
-.video-play-button {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.video-play-button:hover {
-    background: var(--accent-light);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
-}
-
-/* Technology Partners */
-.partners {
-    padding: 6rem 5%;
-    background: var(--secondary);
-}
-
-.partners-carousel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 3rem;
-    margin-top: 3rem;
-}
-
-.partner-logo {
-    max-width: 180px;
-    opacity: 0.7;
-    transition: all 0.3s ease;
-    filter: grayscale(100%);
-}
-
-.partner-logo:hover {
-    opacity: 1;
-    filter: grayscale(0%);
-}
-
-.partner-logo img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-
-/* Animation for partner logos */
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-.partner-logo:nth-child(odd):hover {
-    animation: float 3s ease-in-out infinite;
-}
-
-/* Dark mode toggle */
-.dark-mode-toggle {
-    position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    z-index: 999;
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--highlight);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dark-mode-toggle:hover {
-    background: rgba(229, 9, 20, 0.2);
-    border-color: var(--accent);
-}
-
-.dark-mode-toggle i {
-    font-size: 1.25rem;
-    color: var(--text);
-}
-
-/* Cookie Consent Banner */
-.cookie-consent {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--secondary);
-    padding: 1.5rem;
-    z-index: 9999;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-    border-top: 1px solid var(--highlight);
-}
-
-.cookie-consent.active {
-    transform: translateY(0);
-}
-
-.cookie-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.cookie-text {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    max-width: 800px;
-}
-
-.cookie-buttons {
-    display: flex;
-    gap: 1rem;
-}
-
-.cookie-btn {
-    padding: 0.5rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.cookie-btn.accept {
-    background: var(--accent);
-    color: white;
-    border: none;
-}
-
-.cookie-btn.decline {
-    background: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--highlight);
-}
-
-.cookie-btn:hover {
-    opacity: 0.9;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .testimonials-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .partner-logo {
-        max-width: 120px;
-    }
-    
-    .cookie-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .cookie-buttons {
-        width: 100%;
-        justify-content: center;
-    }
-}
     </style>
    <!-- Meta Pixel Code -->
 <script>
@@ -1406,6 +1291,17 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
 <!-- End Meta Pixel Code --> 
 </head>
 <body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <div class="video-wrapper">
+            <video autoplay muted loop id="parallaxVideo">
+                <source src="Movie.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video-overlay"></div>
+    </div>
+    
     <!-- Parallax Background Layers -->
     <div class="parallax-container">
         <div class="parallax-layer layer-1"></div>
@@ -1415,7 +1311,7 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
     
     <!-- Header -->
     <header id="mainHeader">
-        <a href="#ChatGPT Image Apr 24, 2025, 04_07_07 PM.png" class="logo">
+        <a href="#" class="logo">
             <i class="fas fa-film"></i>
             <span>It's Showtime Inc.</span>
         </a>
@@ -1467,7 +1363,6 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 <div class="carousel-item lazy-load">
                     <img src="URC-Lifestyle-Image-Residential-01.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Theater Lighting" loading="lazy">
                 </div>
-              </div>
             </div>
         </div>
         
@@ -1521,70 +1416,105 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 <div class="service-icon">
                     <i class="fas fa-film"></i>
                 </div>
-                <h3>Single Touch Univeral Remotes and Touch Screen Keypads</h3>
+                <h3>Single Touch Universal Remotes and Touch Screen Keypads</h3>
                 <p>Choose from our stylish Catalog Line</p>
                 <ul class="service-features">
                     <li>Effortless Control: Seamlessly Manage Your Entire Smart Home with One URC Remote</li>
                     <li>Luxury Meets Simplicity: URC Interfaces Blend Elegance with Cutting-Edge Tech</li>
                     <li>Voice, App, or Touchscreen – URC Lets You Choose How You Control Your World</li>
-                    <li>Trusted by Integrators Nationwide: Discover Why URC Is the Pro’s Choice</li>
+                    <li>Trusted by Integrators Nationwide: Discover Why URC Is the Pro's Choice</li>
                 </ul>
             </div>
         </div>
     </section>
     
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <div class="cta-content glass-card">
-            <h2>Ready for Your Private Premiere?</h2>
-            <p>Contact us today to begin designing your dream home theater. Our experts will guide you through every step of the process to create a system that exceeds your expectations.</p>
-            <a href="#" class="cta-button" id="bottomCtaButton">
-                Start Your Project
-                <i class="fas fa-arrow-right"></i>
-            </a>
+    <!-- Contact Form Section -->
+    <section class="contact-form-section" id="contact">
+        <div class="section-header lazy-load">
+            <h2>Contact Us</h2>
+            <p>Fill out the form below and we'll get back to you shortly</p>
+        </div>
+        
+        <div class="form-container glass-card">
+            <form id="contactForm" action="https://formspree.io/f/itshowtime@msn.com" method="POST">
+                <div class="form-group">
+                    <label for="form-name">Your Name*</label>
+                    <input type="text" id="form-name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="form-email">Email*</label>
+                    <input type="email" id="form-email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="form-phone">Phone Number</label>
+                    <input type="tel" id="form-phone" name="phone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="form-service">Service Interested In</label>
+                    <select id="form-service" name="service">
+                        <option value="">Select a service</option>
+                        <option value="Custom Theater">Custom Theater</option>
+                        <option value="Audio Systems">Audio Systems</option>
+                        <option value="Home Automation">Home Automation</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="form-message">Your Message*</label>
+                    <textarea id="form-message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="cta-button">
+                    Send Message
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                
+                <div id="form-status" class="form-status"></div>
+            </form>
         </div>
     </section>
 
-
-<!-- Video Background Modal -->
-<div class="video-modal" id="videoModal">
-    <div class="video-modal-content">
-        <button class="close-video-modal" id="closeVideoModal">&times;</button>
-        <div class="video-container">
-            <iframe id="featureVideo" width="100%" height="100%" src="Movie.mp4" frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+    <!-- Video Background Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="close-video-modal" id="closeVideoModal">&times;</button>
+            <div class="video-container">
+                <iframe id="featureVideo" width="100%" height="100%" src="Movie.mp4" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>
+            </div>
         </div>
     </div>
-</div>
 
-
-
-<!-- Technology Partners Section -->
-<section class="partners">
-    <div class="section-header lazy-load">
-        <h2>We Bring Your Home Up to Speed With Popular Products that deliver exceptional sound and visuals</h2>
-        <p>We work with the industry's leading brands to deliver only the best quality.</p>
-    </div>
-    
-    <div class="partners-carousel">
-        <div class="partner-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Dolby_Laboratories_logo.svg" alt="Dolby" loading="lazy">
+    <!-- Technology Partners Section -->
+    <section class="partners">
+        <div class="section-header lazy-load">
+            <h2>We Bring Your Home Up to Speed With Popular Products that deliver exceptional sound and visuals</h2>
+            <p>We work with the industry's leading brands to deliver only the best quality.</p>
         </div>
-        <div class="partner-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Sonos_logo_black.svg" alt="Sonos" loading="lazy">
+        
+        <div class="partners-carousel">
+            <div class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Dolby_Laboratories_logo.svg" alt="Dolby" loading="lazy">
+            </div>
+            <div class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Sonos_logo_black.svg" alt="Sonos" loading="lazy">
+            </div>
+            <div class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Bang_%26_Olufsen_logo.svg" alt="Bang & Olufsen" loading="lazy">
+            </div>
+            <div class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Lutron_logo.svg" alt="Lutron" loading="lazy">
+            </div>
+            <div class="partner-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Sony_logo.svg" alt="Sony" loading="lazy">
+            </div>
         </div>
-        <div class="partner-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Bang_%26_Olufsen_logo.svg" alt="Bang & Olufsen" loading="lazy">
-        </div>
-        <div class="partner-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Lutron_logo.svg" alt="Lutron" loading="lazy">
-        </div>
-        <div class="partner-logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Sony_logo.svg" alt="Sony" loading="lazy">
-        </div>
-    </div>
-</section>
+    </section>
     
     <!-- Footer -->
     <footer>
@@ -1614,15 +1544,15 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 <ul class="footer-links">
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Our Process</a></li>
-                    <li><a href="#">Business Credentials</li>
+                    <li><a href="#">Business Credentials</a></li>
                 </ul>
             </div>
             
             <div class="footer-col">
                 <h3 class="footer-heading">Contact</h3>
                 <ul class="footer-links">
-                    <li><a href="mailto:info@showtimeinc.com">itshowtime@msn.com</a></li>
-                    <li><br>Long Beach, CA 90807</li>
+                    <li><a href="mailto:itshowtime@msn.com">itshowtime@msn.com</a></li>
+                    <li>Long Beach, CA 90807</li>
                 </ul>
             </div>
         </div>
@@ -1661,7 +1591,7 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                     <h3>Let's Find Your Perfect Theater Solution</h3>
                     <p>Answer a few quick questions to help us tailor our recommendations</p>
                 </div>
-               <form>
+                
                 <div class="qualification-options">
                     <button class="qualification-btn" data-answer="yes">
                         <i class="fas fa-home"></i>
@@ -1799,7 +1729,7 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                     <p>We only need your name and number to get started</p>
                 </div>
                 
-                <form class="qualification-form" id="contactForm">
+                <form class="qualification-form" id="qualificationForm">
                     <div class="form-group required">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" class="form-control" required autocomplete="given-name">
@@ -1825,9 +1755,9 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                         Get My Free Consultation
                         <i class="fas fa-arrow-right"></i>
                     </button>
-                </form>  
+                    
                     <div class="loading-spinner" id="formSpinner"></div>
-                
+                </form>
                 
                 <div class="qualification-navigation">
                     <button class="nav-btn btn-back"><i class="fas fa-arrow-left"></i> Back</button>
@@ -1855,7 +1785,7 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 <div class="qualification-header">
                     <i class="fas fa-info-circle" style="font-size: 4rem; color: var(--warning); margin-bottom: 1rem;"></i>
                     <h3>Thanks For Your Interest!</h3>
-                    <p>We usually responde in 24 hours 48 hours at the latest.</p>
+                    <p>We usually respond within 24 hours (48 hours at the latest).</p>
                     <p>Thank You.</p>
                 </div>
                 
@@ -1867,135 +1797,174 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 </div>
             </div>
         </div>
+    </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Video Background
+            const videoBg = document.getElementById('parallaxVideo');
+            if (videoBg) {
+                videoBg.play().catch(e => console.log('Video autoplay prevented:', e));
+            }
+            
+            // Video Modal
+            const videoModal = document.getElementById('videoModal');
+            const closeVideoModal = document.getElementById('closeVideoModal');
+            const videoButtons = document.querySelectorAll('.video-play-button');
+            
+            if (closeVideoModal) {
+                closeVideoModal.addEventListener('click', function() {
+                    videoModal.classList.remove('active');
+                });
+            }
+            
+            if (videoModal) {
+                videoModal.addEventListener('click', function(e) {
+                    if (e.target === videoModal) {
+                        videoModal.classList.remove('active');
+                    }
+                });
+            }
+            
             // Parallax Effect
             const parallaxContainer = document.querySelector('.parallax-container');
             const layers = document.querySelectorAll('.parallax-layer');
             
-            window.addEventListener('scroll', function() {
-                const scrollPosition = window.pageYOffset;
-                
-                layers.forEach(layer => {
-                    const speed = parseFloat(layer.style.transform.match(/translateZ\(([^)]+)\)/)[1]);
-                    const yPos = -(scrollPosition * speed * 0.5);
-                    layer.style.transform = `translateZ(${speed}px) translateY(${yPos}px) scale(${1 + Math.abs(speed)/10})`;
+            if (parallaxContainer && layers.length > 0) {
+                window.addEventListener('scroll', function() {
+                    const scrollPosition = window.pageYOffset;
+                    
+                    layers.forEach(layer => {
+                        const speed = parseFloat(layer.style.transform.match(/translateZ\(([^)]+)\)/)[1]);
+                        const yPos = -(scrollPosition * speed * 0.5);
+                        layer.style.transform = `translateZ(${speed}px) translateY(${yPos}px) scale(${1 + Math.abs(speed)/10})`;
+                    });
                 });
-            });
+            }
             
             // Header scroll effect
             const header = document.getElementById('mainHeader');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
             
             // Mobile menu toggle
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainNav = document.getElementById('mainNav');
             
-            mobileMenuBtn.addEventListener('click', function() {
-                mainNav.classList.toggle('active');
-                mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
-                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            });
-            
-            // Close mobile menu when clicking a link
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', function() {
-                    if (mainNav.classList.contains('active')) {
-                        mainNav.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
                 });
-            });
+                
+                // Close mobile menu when clicking a link
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                    });
+                });
+            }
             
             // Lazy Loading Animation
             const lazyLoadElements = document.querySelectorAll('.lazy-load');
             
-            const lazyLoadObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('loaded');
-                        lazyLoadObserver.unobserve(entry.target);
-                    }
+            if (lazyLoadElements.length > 0) {
+                const lazyLoadObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('loaded');
+                            lazyLoadObserver.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1
                 });
-            }, {
-                threshold: 0.1
-            });
-            
-            lazyLoadElements.forEach(element => {
-                lazyLoadObserver.observe(element);
-            });
+                
+                lazyLoadElements.forEach(element => {
+                    lazyLoadObserver.observe(element);
+                });
+            }
             
             // Carousel Functionality
             const carousel = document.querySelector('.carousel');
             const carouselItems = document.querySelectorAll('.carousel-item');
             const dots = document.querySelectorAll('.carousel-dot');
-            let currentIndex = 0;
-            const itemWidth = 320; // Width + gap
-            let visibleItems = Math.floor(window.innerWidth / itemWidth) || 1;
             
-            function updateCarousel() {
-                const offset = -currentIndex * itemWidth;
-                carousel.style.transform = `translateX(${offset}px)`;
+            if (carousel && carouselItems.length > 0 && dots.length > 0) {
+                let currentIndex = 0;
+                const itemWidth = 320; // Width + gap
+                let visibleItems = Math.floor(window.innerWidth / itemWidth) || 1;
+                
+                function updateCarousel() {
+                    const offset = -currentIndex * itemWidth;
+                    carousel.style.transform = `translateX(${offset}px)`;
+                    
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentIndex);
+                    });
+                }
                 
                 dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentIndex);
+                    dot.addEventListener('click', () => {
+                        currentIndex = index;
+                        updateCarousel();
+                    });
                 });
-            }
-            
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateCarousel();
-                });
-            });
-            
-            // Auto-advance carousel
-            let carouselInterval = setInterval(() => {
-                currentIndex = (currentIndex + 1) % (carouselItems.length - visibleItems + 1);
-                updateCarousel();
-            }, 5000);
-            
-            // Pause carousel on hover
-            carousel.addEventListener('mouseenter', () => {
-                clearInterval(carouselInterval);
-            });
-            
-            carousel.addEventListener('mouseleave', () => {
-                carouselInterval = setInterval(() => {
+                
+                // Auto-advance carousel
+                let carouselInterval = setInterval(() => {
                     currentIndex = (currentIndex + 1) % (carouselItems.length - visibleItems + 1);
                     updateCarousel();
                 }, 5000);
-            });
-            
-            // Responsive adjustments
-            function handleResize() {
-                const newVisibleItems = Math.floor(window.innerWidth / itemWidth) || 1;
-                if (newVisibleItems !== visibleItems) {
-                    visibleItems = newVisibleItems;
-                    currentIndex = 0;
-                    updateCarousel();
+                
+                // Pause carousel on hover
+                carousel.addEventListener('mouseenter', () => {
+                    clearInterval(carouselInterval);
+                });
+                
+                carousel.addEventListener('mouseleave', () => {
+                    carouselInterval = setInterval(() => {
+                        currentIndex = (currentIndex + 1) % (carouselItems.length - visibleItems + 1);
+                        updateCarousel();
+                    }, 5000);
+                });
+                
+                // Responsive adjustments
+                function handleResize() {
+                    const newVisibleItems = Math.floor(window.innerWidth / itemWidth) || 1;
+                    if (newVisibleItems !== visibleItems) {
+                        visibleItems = newVisibleItems;
+                        currentIndex = 0;
+                        updateCarousel();
+                    }
                 }
+                
+                window.addEventListener('resize', handleResize);
             }
-            
-            window.addEventListener('resize', handleResize);
             
             // Floating CTA Button
             const floatingCta = document.querySelector('.floating-cta');
             
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 300) {
-                    floatingCta.classList.add('visible');
-                } else {
-                    floatingCta.classList.remove('visible');
-                }
-            });
+            if (floatingCta) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        floatingCta.classList.add('visible');
+                    } else {
+                        floatingCta.classList.remove('visible');
+                    }
+                });
+            }
             
             // Enhanced Qualification Flow
             const qualificationModal = document.getElementById('qualificationModal');
@@ -2007,228 +1976,325 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
             const closeDisqualified = document.getElementById('closeDisqualified');
             const qualificationSteps = document.querySelectorAll('.qualification-step');
             const progressFill = document.getElementById('progressFill');
+            const qualificationForm = document.getElementById('qualificationForm');
             const contactForm = document.getElementById('contactForm');
             const formSpinner = document.getElementById('formSpinner');
             
-            let currentStep = 0;
-            let qualificationData = {};
-            
-            // Open modal when clicking any CTA button
-            [mainCtaButton, bottomCtaButton, floatingCtaButton].forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    qualificationModal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    resetQualificationFlow();
+            if (qualificationModal) {
+                let currentStep = 0;
+                let qualificationData = {};
+                
+                // Open modal when clicking any CTA button
+                [mainCtaButton, bottomCtaButton, floatingCtaButton].forEach(button => {
+                    if (button) {
+                        button.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            qualificationModal.classList.add('active');
+                            document.body.style.overflow = 'hidden';
+                            resetQualificationFlow();
+                            
+                            // Track event
+                            trackEvent('begin_qualification', 'engagement', 'Qualification Flow Started');
+                        });
+                    }
+                });
+                
+                // Close modal
+                function closeModal() {
+                    qualificationModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+                
+                if (closeQualification) {
+                    closeQualification.addEventListener('click', closeModal);
+                }
+                
+                if (closeSuccess) {
+                    closeSuccess.addEventListener('click', closeModal);
+                }
+                
+                if (closeDisqualified) {
+                    closeDisqualified.addEventListener('click', closeModal);
+                }
+                
+                // Click outside modal to close
+                qualificationModal.addEventListener('click', function(e) {
+                    if (e.target === qualificationModal) {
+                        closeModal();
+                    }
+                });
+                
+                // Update progress bar
+                function updateProgress() {
+                    const progress = (currentStep / (qualificationSteps.length - 1)) * 100;
+                    if (progressFill) {
+                        progressFill.style.width = `${progress}%`;
+                    }
+                }
+                
+                // Navigation between steps
+                function showStep(stepIndex) {
+                    qualificationSteps.forEach((step, index) => {
+                        if (index === stepIndex) {
+                            step.classList.add('active');
+                        } else {
+                            step.classList.remove('active');
+                        }
+                    });
                     
-                    // Track event
-                    trackEvent('begin_qualification', 'engagement', 'Qualification Flow Started');
-                });
-            });
-            
-            // Close modal
-            function closeModal() {
-                qualificationModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-            
-            closeQualification.addEventListener('click', closeModal);
-            closeSuccess.addEventListener('click', closeModal);
-            closeDisqualified.addEventListener('click', closeModal);
-            
-            // Click outside modal to close
-            qualificationModal.addEventListener('click', function(e) {
-                if (e.target === qualificationModal) {
-                    closeModal();
-                }
-            });
-            
-            // Update progress bar
-            function updateProgress() {
-                const progress = (currentStep / (qualificationSteps.length - 1)) * 100;
-                progressFill.style.width = `${progress}%`;
-            }
-            
-            // Navigation between steps
-            function showStep(stepIndex) {
-                qualificationSteps.forEach((step, index) => {
-                    if (index === stepIndex) {
-                        step.classList.add('active');
-                    } else {
-                        step.classList.remove('active');
-                    }
-                });
-                
-                currentStep = stepIndex;
-                updateProgress();
-            }
-            
-            // Next button functionality
-            document.querySelectorAll('.btn-next').forEach(button => {
-                button.addEventListener('click', function() {
-                    if (validateStep(currentStep)) {
-                        showStep(currentStep + 1);
-                    }
-                });
-            });
-            
-            // Back button functionality
-            document.querySelectorAll('.btn-back').forEach(button => {
-                button.addEventListener('click', function() {
-                    showStep(currentStep - 1);
-                });
-            });
-            
-            // Validate current step before proceeding
-            function validateStep(stepIndex) {
-                const currentStepElement = qualificationSteps[stepIndex];
-                
-                // Step 1: Homeowner verification
-                if (stepIndex === 0) {
-                    const selectedOption = currentStepElement.querySelector('.qualification-btn.selected');
-                    if (!selectedOption) {
-                        showAlert('Please select an option to continue');
-                        return false;
-                    }
-                    qualificationData.homeownerStatus = selectedOption.dataset.answer;
-                    return true;
+                    currentStep = stepIndex;
+                    updateProgress();
                 }
                 
-                // Step 2: Project scope (multiple selection)
-                if (stepIndex === 1) {
-                    const selectedServices = Array.from(currentStepElement.querySelectorAll('input[type="checkbox"]:checked'));
-                    if (selectedServices.length === 0) {
-                        showAlert('Please select at least one service you\'re interested in');
-                        return false;
+                // Next button functionality
+                document.querySelectorAll('.btn-next').forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (validateStep(currentStep)) {
+                            showStep(currentStep + 1);
+                        }
+                    });
+                });
+                
+                // Back button functionality
+                document.querySelectorAll('.btn-back').forEach(button => {
+                    button.addEventListener('click', function() {
+                        showStep(currentStep - 1);
+                    });
+                });
+                
+                // Validate current step before proceeding
+                function validateStep(stepIndex) {
+                    const currentStepElement = qualificationSteps[stepIndex];
+                    
+                    // Step 1: Homeowner verification
+                    if (stepIndex === 0) {
+                        const selectedOption = currentStepElement.querySelector('.qualification-btn.selected');
+                        if (!selectedOption) {
+                            showAlert('Please select an option to continue');
+                            return false;
+                        }
+                        qualificationData.homeownerStatus = selectedOption.dataset.answer;
+                        return true;
                     }
                     
-                    qualificationData.services = selectedServices.map(service => service.value);
-                    return true;
-                }
-                
-                // Step 3: Budget selection
-                if (stepIndex === 2) {
-                    const selectedOption = currentStepElement.querySelector('.qualification-btn.selected');
-                    if (!selectedOption) {
-                        showAlert('Please select a budget range to continue');
-                        return false;
+                    // Step 2: Project scope (multiple selection)
+                    if (stepIndex === 1) {
+                        const selectedServices = Array.from(currentStepElement.querySelectorAll('input[type="checkbox"]:checked'));
+                        if (selectedServices.length === 0) {
+                            showAlert('Please select at least one service you\'re interested in');
+                            return false;
+                        }
+                        
+                        qualificationData.services = selectedServices.map(service => service.value);
+                        return true;
                     }
-                    qualificationData.budget = selectedOption.dataset.answer;
-                    return true;
-                }
-                
-                // Step 4: Timeline selection
-                if (stepIndex === 3) {
-                    const selectedOption = currentStepElement.querySelector('.qualification-btn.selected');
-                    if (!selectedOption) {
-                        showAlert('Please select a timeline to continue');
-                        return false;
+                    
+                    // Step 3: Budget selection
+                    if (stepIndex === 2) {
+                        const selectedOption = currentStepElement.querySelector('.qualification-btn.selected');
+                        if (!selectedOption) {
+                            showAlert('Please select a budget range to continue');
+                            return false;
+                        }
+                        qualificationData.budget = selectedOption.dataset.answer;
+                        return true;
                     }
-                    qualificationData.timeline = selectedOption.dataset.answer;
+                    
+                    // Step 4: Timeline selection
+                    if (stepIndex === 3) {
+                        const selectedOption = currentStepElement.querySelector('.qualification-btn.selected');
+                        if (!selectedOption) {
+                            showAlert('Please select a timeline to continue');
+                            return false;
+                        }
+                        qualificationData.timeline = selectedOption.dataset.answer;
+                        return true;
+                    }
+                    
                     return true;
                 }
                 
-                return true;
-            }
-            
-            // Show alert message
-            function showAlert(message) {
-                const alertElement = document.createElement('div');
-                alertElement.className = 'alert-message';
-                alertElement.textContent = message;
-                alertElement.style.position = 'fixed';
-                alertElement.style.bottom = '20px';
-                alertElement.style.left = '50%';
-                alertElement.style.transform = 'translateX(-50%)';
-                alertElement.style.backgroundColor = 'var(--accent)';
-                alertElement.style.color = 'white';
-                alertElement.style.padding = '12px 24px';
-                alertElement.style.borderRadius = '8px';
-                alertElement.style.zIndex = '10000';
-                alertElement.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
-                alertElement.style.animation = 'fadeUp 0.3s ease';
-                
-                document.body.appendChild(alertElement);
-                
-                setTimeout(() => {
-                    alertElement.style.opacity = '0';
+                // Show alert message
+                function showAlert(message) {
+                    const alertElement = document.createElement('div');
+                    alertElement.className = 'alert-message';
+                    alertElement.textContent = message;
+                    alertElement.style.position = 'fixed';
+                    alertElement.style.bottom = '20px';
+                    alertElement.style.left = '50%';
+                    alertElement.style.transform = 'translateX(-50%)';
+                    alertElement.style.backgroundColor = 'var(--accent)';
+                    alertElement.style.color = 'white';
+                    alertElement.style.padding = '12px 24px';
+                    alertElement.style.borderRadius = '8px';
+                    alertElement.style.zIndex = '10000';
+                    alertElement.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+                    alertElement.style.animation = 'fadeUp 0.3s ease';
+                    
+                    document.body.appendChild(alertElement);
+                    
                     setTimeout(() => {
-                        document.body.removeChild(alertElement);
-                    }, 300);
-                }, 3000);
-            }
-            
-            // Button selection functionality
-            document.querySelectorAll('.qualification-btn:not(.checkbox-option)').forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove selected class from siblings
-                    const parent = this.parentElement;
-                    parent.querySelectorAll('.qualification-btn').forEach(btn => {
+                        alertElement.style.opacity = '0';
+                        setTimeout(() => {
+                            document.body.removeChild(alertElement);
+                        }, 300);
+                    }, 3000);
+                }
+                
+                // Button selection functionality
+                document.querySelectorAll('.qualification-btn:not(.checkbox-option)').forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Remove selected class from siblings
+                        const parent = this.parentElement;
+                        parent.querySelectorAll('.qualification-btn').forEach(btn => {
+                            btn.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked button
+                        this.classList.add('selected');
+                        
+                        // Enable next button if on step 1
+                        if (currentStep === 0) {
+                            const nextButton = qualificationSteps[0].querySelector('.btn-next');
+                            if (nextButton) {
+                                nextButton.disabled = false;
+                            }
+                        }
+                    });
+                });
+                
+                // Checkbox selection styling
+                document.querySelectorAll('.checkbox-option input').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const parentLabel = this.closest('.checkbox-option');
+                        if (this.checked) {
+                            parentLabel.classList.add('selected');
+                        } else {
+                            parentLabel.classList.remove('selected');
+                        }
+                    });
+                });
+                
+                // Form submission
+                if (qualificationForm) {
+                    qualificationForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        // Show loading spinner
+                        if (formSpinner) {
+                            formSpinner.style.display = 'block';
+                        }
+                        
+                        // Only gather required fields
+                        qualificationData.name = document.getElementById('name').value;
+                        qualificationData.phone = document.getElementById('phone').value;
+                        
+                        // Optional fields
+                        qualificationData.email = document.getElementById('email').value || 'Not provided';
+                        qualificationData.notes = document.getElementById('notes').value || 'None';
+                        
+                        // Simulate API call with timeout
+                        setTimeout(() => {
+                            if (formSpinner) {
+                                formSpinner.style.display = 'none';
+                            }
+                            
+                            // Determine if qualified (simplified logic)
+                            const isQualified = qualificationData.homeownerStatus !== 'no';
+                            
+                            if (isQualified) {
+                                qualificationSteps.forEach(step => step.classList.remove('active'));
+                                document.getElementById('qualifiedLead').style.display = 'block';
+                                
+                                // Track conversion
+                                trackEvent('lead_conversion', 'conversion', 'Minimal Info Lead');
+                            } else {
+                                qualificationSteps.forEach(step => step.classList.remove('active'));
+                                document.getElementById('disqualifiedLead').style.display = 'block';
+                            }
+                            
+                            console.log('Qualification data:', qualificationData);
+                            
+                            // In a real implementation, you would send this data to your server
+                            // sendLeadData(qualificationData);
+                        }, 1500);
+                    });
+                }
+                
+                // Reset flow when reopened
+                function resetQualificationFlow() {
+                    currentStep = 0;
+                    qualificationData = {};
+                    
+                    // Reset all steps
+                    qualificationSteps.forEach((step, index) => {
+                        step.classList.toggle('active', index === 0);
+                    });
+                    
+                    // Reset selections
+                    document.querySelectorAll('.qualification-btn.selected').forEach(btn => {
                         btn.classList.remove('selected');
                     });
                     
-                    // Add selected class to clicked button
-                    this.classList.add('selected');
+                    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                        checkbox.checked = false;
+                        const parentLabel = checkbox.closest('.checkbox-option');
+                        if (parentLabel) {
+                            parentLabel.classList.remove('selected');
+                        }
+                    });
                     
-                    // Enable next button if on step 1
-                    if (currentStep === 0) {
-                        const nextButton = qualificationSteps[0].querySelector('.btn-next');
-                        nextButton.disabled = false;
-                    }
-                });
-            });
+                    // Reset form
+                    if (qualificationForm) qualificationForm.reset();
+                    
+                    // Reset results screens
+                    const qualifiedLead = document.getElementById('qualifiedLead');
+                    const disqualifiedLead = document.getElementById('disqualifiedLead');
+                    if (qualifiedLead) qualifiedLead.style.display = 'none';
+                    if (disqualifiedLead) disqualifiedLead.style.display = 'none';
+                    
+                    // Reset progress
+                    updateProgress();
+                }
+            }
             
-            // Checkbox selection styling
-            document.querySelectorAll('.checkbox-option input').forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    const parentLabel = this.closest('.checkbox-option');
-                    if (this.checked) {
-                        parentLabel.classList.add('selected');
-                    } else {
-                        parentLabel.classList.remove('selected');
-                    }
+            // Contact Form Submission
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(contactForm);
+                    const formStatus = document.getElementById('form-status');
+                    
+                    fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            formStatus.textContent = 'Thanks for your submission! We will contact you soon.';
+                            formStatus.className = 'form-status success';
+                            contactForm.reset();
+                        } else {
+                            response.json().then(data => {
+                                if (Object.hasOwn(data, 'errors')) {
+                                    formStatus.textContent = data.errors.map(error => error.message).join(', ');
+                                } else {
+                                    formStatus.textContent = 'Oops! There was a problem submitting your form';
+                                }
+                                formStatus.className = 'form-status error';
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        formStatus.textContent = 'Oops! There was a problem submitting your form';
+                        formStatus.className = 'form-status error';
+                    });
                 });
-            });
-            
-            // Form submission
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Show loading spinner
-                formSpinner.style.display = 'block';
-                
-                // Only gather required fields
-                qualificationData.name = document.getElementById('name').value;
-                qualificationData.phone = document.getElementById('phone').value;
-                
-                // Optional fields
-                qualificationData.email = document.getElementById('email').value || 'Not provided';
-                qualificationData.notes = document.getElementById('notes').value || 'None';
-                
-                // Simulate API call with timeout
-                setTimeout(() => {
-                    formSpinner.style.display = 'none';
-                    
-                    // Determine if qualified (simplified logic)
-                    const isQualified = qualificationData.homeownerStatus !== 'no';
-                    
-                    if (isQualified) {
-                        qualificationSteps.forEach(step => step.classList.remove('active'));
-                        document.getElementById('qualifiedLead').style.display = 'block';
-                        
-                        // Track conversion
-                        trackEvent('lead_conversion', 'conversion', 'Minimal Info Lead');
-                    } else {
-                        qualificationSteps.forEach(step => step.classList.remove('active'));
-                        document.getElementById('disqualifiedLead').style.display = 'block';
-                    }
-                    
-                    console.log('Qualification data:', qualificationData);
-                    
-                    // In a real implementation, you would send this data to your server
-                    // sendLeadData(qualificationData);
-                }, 1500);
-            });
+            }
             
             // Track event function
             function trackEvent(eventName, category, label) {
@@ -2249,37 +2315,6 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                         content_category: category
                     });
                 }
-            }
-            
-            // Reset flow when reopened
-            function resetQualificationFlow() {
-                currentStep = 0;
-                qualificationData = {};
-                
-                // Reset all steps
-                qualificationSteps.forEach((step, index) => {
-                    step.classList.toggle('active', index === 0);
-                });
-                
-                // Reset selections
-                document.querySelectorAll('.qualification-btn.selected').forEach(btn => {
-                    btn.classList.remove('selected');
-                });
-                
-                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                    checkbox.checked = false;
-                    checkbox.closest('.checkbox-option').classList.remove('selected');
-                });
-                
-                // Reset form
-                if (contactForm) contactForm.reset();
-                
-                // Reset results screens
-                document.getElementById('qualifiedLead').style.display = 'none';
-                document.getElementById('disqualifiedLead').style.display = 'none';
-                
-                // Reset progress
-                updateProgress();
             }
             
             // Smooth scrolling for anchor links
@@ -2305,4 +2340,4 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
         });
     </script>
 </body>
-</html>
+    </html>
