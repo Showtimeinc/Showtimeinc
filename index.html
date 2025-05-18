@@ -1474,7 +1474,7 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
             <h2>Contact Us</h2>
             <p>Fill out the form below and we'll get back to you shortly</p>
         </div>
-        
+       <form>
         <div class="form-container glass-card">
             <form id="contactForm" action="https://formspree.io/f/itshowtime@msn.com" method="POST">
                 <div class="form-group">
@@ -1489,29 +1489,24 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 
                 <div class="form-group">
                     <label for="form-phone">Phone Number</label>
-                    <input type="tel" id="form-phone" name="phone">
+                    <input type="tel" id="form-phone" name="phone-number">
                 </div>
                 
                 <div class="form-group">
                     <label for="form-service">Service Interested In</label>
                     <select id="form-service" name="service">
                         <option value="">Select a service</option>
-                        <option value="Custom Theater">Custom Theater</option>
-                        <option value="Audio Systems">Audio Systems</option>
-                        <option value="Home Automation">Home Automation</option>
-                        <option value="Other">Other</option>
+                        <option value="Custom Theater" name="custom-theater">Custom Theater</option>
+                        <option value="Audio Systems" name="audio-systems">Audio Systems</option>
+                        <option value="Home Automation" name="home-automation">Home Automation</option>
+                        <option value="Other" name="other">Other</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="form-message">Your Message*</label>
-                    <textarea id="form-message" name="message" required></textarea>
+                    <label for="form-message" name="your message">Your Message*</label>
+                    <textarea id="form-message" name="message"></textarea>
                 </div>
-                
-                <button type="submit" class="cta-button">
-                    Send Message
-                    <i class="fas fa-arrow-right"></i>
-                </button>
                 
                 <div id="form-status" class="form-status"></div>
             </form>
@@ -1523,7 +1518,7 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
         <div class="video-modal-content">
             <button class="close-video-modal" id="closeVideoModal">&times;</button>
             <div class="video-container">
-                <iframe id="featureVideo" width="100%" height="100%" src="showtimeinc.com/Movie.mp4" frameborder="0" 
+                <iframe id="featureVideo" width="100%" height="100%" video src="Movie.mp4" frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen></iframe>
             </div>
