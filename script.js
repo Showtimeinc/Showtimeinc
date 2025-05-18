@@ -143,7 +143,6 @@ styleElement.textContent = `
 `;
 document.head.appendChild(styleElement);
 
-<script>
         document.addEventListener('DOMContentLoaded', function() {
             // Video Background
             const videoBg = document.getElementById('parallaxVideo');
