@@ -1,4 +1,5 @@
-// Add this JavaScript before the closing </script> tag
+document.addEventListener('DOMContentLoaded', function () {
+  // your code here
 
 // Video Modal Functionality
 const videoModal = document.getElementById('videoModal');
@@ -141,3 +142,4 @@ styleElement.textContent = `
     }
 `;
 document.head.appendChild(styleElement);
+});
