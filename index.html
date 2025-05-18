@@ -9,30 +9,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-   <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '714428277637150');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code --> 
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '714428277637150');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code --> 
 </head>
 <body>
     <!-- Video Background -->
     <div class="video-background">
         <div class="video-wrapper">
-            <video autoplay muted loop id="parallaxVideo">
-                <video src="Movie.mp4" type="mp4">
+            <video autoplay muted loop id="parallaxVideo" src="Movie.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -41,19 +40,19 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
     
     <!-- Parallax Background Layers -->
     <div class="parallax-container">
-        <div class="parallax-layer layer-1" image src="Marketing-Resources-Social-Post-2.jpg"></div>
-        <div class="parallax-layer layer-2" image src="20250122_094038.jpg"></div>
-        <div class="parallax-layer layer-3" image src="20211007_102241.jpg"></div>
+        <div class="parallax-layer layer-1" data-image="Marketing-Resources-Social-Post-2.jpg"></div>
+        <div class="parallax-layer layer-2" data-image="20250122_094038.jpg"></div>
+        <div class="parallax-layer layer-3" data-image="20211007_102241.jpg"></div>
     </div>
     
     <!-- Header -->
     <header id="mainHeader">
-  <div class="logo-container">
-    <img src="ChatGPT Image Apr 24, 2025, 04_07_07 PM.png" alt="It's Showtime Inc. Logo" class="logo">
-    <span class="brand-text">It's Showtime Inc.</span>
-  </div>
+        <div class="logo-container">
+            <img src="ChatGPT Image Apr 24, 2025, 04_07_07 PM.png" alt="It's Showtime Inc. Logo" class="logo">
+            <span class="brand-text">It's Showtime Inc.</span>
+        </div>
 
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
             <i class="fas fa-bars"></i>
         </button>
         <nav id="mainNav">
@@ -114,7 +113,6 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
             <div class="carousel-dot"></div>
             <div class="carousel-dot"></div>
             <div class="carousel-dot"></div>
-            <div class="carousel-dot"></div>
         </div>
     </section>
     
@@ -164,35 +162,35 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                 <ul class="service-features">
                     <li>Effortless Control: Seamlessly Manage Your Entire Smart Home with One URC Remote</li>
                     <li>Luxury Meets Simplicity: URC Interfaces Blend Elegance with Cutting-Edge Tech</li>
-                    <li>Voice, App, or Touchscreen – URC Lets You Choose How You Control Your World</li>
+                    <li>Voice, App, or Touchscreen - URC Lets You Choose How You Control Your World</li>
                     <li>Trusted by Integrators Nationwide: Discover Why URC Is the Pro's Choice</li>
                 </ul>
             </div>
         
-        <div class="service-card glass-card">
-            <div class="service-icon">
-               <i class="fas fa-light"></i>
-           </div>
-           <h3>Lutron RadioRA 3 Lighting Control</h3>
-           <p>Modernize your home with intelligent, wireless lighting systems from Lutron.</p>
-           <ul class="service-features">
-               <li>Sleek Sunnata dimmer keypads with LED sliders</li>
-               <li>Whole-home lighting control via mobile app</li>
-               <li>Voice assistant integration (Alexa, Siri, Google)</li>
-               <li>Automated scenes, schedules, and smart dimming</li>
-               <li>Ideal for new builds or retrofits</li>
-           </ul>
+            <div class="service-card glass-card">
+                <div class="service-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Lutron RadioRA 3 Lighting Control</h3>
+                <p>Modernize your home with intelligent, wireless lighting systems from Lutron.</p>
+                <ul class="service-features">
+                    <li>Sleek Sunnata dimmer keypads with LED sliders</li>
+                    <li>Whole-home lighting control via mobile app</li>
+                    <li>Voice assistant integration (Alexa, Siri, Google)</li>
+                    <li>Automated scenes, schedules, and smart dimming</li>
+                    <li>Ideal for new builds or retrofits</li>
+                </ul>
+            </div>
         </div>
-    </div>
-  
-    </section> 
+    </section>
+    
     <!-- Contact Form Section -->
     <section class="contact-form-section" id="contact">
         <div class="section-header lazy-load">
             <h2>Contact Us</h2>
             <p>Fill out the form below and we'll get back to you shortly</p>
         </div>
-       <form>
+       
         <div class="form-container glass-card">
             <form id="contactForm" action="https://formspree.io/f/itshowtime@msn.com" method="POST">
                 <div class="form-group">
@@ -214,19 +212,24 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                     <label for="form-service">Service Interested In</label>
                     <select id="form-service" name="service">
                         <option value="">Select a service</option>
-                        <option value="Custom Theater" name="custom-theater">Custom Theater</option>
-                        <option value="Audio Systems" name="audio-systems">Audio Systems</option>
-                        <option value="Home Automation" name="home-automation">Home Automation</option>
-                        <option value="Other" name="other">Other</option>
+                        <option value="Custom Theater">Custom Theater</option>
+                        <option value="Audio Systems">Audio Systems</option>
+                        <option value="Home Automation">Home Automation</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="form-message" name="your message">Your Message*</label>
-                    <textarea id="form-message" name="message"></textarea>
+                    <label for="form-message">Your Message*</label>
+                    <textarea id="form-message" name="message" required></textarea>
                 </div>
                 
                 <div id="form-status" class="form-status"></div>
+                
+                <button type="submit" class="cta-button">
+                    Send Message
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </form>
         </div>
     </section>
@@ -234,9 +237,9 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
     <!-- Video Background Modal -->
     <div class="video-modal" id="videoModal">
         <div class="video-modal-content">
-            <button class="close-video-modal" id="closeVideoModal">&times;</button>
+            <button class="close-video-modal" id="closeVideoModal" aria-label="Close video modal">&times;</button>
             <div class="video-container">
-                <iframe id="featureVideo" width="100%" height="100%" video src="Movie.mp4" frameborder="0" 
+                <iframe id="featureVideo" width="100%" height="100%" src="Movie.mp4" frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen></iframe>
             </div>
@@ -252,7 +255,7 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
         
         <div class="partners-carousel">
             <div class="partner-logo">
-                <img src="" alt="Dolby" loading="lazy">
+                <img src="dolby-logo.png" alt="Dolby" loading="lazy">
             </div>
             <div class="partner-logo">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Sonos_logo_black.svg" alt="Sonos" loading="lazy">
@@ -332,7 +335,7 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
     <!-- Qualification Flow Modal -->
     <div class="qualification-modal" id="qualificationModal">
         <div class="qualification-flow">
-            <button class="close-qualification" id="closeQualification">&times;</button>
+            <button class="close-qualification" id="closeQualification" aria-label="Close qualification modal">&times;</button>
             
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
@@ -502,10 +505,6 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
                     <div class="form-group">
                         <label for="notes">Anything else we should know? (optional)</label>
                         <textarea id="notes" class="form-control" rows="2"></textarea>
-                    <button type="submit" class="cta-button">
-                    Send Message
-                    <i class="fas fa-arrow-right"></i>
-                </button>
                     </div>
                     
                     <button type="submit" class="nav-btn btn-submit">
@@ -555,5 +554,5 @@ src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
             </div>
         </div>
     </div>
-    </body>
-    </html>
+</body>
+</html>
