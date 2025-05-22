@@ -27,7 +27,90 @@ videoModal.addEventListener('click', function(e) {
         featureVideo.src = "";
     }
 });
+class PremiumParallax {
+    constructor() {
+        this.layers = document.querySelectorAll('.parallax-layer');
+        this.textContainer = document.querySelector('.parallax-text-container');
+        this.currentImageIndex = 0;
+        this.imageChangeThreshold = 600; // pixels before image change
+        this.lastScrollPosition = 0;
+        this.scrollDirection = null;
+        this.imageSets = [];
+        this.init();
+    }
 
+    init() {
+        // Preload images for smooth transitions
+        this.layers.forEach(layer => {
+            const imageUrls = JSON.parse(layer.dataset.images);
+            this.imageSets.push(imageUrls);
+            this.preloadImages(imageUrls);
+        });
+
+        // Set initial active images
+        this.setActiveImages(0);
+        
+        // Initialize scroll effects
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+        
+        // Auto-rotate backgrounds every 8 seconds
+        setInterval(this.rotateBackgrounds.bind(this), 8000);
+    }
+
+    preloadImages(urls) {
+        urls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
+    }
+
+    handleScroll() {
+        const scrollPosition = window.pageYOffset;
+        this.scrollDirection = scrollPosition > this.lastScrollPosition ? 'down' : 'up';
+        this.lastScrollPosition = scrollPosition;
+        
+        // Parallax movement for layers
+        this.layers.forEach((layer, index) => {
+            const speed = parseFloat(layer.dataset.speed);
+            const yPos = -(scrollPosition * speed);
+            const zPos = -100 * (index + 1);
+            layer.style.transform = `translateZ(${zPos}px) translateY(${yPos}px) scale(${1 + (index * 0.3)})`;
+        });
+        
+        // Subtle floating effect for text
+        const textYPos = -(scrollPosition * 0.1);
+        this.textContainer.style.transform = `translate(-50%, calc(-50% + ${textYPos}px))`;
+        
+        // Change images based on scroll depth
+        const scrollSegment = Math.floor(scrollPosition / this.imageChangeThreshold);
+        this.setActiveImages(scrollSegment % this.imageSets[0].length);
+    }
+
+    setActiveImages(index) {
+        this.layers.forEach((layer, layerIndex) => {
+            // Fade out current image
+            layer.style.opacity = 0;
+            
+            // After fade out completes, change image and fade in
+            setTimeout(() => {
+                layer.style.backgroundImage = `url(${this.imageSets[layerIndex][index]})`;
+                layer.style.opacity = 1;
+            }, 1000);
+        });
+        
+        this.currentImageIndex = index;
+    }
+
+    rotateBackgrounds() {
+        const nextIndex = (this.currentImageIndex + 1) % this.imageSets[0].length;
+        this.setActiveImages(nextIndex);
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new PremiumParallax();
+});
 // Dark Mode Toggle
 const darkModeToggle = document.createElement('div');
 darkModeToggle.className = 'dark-mode-toggle';
