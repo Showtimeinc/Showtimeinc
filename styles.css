@@ -25,6 +25,90 @@ body {
   overflow-x: hidden;
 }
 
+/* ===== CINEMATIC PARALLAX TEXT ===== */
+.parallax-text-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+    perspective: 1000px;
+}
+
+.main-title {
+    font-size: 8vw;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent);
+    text-stroke: 2px var(--accent);
+    letter-spacing: 0.2em;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(50px) rotateX(-45deg);
+    animation: slideInTitle 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.5s;
+    text-shadow: 
+        0 0 10px rgba(229, 9, 20, 0.3),
+        0 0 20px rgba(229, 9, 20, 0.2);
+}
+
+.subtitle {
+    font-size: 1.5vw;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.5em;
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInSubtitle 1.5s ease-out forwards 1.5s;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Text Animations */
+@keyframes slideInTitle {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) rotateX(-45deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+@keyframes fadeInSubtitle {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+}
+
+/* Floating Effect on Scroll */
+.parallax-text-container {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 15vw;
+        -webkit-text-stroke: 1px var(--accent);
+    }
+    
+    .subtitle {
+        font-size: 4vw;
+        letter-spacing: 0.2em;
+    }
+}
+
 /* Video Background */
 .video-background {
   height: 100vh;
