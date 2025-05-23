@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultation Form | It's Showtime</title>
+  <style>
+    :root {
+      --gold: #FFD700;
+      --navy: #0A1A2F;
+      --ivory: #F8F4E9;
+      --spacing: clamp(20px, 5vw, 80px);
+      --transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      color: var(--navy);
+      background-color: var(--ivory);
+      overflow-x: hidden;
+      line-height: 1.6;
+      padding: var(--spacing);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid var(--navy);
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    button:hover {
+      background-color: var(--navy);
+      color: var(--gold);
+    }
+
+    /* Thank-you popup styles */
+    .thank-you {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(10, 26, 47, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: var(--transition);
+    }
+
+    .thank-you.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .thank-you-box {
+      background-color: var(--ivory);
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 2px solid var(--gold);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .thank-you-box h2 {
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .thank-you-box p {
+      color: var(--navy);
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src='https://connect.facebook.net/en_US/fbevents.js';
+    s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script');
+    fbq('init', '1935929103604346'); // <-- Replace with your actual ID
+    fbq('track', 'PageView');
+  </script>
+</head>
+
+<body>
+
+  <h1>Request a Free Consultation</h1>
+  <form id="lead-form" action="https://formspree.io/f/mwporqwb" method="POST">
+    <input type="text" name="name" placeholder="Your Full Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="tel" name="phone" placeholder="Phone Number (optional)">
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="thank-you-popup" class="thank-you hidden">
+    <div class="thank-you-box">
+      <h2>Thank You!</h2>
+      <p>We've received your request.<br>You’ll hear from us shortly.</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('lead-form');
+    const popup = document.getElementById('thank-you-popup');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          fbq('track', 'Lead');
+          form.reset();
+          popup.classList.remove('hidden');
+          setTimeout(() => popup.classList.add('hidden'), 5000); // auto close in 5 sec
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
+      })
+      .catch(() => alert('Error sending form.'));
+    });
+  </script>
+
+</body>
+</html>
