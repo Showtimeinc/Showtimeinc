@@ -31,6 +31,19 @@
             overflow-x: hidden;
             line-height: 1.6;
         }
+
+        .site-header {
+  text-align: center;
+  padding: 2rem 0;
+  position: relative;
+  z-index: 10; /* Ensure it's above the video */
+}
+
+.site-logo {
+  max-width: 220px;
+  height: auto;
+}
+
         
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
@@ -823,6 +836,10 @@
     /></noscript>
 </head>
 <body>
+    <header class="site-header">
+  <img src="ChatGPT Image Apr 24, 2025, 04_07_07 PM.png" alt="It's Showtime Inc. Logo" class="site-logo">
+</header>
+
     <!-- Hero Section with Video Background -->
     <section class="hero">
         <video autoplay muted loop playsinline class="hero-video">
