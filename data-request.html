@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Request | It's Showtime Inc.</title>
+  <style>
+    :root {
+      --gold: #FFD700;
+      --navy: #0A1A2F;
+      --ivory: #F8F4E9;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--ivory);
+      color: var(--navy);
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+    }
+
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid var(--gold);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid var(--navy);
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: var(--gold);
+      color: var(--navy);
+      font-weight: bold;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--navy);
+      color: var(--gold);
+    }
+
+    .info {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Manage Your Data</h1>
+  <div class="info">
+    <p>We respect your privacy. You may request a copy of your data or request that we permanently delete it. We'll verify your identity and respond within 30–45 days, as required by law.</p>
+  </div>
+
+  <form action="https://formspree.io/f/" method="POST">
+    <label>
+      Full Name:
+      <input type="text" name="name" required />
+    </label>
+
+    <label>
+      Email Address (used on our site):
+      <input type="email" name="email" required />
+    </label>
+
+    <label>
+      Type of Request:
+      <select name="request" required>
+        <option value="">Please choose one</option>
+        <option value="access">Download my personal data</option>
+        <option value="delete">Delete my personal data</option>
+        <option value="correction">Request correction</option>
+      </select>
+    </label>
+
+    <label>
+      Additional Info (optional):
+      <textarea name="message" rows="4" placeholder="Tell us anything that can help us find your data..."></textarea>
+    </label>
+
+    <button type="submit">Submit Request</button>
+  </form>
+</body>
+</html>
