@@ -1452,36 +1452,47 @@
             // Initialize lazy loading
             lazyLoad(document.querySelectorAll('.lazy'));
 
-            // Parallax Effect
-            const parallaxLayers = [
-                document.getElementById('parallax-layer-1'),
-                document.getElementById('parallax-layer-2')
-            ];
+            // Parallax Effect Setup
+const initParallax = () => {
+    // Parallax layers (background images)
+    const parallaxLayers = [
+        document.getElementById('parallax-layer-1'),
+        document.getElementById('parallax-layer-2')
+    ];
 
-            // Set background images for parallax layers
-            parallaxLayers[0].style.backgroundImage = 'url("spkr_close_up~2.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")';
-            parallaxLayers[1].style.backgroundImage = 'url("URC-Lifestyle-Image-Residential-12.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")';
+    // Set background images (ensure high-res URLs are correct)
+    parallaxLayers[0].style.backgroundImage = 'url("spkr_close_up~2.jpg")';
+    parallaxLayers[1].style.backgroundImage = 'url("URC-Lifestyle-Image-Residential-12.jpg")';
 
-            // Video parallax effect
-            const heroVideo = document.querySelector('.hero-video');
+    // Video element
+    const heroVideo = document.querySelector('.hero-video');
+
+    // Scroll event handler
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.pageYOffset;
+
+        // Apply parallax to layers with different speeds
+        parallaxLayers.forEach((layer, index) => {
+            const speed = 0.2 * (index + 1); // Layer 1: 0.2, Layer 2: 0.4
+            const yPos = -scrollPosition * speed;
+            layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
             
-            window.addEventListener('scroll', function() {
-                const scrollPosition = window.pageYOffset;
-                
-                // Parallax for background layers
-                parallaxLayers.forEach((layer, index) => {
-                    const speed = 0.2 * (index + 1);
-                    const yPos = -(scrollPosition * speed);
-                    layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
-                });
-                
-                // Subtle parallax for video
-                if (heroVideo) {
-                    const videoYPos = -(scrollPosition * 0.3);
-                    heroVideo.style.transform = `translate3d(0, ${videoYPos}px, 0)`;
-                }
-            });
+            // Ensure full image is visible before overlap
+            layer.style.willChange = 'transform';
+            layer.style.backfaceVisibility = 'hidden';
+        });
 
+        // Subtle parallax for video (if exists)
+        if (heroVideo) {
+            const videoYPos = -scrollPosition * 0.3;
+            heroVideo.style.transform = `translate3d(0, ${videoYPos}px, 0)`;
+            heroVideo.style.willChange = 'transform';
+        }
+    });
+};
+
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', initParallax);
             // GSAP Animations
             // Hero animations
             gsap.to('.hero h1', {
