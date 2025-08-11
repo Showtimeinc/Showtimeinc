@@ -36,8 +36,8 @@ It's Showtime Inc. is a premier Audio Video installation company with **25+ year
 ## Schedule a Consultation
 
 Interested in transforming your home into a smarter, more entertaining space?  
-**Call us today at (562) 685-5651**  
-or email **Calidefinition@gmail.com**
+**Call us today at (562) 964-1624**  
+or email **itshowtime@msn.com**
 
 ---
 
