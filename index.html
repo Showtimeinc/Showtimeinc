@@ -449,6 +449,23 @@
     
     <!-- Floating CTA -->
     <a href="#contact" class="floating-cta" aria-label="Contact Us">✉️</a>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Remove loading screen
+    const loadingScreen = document.querySelector('.loading-animation');
+    if (loadingScreen) {
+        loadingScreen.classList.add('fade-out');
+        
+        // Remove it completely after animation ends
+        loadingScreen.addEventListener('transitionend', function() {
+            loadingScreen.remove();
+        });
+    }
+
+    // Rest of your JavaScript code can go here
+    // ...
+});
+    </script>
     
 <script src="script.js" defer></script>
 </body>
