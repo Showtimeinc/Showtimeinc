@@ -95,57 +95,101 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
         
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            min-height: 700px;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            color: white;
-            isolation: isolate;
-            background: linear-gradient(rgba(10,26,47,0.85), rgba(10,26,47,0.6)), url('assets/images/hero-fallback.jpg') no-repeat center/cover;
-        }
-        
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            will-change: transform;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            padding: var(--spacing);
-            max-width: 700px;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            margin-bottom: 20px;
-            opacity: 0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        
-        .hero h1 span {
-            color: var(--gold);
-            font-style: italic;
-            display: inline-block;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            opacity: 0;
-            max-width: 600px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
+  /* ===================== */
+/* Updated Hero Section  */
+/* ===================== */
+.hero {
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    isolation: isolate;
+    background: linear-gradient(rgba(10,26,47,0.85), rgba(10,26,47,0.6)), url('assets/images/hero-fallback.jpg') no-repeat center/cover;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    will-change: transform;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: var(--spacing);
+    width: 100%;
+    text-align: center;
+}
+
+/* Logo Styles */
+.logo-container {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.header-logo {
+    width: 180px;  /* Design your logo to be 180px wide */
+    height: auto;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+
+/* Header Text Styles */
+.header-text {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    opacity: 0; /* Keep for animation */
+}
+
+.hero h1 span {
+    color: transparent;
+    font-style: italic;
+    background: linear-gradient(to right, var(--gold), #ffea80);
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: inline;
+}
+
+.hero h2 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+}
+
+.hero h2:after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 2px;
+    background: var(--gold);
+    margin: 15px auto 0;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    opacity: 0; /* Keep for animation */
+}
         
         .cta-button {
             display: inline-block;
