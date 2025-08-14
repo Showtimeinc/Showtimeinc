@@ -3,45 +3,994 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luxury AV design & installation in Southern California since 1999. Custom home theaters, smart home automation, and commercial AV solutions.">
-    
     <title>It's Showtime Inc. | Luxury AV Design & Installation</title>
-    
-    <!-- Preconnects and Preloads -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="style.css" as="style">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js" as="script">
-    <link rel="preload" href="0276ef17-8b38-4154-8b1d-7f7af73512ed~2.mp4" as="video" type="video/mp4">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;500;700&display=swap" rel="stylesheet">
-    
-    <!-- JS Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
-    
-    <!-- Facebook Pixel -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        :root {
+            --gold: #FFD700;
+            --navy: #0A1A2F;
+            --ivory: #F8F4E9;
+            --spacing: clamp(20px, 5vw, 80px);
+            --transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+            --glass-blur: 12px;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: var(--navy);
+            background-color: var(--ivory);
+            overflow-x: hidden;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Parallax Background Layers */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, var(--navy) 0%, #1a2a3a 100%);
+        }
+        
+        .parallax-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+            will-change: transform;
+        }
+        
+        /* Glass Morphism Styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Hero Section with Parallax Video */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            isolation: isolate;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            will-change: transform;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10,26,47,0.85) 0%, rgba(10,26,47,0.6) 100%);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: var(--spacing);
+            max-width: 700px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 20px;
+            opacity: 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .hero h1 span {
+            color: var(--gold);
+            font-style: italic;
+            display: inline-block;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            max-width: 600px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--navy);
+            padding: 18px 45px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: var(--transition);
+            border: 2px solid var(--gold);
+            cursor: pointer;
+            opacity: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* Animated Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(10, 26, 47, 0.8);
+            padding: 20px 0;
+            margin-top: -1px;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .stat-item {
+            text-align: center;
+            color: white;
+            opacity: 0;
+            padding: 15px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* About Section */
+        .section {
+            padding: calc(var(--spacing) * 2) 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: var(--spacing);
+            text-align: center;
+            position: relative;
+            opacity: 0;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+            margin: 20px auto;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing);
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            opacity: 0;
+            padding: 40px;
+            background: rgba(248, 244, 233, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            background: url('20250122_094038.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center/cover;
+            opacity: 0;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform-style: preserve-3d;
+        }
+        
+        .years-badge {
+            position: absolute;
+            bottom: -25px;
+            right: 50px;
+            background: var(--gold);
+            color: var(--navy);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            z-index: 2;
+            transform: translateZ(20px);
+        }
+        
+        .years-badge span:first-child {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: rgba(10, 26, 47, 0.9);
+            color: var(--ivory);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('spkr_close_up~2.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .services .section-title:after {
+            background: var(--ivory);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing);
+            margin-top: var(--spacing);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-card {
+            background-color: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-top: 3px solid var(--gold);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255,255,255,0.15);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .service-card h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        /* Portfolio Section with Enhanced 3D Flip Cards */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing);
+            margin-top: var(--spacing);
+        }
+        
+        .flip-card {
+            perspective: 1500px;
+            height: 400px;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+            box-shadow: 0 15px 55px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .flip-card-front {
+            background-color: var(--ivory);
+            color: var(--ivory);
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+            background-size: cover;
+            background-position: center;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card-front::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .flip-card-front h3 {
+            position: relative;
+            z-index: 2;
+            transform: translateZ(40px);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .flip-card-back {
+            background-color: var(--gold);
+            color: var(--navy);
+            transform: rotateY(180deg);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card-back h3 {
+            transform: translateZ(40px);
+            margin-bottom: 20px;
+        }
+        
+        .flip-card-back p {
+            transform: translateZ(30px);
+        }
+        
+        .portfolio-item-1 .flip-card-front {
+            background-image: url('PicMa_2245795_1748083793412.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+        }
+        
+        .portfolio-item-2 .flip-card-front {
+            background-image: url('20211007_102241.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+        }
+        
+        .portfolio-item-3 .flip-card-front {
+            background-image: url('20250122_094038.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            text-align: center;
+            background-color: var(--ivory);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing);
+            margin-top: var(--spacing);
+        }
+        
+        .testimonial {
+            padding: 40px 30px;
+            border: 1px solid rgba(0,0,0,0.1);
+            opacity: 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-quote:before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            color: rgba(0,0,0,0.1);
+            font-family: serif;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--navy);
+        }
+        
+        .testimonial-location {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: rgba(10, 26, 47, 0.95);
+            color: var(--ivory);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('URC-Lifestyle-Image-Residential-12.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center/cover;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .contact .section-title:after {
+            background: var(--ivory);
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            position: relative;
+            z-index: 1;
+            background: rgba(10,26,47,0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,215,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            font-family: 'Raleway', sans-serif;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(255,215,0,0.2);
+            background-color: rgba(255,255,255,0.15);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Radio & Checkbox Groups */
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .radio-option input[type="radio"],
+        .checkbox-option input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+        }
+        
+        .radio-custom {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            margin-right: 12px;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .checkbox-custom {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            margin-right: 12px;
+            position: relative;
+            transition: var(--transition);
+            border-radius: 4px;
+        }
+        
+        .radio-option input[type="radio"]:checked + .radio-custom::after {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .checkbox-option input[type="checkbox"]:checked + .checkbox-custom::after {
+            content: '✓';
+            display: block;
+            color: var(--gold);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+        }
+        
+        /* CTA Card */
+        .cta-card {
+            background: rgba(10, 26, 47, 0.9);
+            border: 1px solid var(--gold);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta-card h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .benefits-list {
+            margin: 25px 0;
+            padding-left: 20px;
+            text-align: left;
+            display: inline-block;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 12px;
+            position: relative;
+            list-style-type: none;
+            padding-left: 30px;
+        }
+        
+        .benefits-list li:before {
+            content: '✓';
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .direct-call-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background-color: var(--gold);
+            color: var(--navy);
+            padding: 18px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid var(--gold);
+        }
+        
+        .direct-call-button:hover {
+            background-color: transparent;
+            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .cta-divider {
+            color: var(--gold);
+            margin: 10px 0;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            padding: 0 15px;
+            background: var(--navy);
+            z-index: 1;
+        }
+        
+        .cta-divider:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255,215,0,0.3);
+            z-index: -1;
+        }
+        
+        .schedule-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background-color: transparent;
+            color: white;
+            padding: 18px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .schedule-button:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .guarantee-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+            color: var(--gold);
+            font-size: 1rem;
+            padding: 12px 20px;
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 50px;
+            background: rgba(255,215,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: var(--spacing) 0;
+            background-color: rgba(10, 26, 47, 0.95);
+            color: var(--ivory);
+            position: relative;
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .footer-logo span {
+            color: var(--gold);
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        
+        .footer-contact {
+            margin: 30px 0;
+        }
+        
+        .footer-contact a {
+            color: var(--gold);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+        
+        .footer-contact a:hover {
+            transform: translateY(-2px);
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            margin: 30px 0;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: var(--gold);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--gold);
+            color: var(--navy);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+            z-index: 100;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .floating-cta:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        
+        /* Lazy Loading Styles */
+        .lazy-load {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .lazy-loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Loading Animation */
+        .loading-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--navy);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-animation.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+            }
+            
+            .years-badge {
+                right: 20px;
+                width: 120px;
+                height: 120px;
+            }
+            
+            .years-badge span:first-child {
+                font-size: 2.5rem;
+            }
+            
+            .floating-cta {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .hero-video {
+                display: none;
+            }
+            
+            .hero {
+                background: linear-gradient(rgba(10,26,47,0.85), rgba(10,26,47,0.6)), url('spkr_close_up~2.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center/cover;
+            }
+            
+            .cta-card {
+                padding: 30px 20px;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .flip-card {
+                height: 350px;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 26, 47, 0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e6c200;
+        }
+    </style>
     <script>
-    !function(f,b,e,v,n,t,s){
-        if(f.fbq)return;
-        n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)
-    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1976710186408387');
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1935929103604346');
     fbq('track', 'PageView');
     </script>
-    <noscript>
-        <img height="1" width="1" style="display:none" 
-             src="https://www.facebook.com/tr?id=1976710186408387&ev=PageView&noscript=1">
-    </noscript>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1935929103604346&ev=PageView&noscript=1"
+    /></noscript>
 </head>
 <body>
     <!-- Loading Animation -->
@@ -403,7 +1352,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                                 </svg>
-                                <span>We answer every call. Even if its been 25 years, we still answer the call. If not we reply within 24 hours.</span>
+                                <span>25-Year Guarantee on All Installations</span>
                             </div>
                         </div>
                     </div>
@@ -423,7 +1372,7 @@
             <div class="footer-logo">It's <span>Showtime</span></div>
             
             <div class="footer-contact">
-                <a href="tel:+15629641624">call us to schedule your free in-home consultaion today!</a>
+                <a href="tel:+15629641624">(562) 964-1624</a>
                 <a href="mailto:itshowtime@msn.com">itshowtime@msn.com</a>
             </div>
             
@@ -449,24 +1398,345 @@
     
     <!-- Floating CTA -->
     <a href="#contact" class="floating-cta" aria-label="Contact Us">✉️</a>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Remove loading screen
-    const loadingScreen = document.querySelector('.loading-animation');
-    if (loadingScreen) {
-        loadingScreen.classList.add('fade-out');
-        
-        // Remove it completely after animation ends
-        loadingScreen.addEventListener('transitionend', function() {
-            loadingScreen.remove();
-        });
-    }
-
-    // Rest of your JavaScript code can go here
-    // ...
-});
-    </script>
     
-<script src="script.js" defer></script>
+    <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loading-animation').classList.add('fade-out');
+                setTimeout(function() {
+                    document.querySelector('.loading-animation').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Lazy Loading Implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lazy load images and background images
+            const lazyLoad = (targets) => {
+                const io = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const target = entry.target;
+                            
+                            if (target.classList.contains('lazy')) {
+                                if (target.tagName === 'IMG') {
+                                    target.src = target.dataset.src;
+                                } else if (target.tagName === 'VIDEO') {
+                                    const sources = target.querySelectorAll('source');
+                                    sources.forEach(source => {
+                                        source.src = source.dataset.src;
+                                    });
+                                    target.load();
+                                } else if (target.hasAttribute('data-bg')) {
+                                    target.style.backgroundImage = `url(${target.dataset.bg})`;
+                                }
+                                
+                                target.classList.remove('lazy');
+                                target.classList.add('lazy-loaded');
+                            }
+                            
+                            observer.unobserve(target);
+                        }
+                    });
+                }, {
+                    rootMargin: '0px 0px 100px 0px',
+                    threshold: 0.1
+                });
+
+                targets.forEach(target => {
+                    io.observe(target);
+                });
+            };
+
+            // Initialize lazy loading
+            lazyLoad(document.querySelectorAll('.lazy'));
+
+            // Parallax Effect
+            const parallaxLayers = [
+                document.getElementById('parallax-layer-1'),
+                document.getElementById('parallax-layer-2')
+            ];
+
+            // Set background images for parallax layers
+            parallaxLayers[0].style.backgroundImage = 'url("spkr_close_up~2.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")';
+            parallaxLayers[1].style.backgroundImage = 'url("URC-Lifestyle-Image-Residential-12.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")';
+
+            // Video parallax effect
+            const heroVideo = document.querySelector('.hero-video');
+            
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                
+                // Parallax for background layers
+                parallaxLayers.forEach((layer, index) => {
+                    const speed = 0.2 * (index + 1);
+                    const yPos = -(scrollPosition * speed);
+                    layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                });
+                
+                // Subtle parallax for video
+                if (heroVideo) {
+                    const videoYPos = -(scrollPosition * 0.3);
+                    heroVideo.style.transform = `translate3d(0, ${videoYPos}px, 0)`;
+                }
+            });
+
+            // GSAP Animations
+            // Hero animations
+            gsap.to('.hero h1', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power3.out',
+                delay: 0.3
+            });
+            
+            gsap.to('.hero h1 span', {
+                y: 0,
+                scale: 1,
+                duration: 1,
+                ease: 'elastic.out(1, 0.5)',
+                delay: 0.6
+            });
+            
+            gsap.to('.hero p', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.9,
+                ease: 'power3.out'
+            });
+            
+            gsap.to('.cta-button', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 1.2,
+                ease: 'power3.out'
+            });
+            
+            // Animate stats counter
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                const suffix = stat.textContent.includes('%') ? '%' : '';
+                const duration = 2;
+                
+                gsap.to(stat, {
+                    innerText: target,
+                    duration: duration,
+                    snap: { innerText: 1 },
+                    ease: "power1.out",
+                    onUpdate: function() {
+                        stat.innerText = Math.floor(this.targets()[0].innerText) + suffix;
+                    },
+                    scrollTrigger: {
+                        trigger: stat,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+            
+            // About section animations
+            ScrollTrigger.create({
+                trigger: '.about-text',
+                start: 'top 80%',
+                onEnter: () => {
+                    gsap.to('.about-text', {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1
+                    });
+                    gsap.to('.about-image', {
+                        opacity: 1,
+                        x: 0,
+                        duration: 1,
+                        delay: 0.3
+                    });
+                    gsap.to('.years-badge', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: 0.6,
+                        ease: 'back.out(1.7)'
+                    });
+                }
+            });
+            
+            // Services animations
+            gsap.utils.toArray('.service-card').forEach((card, i) => {
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: 'top 80%',
+                    onEnter: () => {
+                        gsap.to(card, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            delay: i * 0.1
+                        });
+                    }
+                });
+            });
+            
+            // Portfolio animations
+            gsap.utils.toArray('.flip-card').forEach((card, i) => {
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: 'top 80%',
+                    onEnter: () => {
+                        gsap.to(card, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            delay: i * 0.1
+                        });
+                    }
+                });
+            });
+            
+            // Testimonial animations
+            gsap.utils.toArray('.testimonial').forEach((testimonial, i) => {
+                ScrollTrigger.create({
+                    trigger: testimonial,
+                    start: 'top 80%',
+                    onEnter: () => {
+                        gsap.to(testimonial, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            delay: i * 0.2
+                        });
+                    }
+                });
+            });
+            
+            // Contact form animation
+            ScrollTrigger.create({
+                trigger: '.contact-form',
+                start: 'top 80%',
+                onEnter: () => {
+                    gsap.to('.contact-form', {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1
+                    });
+                }
+            });
+            
+            // Floating CTA animation
+            gsap.to('.floating-cta', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 2,
+                ease: 'elastic.out(1, 0.5)'
+            });
+            
+            // Form logic
+            const homeownerRadios = document.querySelectorAll('input[name="homeowner"]');
+            const projectDetails = document.getElementById('project-details');
+            const nonQualifiedMessage = document.getElementById('non-qualified-message');
+            const qualifiedCTA = document.getElementById('qualified-cta');
+            
+            homeownerRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        projectDetails.style.display = 'block';
+                        nonQualifiedMessage.style.display = 'none';
+                        gsap.from(projectDetails, {
+                            opacity: 0,
+                            y: 20,
+                            duration: 0.8
+                        });
+                    } else {
+                        projectDetails.style.display = 'none';
+                        nonQualifiedMessage.style.display = 'block';
+                        gsap.from(nonQualifiedMessage, {
+                            opacity: 0,
+                            y: 20,
+                            duration: 0.8
+                        });
+                    }
+                });
+            });
+            
+            // Show CTA when all required fields are filled
+            const formFields = document.querySelectorAll('#project-details input[required], #project-details select[required]');
+            formFields.forEach(field => {
+                field.addEventListener('change', function() {
+                    checkFormCompletion();
+                });
+            });
+            
+            function checkFormCompletion() {
+                let allFilled = true;
+                formFields.forEach(field => {
+                    if (field.type === 'checkbox' || field.type === 'radio') {
+                        const name = field.getAttribute('name');
+                        const checked = document.querySelector(`input[name="${name}"]:checked`);
+                        if (!checked) allFilled = false;
+                    } else {
+                        if (!field.value) allFilled = false;
+                    }
+                });
+                
+                if (allFilled) {
+                    qualifiedCTA.style.display = 'block';
+                    gsap.from(qualifiedCTA, {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.8
+                    });
+                    
+                    // Scroll to CTA
+                    setTimeout(() => {
+                        qualifiedCTA.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                } else {
+                    qualifiedCTA.style.display = 'none';
+                }
+            }
+            
+            // Form submission handler
+            const leadForm = document.getElementById('leadForm');
+            if (leadForm) {
+                leadForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Collect form data
+                    const formData = new FormData(this);
+                    const data = {};
+                    formData.forEach((value, key) => {
+                        data[key] = value;
+                    });
+                    
+                    // Simulate form submission
+                    console.log('Form submitted:', data);
+                    
+                    // Show confirmation
+                    const confirmation = document.createElement('div');
+                    confirmation.innerHTML = `
+                        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+                            <div style="background: white; padding: 40px; max-width: 500px; text-align: center; border-radius: 15px; position: relative; backdrop-filter: blur(10px);">
+                                <h3 style="color: var(--navy); margin-bottom: 20px;">Thank You!</h3>
+                                <p style="margin-bottom: 20px;">Your information has been received. We'll contact you within 24 hours to confirm your consultation.</p>
+                                <button onclick="this.parentNode.parentNode.remove()" style="background: var(--gold); color: var(--navy); border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">Close</button>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(confirmation);
+                    
+                    // In production, you would send this to your CRM/email
+                    // fetch('/submit-form', {
+                    //     method: 'POST',
+                    //     body: formData
+                    // });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
