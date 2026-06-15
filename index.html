@@ -7,10 +7,10 @@
     <meta name="description" content="Luxury AV design and installation for Southern California homes and businesses since 1999. Custom home theaters, smart home automation, and commercial AV solutions.">
     <meta name="theme-color" content="#0A1A2F">
     
-    <!-- Fonts -->
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,8 +27,10 @@
             --gold: #C6A43F;
             --gold-light: #E2C268;
             --gold-dark: #9E7E2E;
+            --gold-glow: rgba(198, 164, 63, 0.4);
             --charcoal: #1A1A1A;
             --charcoal-light: #2A2A2A;
+            --charcoal-lighter: #3A3A3A;
             --cream: #F5F0E8;
             --cream-dark: #E8E0D4;
             --white: #FFFFFF;
@@ -48,9 +50,18 @@
             --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
             --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
             --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.2);
-            --shadow-gold: 0 0 40px rgba(198, 164, 63, 0.3);
+            --shadow-gold: 0 0 30px rgba(198, 164, 63, 0.3);
+            --shadow-gold-strong: 0 0 50px rgba(198, 164, 63, 0.5);
+            --shadow-inner-gold: inset 0 0 20px rgba(198, 164, 63, 0.1);
             
             --gradient-gold: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            --gradient-gold-subtle: linear-gradient(135deg, rgba(198,164,63,0.1) 0%, rgba(198,164,63,0.05) 100%);
+            --gradient-dark: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+            --gradient-text: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Plus Jakarta Sans', 'Inter', sans-serif;
         }
         
         html {
@@ -59,7 +70,7 @@
         }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-body);
             background: var(--cream);
             color: var(--charcoal);
             overflow-x: hidden;
@@ -80,11 +91,33 @@
             border-radius: 3px;
         }
         
-        /* Typography */
-        h1, h2, h3, .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
+        /* Typography - More Stylish */
+        h1, h2, h3, .logo, .hero-badge, .section-title {
+            font-family: var(--font-heading);
+            font-weight: 600;
             letter-spacing: -0.02em;
+        }
+        
+        h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title::after {
+            background: var(--gradient-gold);
         }
         
         .container {
@@ -165,6 +198,7 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-gold);
         }
         
         @keyframes spin {
@@ -176,6 +210,7 @@
             font-size: 0.85rem;
             letter-spacing: 4px;
             text-transform: uppercase;
+            font-weight: 500;
         }
         
         /* ========== NAVIGATION ========== */
@@ -194,7 +229,8 @@
             background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(20px);
             padding: 1rem 2rem;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
+            border-bottom: 1px solid rgba(198, 164, 63, 0.2);
         }
         
         .nav-container {
@@ -208,14 +244,20 @@
         .logo {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--white);
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             text-decoration: none;
             letter-spacing: 2px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 0 20px rgba(198,164,63,0.3);
         }
         
         .logo span {
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-style: italic;
         }
         
@@ -241,8 +283,8 @@
             bottom: -5px;
             left: 0;
             width: 0;
-            height: 1.5px;
-            background: var(--gold);
+            height: 2px;
+            background: var(--gradient-gold);
             transition: var(--transition-smooth);
         }
         
@@ -252,15 +294,17 @@
         }
         
         .nav-links a:hover {
-            color: var(--gold);
+            color: var(--gold-light);
         }
         
         .nav-cta {
-            background: var(--gold);
+            background: var(--gradient-gold);
             color: var(--charcoal) !important;
             padding: 0.6rem 1.5rem;
             border-radius: 50px;
             font-weight: 600 !important;
+            box-shadow: var(--shadow-gold);
+            transition: var(--transition-smooth);
         }
         
         .nav-cta::after {
@@ -268,8 +312,9 @@
         }
         
         .nav-cta:hover {
-            background: var(--gold-light);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-gold-strong);
+            color: var(--charcoal) !important;
         }
         
         .menu-btn {
@@ -287,7 +332,7 @@
             display: flex;
             align-items: center;
             position: relative;
-            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
+            background: var(--gradient-hero);
             overflow: hidden;
         }
         
@@ -312,14 +357,17 @@
         
         .hero-badge {
             display: inline-block;
-            background: rgba(198, 164, 63, 0.2);
+            background: rgba(198, 164, 63, 0.15);
             backdrop-filter: blur(10px);
-            padding: 0.5rem 1.2rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 50px;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
             margin-bottom: 2rem;
             border: 1px solid rgba(198, 164, 63, 0.4);
+            font-weight: 500;
+            text-transform: uppercase;
+            box-shadow: var(--shadow-inner-gold);
         }
         
         .hero h1 {
@@ -330,7 +378,10 @@
         }
         
         .hero h1 span {
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-style: italic;
         }
         
@@ -340,6 +391,7 @@
             margin-bottom: 2rem;
             opacity: 0.9;
             line-height: 1.7;
+            font-weight: 400;
         }
         
         .hero-stats {
@@ -355,8 +407,11 @@
         .hero-stat-number {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--gold);
-            font-family: 'Cormorant Garamond', serif;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: var(--font-heading);
         }
         
         .hero-stat-label {
@@ -372,25 +427,41 @@
         }
         
         .btn-primary {
-            background: var(--gold);
+            background: var(--gradient-gold);
             color: var(--charcoal);
             padding: 1rem 2rem;
             font-weight: 600;
             text-decoration: none;
             border-radius: 50px;
             transition: var(--transition-smooth);
-            border: 2px solid var(--gold);
+            border: none;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            box-shadow: var(--shadow-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
         }
         
         .btn-primary:hover {
-            background: transparent;
-            color: var(--gold);
             transform: translateY(-3px);
-            box-shadow: var(--shadow-gold);
+            box-shadow: var(--shadow-gold-strong);
         }
         
         .btn-outline {
@@ -401,26 +472,30 @@
             text-decoration: none;
             border-radius: 50px;
             transition: var(--transition-smooth);
-            border: 2px solid var(--white);
+            border: 1.5px solid var(--white);
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            backdrop-filter: blur(10px);
         }
         
         .btn-outline:hover {
-            background: var(--white);
-            color: var(--charcoal);
+            background: rgba(255,255,255,0.1);
             transform: translateY(-3px);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-gold);
         }
         
         /* ========== MARQUEE ========== */
         .marquee {
-            background: var(--charcoal);
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
             padding: 1rem 0;
             overflow: hidden;
             white-space: nowrap;
             position: relative;
+            border-top: 1px solid rgba(198,164,63,0.2);
+            border-bottom: 1px solid rgba(198,164,63,0.2);
         }
         
         .marquee-content {
@@ -431,9 +506,13 @@
         .marquee-content span {
             display: inline-block;
             margin: 0 1.5rem;
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-size: 0.85rem;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-weight: 600;
         }
         
         @keyframes marquee {
@@ -462,13 +541,16 @@
         .section-title {
             font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 0.5rem;
+            text-align: center;
         }
         
         .section-subtitle {
             color: rgba(0,0,0,0.6);
             margin-bottom: var(--spacing-lg);
             font-size: 1rem;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: 400;
         }
         
         .section-dark .section-subtitle {
@@ -502,6 +584,23 @@
             top: 0;
             left: 0;
             width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(198,164,63,0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 3px;
             background: var(--gradient-gold);
             transform: scaleX(0);
@@ -509,33 +608,37 @@
             transition: var(--transition-smooth);
         }
         
-        .service-card:hover::before {
+        .service-card:hover::after {
             transform: scaleX(1);
         }
         
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-lg), var(--shadow-gold);
         }
         
         .service-icon {
             font-size: 2.5rem;
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 1.5rem;
         }
         
         .service-card h3 {
             font-size: 1.4rem;
             margin-bottom: 1rem;
+            font-family: var(--font-heading);
         }
         
         .service-card p {
             color: rgba(0,0,0,0.6);
             line-height: 1.7;
+            font-size: 0.9rem;
         }
         
-        /* ========== 3D PORTFOLIO CARDS - SUBTLE TILT & TEXT REVEAL ========== */
+        /* ========== 3D PORTFOLIO CARDS WITH EDGE LIGHTING ========== */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -552,7 +655,6 @@
             transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
         
-        /* Subtle tilt - much less aggressive */
         .portfolio-3d-card:hover {
             transform: perspective(1200px) rotateX(2deg) rotateY(3deg) translateY(-5px);
         }
@@ -565,10 +667,11 @@
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             transition: box-shadow 0.3s ease;
+            border: 1px solid rgba(198,164,63,0.1);
         }
         
         .portfolio-3d-card:hover .portfolio-card-inner {
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-xl), 0 0 0 2px rgba(198,164,63,0.3);
         }
         
         .portfolio-card-inner img {
@@ -582,11 +685,10 @@
             transform: scale(1.05);
         }
         
-        /* Text overlay that rises from within the image like it's emerging from depth */
         .portfolio-card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -602,7 +704,10 @@
         }
         
         .portfolio-card-overlay h3 {
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
             transform: translateY(20px);
@@ -616,7 +721,7 @@
         }
         
         .portfolio-card-overlay p {
-            color: white;
+            color: rgba(255,255,255,0.9);
             font-size: 0.9rem;
             opacity: 0;
             transform: translateY(20px);
@@ -629,7 +734,6 @@
             opacity: 0.9;
         }
         
-        /* Subtle glow effect on hover */
         .portfolio-card-glow {
             position: absolute;
             inset: 0;
@@ -639,7 +743,7 @@
         }
         
         .portfolio-3d-card:hover .portfolio-card-glow {
-            box-shadow: 0 0 20px rgba(198, 164, 63, 0.3);
+            box-shadow: inset 0 0 30px rgba(198,164,63,0.2), 0 0 30px rgba(198,164,63,0.3);
         }
         
         /* ========== TESTIMONIALS ========== */
@@ -656,6 +760,24 @@
             border-radius: 20px;
             border: 1px solid rgba(0,0,0,0.1);
             transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 0% 0%, rgba(198,164,63,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .testimonial-card:hover::before {
+            opacity: 1;
         }
         
         .section-dark .testimonial-card {
@@ -666,6 +788,7 @@
         .testimonial-card:hover {
             transform: translateY(-5px);
             border-color: var(--gold);
+            box-shadow: var(--shadow-lg), var(--shadow-gold);
         }
         
         .testimonial-quote {
@@ -674,6 +797,7 @@
             margin-bottom: 1.5rem;
             position: relative;
             padding-left: 1.5rem;
+            font-weight: 400;
         }
         
         .testimonial-quote::before {
@@ -682,13 +806,19 @@
             left: 0;
             top: -0.5rem;
             font-size: 2.5rem;
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-family: serif;
         }
         
         .testimonial-author {
-            font-weight: 600;
-            color: var(--gold);
+            font-weight: 700;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .testimonial-location {
@@ -721,7 +851,7 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.85rem;
             letter-spacing: 0.5px;
         }
@@ -734,7 +864,7 @@
             background: rgba(0,0,0,0.05);
             border: 1.5px solid rgba(0,0,0,0.1);
             border-radius: 12px;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-body);
             transition: var(--transition-smooth);
         }
         
@@ -780,18 +910,42 @@
         
         /* ========== CTA CARD ========== */
         .cta-card {
-            background: linear-gradient(135deg, rgba(198,164,63,0.2), rgba(198,164,63,0.05));
+            background: var(--gradient-gold-subtle);
             backdrop-filter: blur(10px);
             border: 1px solid var(--gold);
             padding: 2rem;
             border-radius: 20px;
             margin-top: 2rem;
             text-align: center;
+            box-shadow: var(--shadow-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(198,164,63,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
         .cta-card h3 {
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
         
         .benefits-list {
@@ -801,26 +955,44 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
         
         .benefits-list li {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-weight: 500;
         }
         
         .benefits-list li::before {
             content: '✓';
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             font-weight: bold;
+            font-size: 1.1rem;
         }
         
         /* ========== FOOTER ========== */
         .footer {
-            background: var(--charcoal);
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
             color: white;
             padding: 4rem 0 2rem;
             position: relative;
+            border-top: 1px solid rgba(198,164,63,0.2);
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gradient-gold);
         }
         
         .footer-grid {
@@ -835,10 +1007,17 @@
         .footer-logo {
             font-size: 2rem;
             margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .footer-logo span {
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .footer-links {
@@ -854,7 +1033,10 @@
         }
         
         .footer-links a:hover {
-            color: var(--gold);
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .footer-bottom {
@@ -872,7 +1054,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: var(--gold);
+            background: var(--gradient-gold);
             color: var(--charcoal);
             width: 55px;
             height: 55px;
@@ -882,14 +1064,14 @@
             justify-content: center;
             text-decoration: none;
             font-size: 1.2rem;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-gold);
             z-index: 100;
             transition: var(--transition-smooth);
         }
         
         .floating-cta:hover {
             transform: scale(1.1) translateY(-5px);
-            background: var(--gold-light);
+            box-shadow: var(--shadow-gold-strong);
         }
         
         /* ========== RESPONSIVE ========== */
@@ -1087,7 +1269,7 @@
         </div>
     </section>
     
-    <!-- Portfolio Section with Subtle 3D Cards & Text That Rises From Within -->
+    <!-- Portfolio Section -->
     <section id="portfolio" class="section section-dark">
         <div class="container">
             <div class="reveal">
@@ -1100,7 +1282,7 @@
                         <img src="https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070" alt="Home Theater">
                         <div class="portfolio-card-overlay">
                             <h3>Newport Beach Estate</h3>
-                            <p>9.4.6 Dolby Atmos | 150" MicroLED | Acoustic Treatments | Luxury Seating</p>
+                            <p>9.4.6 Dolby Atmos | 150" MicroLED | Acoustic Treatments</p>
                         </div>
                         <div class="portfolio-card-glow"></div>
                     </div>
@@ -1110,7 +1292,7 @@
                         <img src="https://images.unsplash.com/photo-1556912172-0b5b2bfa3cfa?q=80&w=2070" alt="Restaurant AV">
                         <div class="portfolio-card-overlay">
                             <h3>Torrance Fine Dining</h3>
-                            <p>14 OLED Displays | Zone Audio | Automated Lighting | URC Control</p>
+                            <p>14 OLED Displays | Zone Audio | Automated Lighting</p>
                         </div>
                         <div class="portfolio-card-glow"></div>
                     </div>
@@ -1120,7 +1302,7 @@
                         <img src="https://images.unsplash.com/photo-1521575107034-e0fa0b82b3d3?q=80&w=2070" alt="TV Installation">
                         <div class="portfolio-card-overlay">
                             <h3>Costa Mesa Residence</h3>
-                            <p>85" Sony Micro LED | In-Wall Speakers | Hidden Cabling | Keypad Control</p>
+                            <p>85" Sony Micro LED | In-Wall Speakers | Hidden Cabling</p>
                         </div>
                         <div class="portfolio-card-glow"></div>
                     </div>
@@ -1272,14 +1454,14 @@
                     <p style="opacity: 0.7; margin-top: 1rem;">Serving Southern California's most discerning residences since 2001.</p>
                 </div>
                 <div>
-                    <h4 style="margin-bottom: 1rem;">Contact</h4>
+                    <h4 style="margin-bottom: 1rem; font-family: var(--font-heading);">Contact</h4>
                     <div class="footer-links">
                         <a href="mailto:itshowtime@msn.com">itshowtime@msn.com</a>
                         <a href="#">Long Beach | LA | Orange County</a>
                     </div>
                 </div>
                 <div>
-                    <h4 style="margin-bottom: 1rem;">Legal</h4>
+                    <h4 style="margin-bottom: 1rem; font-family: var(--font-heading);">Legal</h4>
                     <div class="footer-links">
                         <a href="#">Privacy Policy</a>
                         <a href="#">Terms of Service</a>
@@ -1347,7 +1529,6 @@
                 const y = e.clientY - rect.top;
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                // Much more subtle rotation - max 3 degrees instead of 10+
                 const rotateX = ((y - centerY) / centerY) * 1.5;
                 const rotateY = ((centerX - x) / centerX) * 1.5;
                 card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
@@ -1471,6 +1652,17 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     navLinks?.classList.remove('active');
                 }
+            });
+        });
+        
+        // Service card mouse tracking for radial gradient
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--x', `${x}%`);
+                card.style.setProperty('--y', `${y}%`);
             });
         });
     </script>
