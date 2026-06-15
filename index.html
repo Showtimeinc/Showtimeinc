@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>It's Showtime Inc. | Luxury AV Design & Installation</title>
     <meta name="description" content="Luxury AV design and installation for Southern California homes and businesses since 1999. Custom home theaters, smart home automation, and commercial AV solutions.">
     <meta name="theme-color" content="#0A1A2F">
@@ -10,7 +10,19 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js for 3D Effects -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
     
     <style>
         /* ========== RESET & VARIABLES ========== */
@@ -21,22 +33,36 @@
         }
         
         :root {
-            --gold: #FFD700;
-            --gold-dark: #DAA520;
-            --navy: #0A1A2F;
-            --navy-light: #1a2a4a;
-            --ivory: #F8F4E9;
-            --ivory-dark: #e8e0d0;
+            --gold: #C6A43F;
+            --gold-light: #E2C268;
+            --gold-dark: #9E7E2E;
+            --charcoal: #1A1A1A;
+            --charcoal-light: #2A2A2A;
+            --charcoal-lighter: #3A3A3A;
+            --cream: #F5F0E8;
+            --cream-dark: #E8E0D4;
+            --white: #FFFFFF;
+            --black: #000000;
+            
+            --spacing-xs: 0.5rem;
             --spacing-sm: 1rem;
             --spacing-md: 2rem;
             --spacing-lg: 4rem;
             --spacing-xl: 6rem;
-            --transition-fast: 0.2s ease;
-            --transition: 0.4s cubic-bezier(0.65, 0, 0.35, 1);
-            --glass-blur: 12px;
-            --shadow-sm: 0 4px 15px rgba(0,0,0,0.1);
-            --shadow-md: 0 8px 32px rgba(0,0,0,0.15);
-            --shadow-lg: 0 20px 50px rgba(0,0,0,0.2);
+            --spacing-2xl: 8rem;
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-slow: all 0.6s ease-out;
+            
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.2);
+            --shadow-gold: 0 0 40px rgba(198, 164, 63, 0.4);
+            
+            --gradient-gold: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            --gradient-dark: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
         }
         
         html {
@@ -45,45 +71,127 @@
         }
         
         body {
-            font-family: 'Raleway', sans-serif;
-            color: var(--navy);
-            background-color: var(--ivory);
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
             overflow-x: hidden;
             line-height: 1.6;
         }
         
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
+        /* Custom Cursor */
+        .custom-cursor {
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px var(--gold);
+        }
+        
+        .custom-cursor-follower {
+            width: 50px;
+            height: 50px;
+            border: 1.5px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transform: translate(-50%, -50%);
+            backdrop-filter: blur(2px);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--cream-dark);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+        
+        /* Typography */
+        h1, h2, h3, .logo {
+            font-family: 'Cormorant Garamond', serif;
             font-weight: 700;
-            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
         
         .container {
-            width: 90%;
+            width: 88%;
             max-width: 1400px;
             margin: 0 auto;
             position: relative;
+            z-index: 2;
         }
         
-        /* ========== UTILITY CLASSES ========== */
-        .text-gold { color: var(--gold); }
-        .text-navy { color: var(--navy); }
-        .bg-navy { background: var(--navy); }
-        .text-center { text-align: center; }
-        
-        /* ========== LOADER ========== */
-        .loader {
+        /* ========== PARALLAX GLASS BACKGROUNDS ========== */
+        .parallax-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--navy);
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        .parallax-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            will-change: transform;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        
+        .parallax-layer-1 { background-image: url('https://images.unsplash.com/photo-1558002038-1055e2e28ac4?q=80&w=2070'); }
+        .parallax-layer-2 { background-image: url('https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070'); opacity: 0.1; }
+        .parallax-layer-3 { background-image: url('https://images.unsplash.com/photo-1556912172-0b5b2bfa3cfa?q=80&w=2070'); opacity: 0.08; }
+        
+        /* Section-specific glass backgrounds */
+        .section-glass-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .section-glass-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.08;
+            transition: transform 0.3s ease-out;
+        }
+        
+        /* ========== LOADER ========== */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--charcoal);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
         
         .loader.hidden {
@@ -91,34 +199,133 @@
             visibility: hidden;
         }
         
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(255,215,0,0.2);
+        .loader-content {
+            text-align: center;
+        }
+        
+        .loader-ring {
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(198, 164, 63, 0.2);
             border-top-color: var(--gold);
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
         
-        /* ========== GLASSMORPHISM ========== */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: var(--shadow-md);
-            border-radius: 16px;
-            transition: var(--transition);
+        .loader-text {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
         }
         
-        .glass-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 215, 0, 0.4);
-            box-shadow: var(--shadow-lg);
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            background: transparent;
+        }
+        
+        .nav.scrolled {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* LARGER COMPANY NAME */
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .logo span {
+            color: var(--gold);
+            font-style: italic;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--gold);
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+        
+        .nav-cta {
+            background: var(--gold);
+            color: var(--charcoal) !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600 !important;
+        }
+        
+        .nav-cta::after {
+            display: none;
+        }
+        
+        .nav-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+        
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         
         /* ========== HERO SECTION ========== */
@@ -127,384 +334,464 @@
             display: flex;
             align-items: center;
             position: relative;
-            background: linear-gradient(135deg, rgba(10,26,47,0.85) 0%, rgba(10,26,47,0.7) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
             overflow: hidden;
         }
         
-        .hero::before {
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+        
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-bg::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: url('https://images.unsplash.com/photo-1558002038-1055e2e28ac4?q=80&w=2070') center/cover no-repeat;
-            z-index: -2;
-            animation: slowZoom 20s ease-out infinite alternate;
-        }
-        
-        @keyframes slowZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%);
         }
         
         .hero-content {
             position: relative;
-            padding: var(--spacing-lg) var(--spacing-md);
+            padding: var(--spacing-xl) var(--spacing-md);
             width: 100%;
-            text-align: center;
-            color: white;
+            color: var(--white);
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(198, 164, 63, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(198, 164, 63, 0.4);
         }
         
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
         }
         
         .hero h1 span {
-            background: linear-gradient(135deg, var(--gold), #ffea80);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--gold);
+            font-style: italic;
         }
         
-        .hero h2 {
-            font-family: 'Raleway', sans-serif;
-            font-weight: 300;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            margin: 1.5rem 0;
-            letter-spacing: 4px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease 0.3s forwards;
+        .hero-desc {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            max-width: 550px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.7;
         }
         
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease 0.6s forwards;
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
         }
         
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-stat {
+            text-align: left;
         }
         
-        .cta-button {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--navy);
-            padding: 1rem 2.5rem;
+        .hero-stat-number {
+            font-size: 2rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .hero-stat-label {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--charcoal);
+            padding: 1rem 2rem;
+            font-weight: 600;
             text-decoration: none;
             border-radius: 50px;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
             border: 2px solid var(--gold);
             cursor: pointer;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease 0.9s forwards;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .cta-button:hover {
+        .btn-primary:hover {
             background: transparent;
             color: var(--gold);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-gold);
         }
         
-        /* ========== STATS BAR ========== */
-        .stats-bar {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            background: rgba(10, 26, 47, 0.9);
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 215, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition-smooth);
+            border: 2px solid var(--white);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .stat-item {
-            text-align: center;
-            color: white;
-            padding: 1rem;
-            min-width: 150px;
-            transition: var(--transition);
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--charcoal);
+            transform: translateY(-3px);
         }
         
-        .stat-item:hover {
-            transform: scale(1.05);
-        }
-        
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--gold);
-        }
-        
-        .stat-label {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 0.5rem;
-        }
-        
-        /* ========== SECTIONS ========== */
+        /* ========== SECTIONS WITH GLASS BACKGROUNDS ========== */
         .section {
-            padding: var(--spacing-xl) 0;
+            padding: var(--spacing-2xl) 0;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.08;
+            z-index: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .section-light {
+            background: rgba(245, 240, 232, 0.92);
+            backdrop-filter: blur(2px);
+        }
+        
+        .section-light::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .section-dark {
+            background: rgba(26, 26, 26, 0.92);
+            backdrop-filter: blur(2px);
+            color: var(--white);
+        }
+        
+        .section-dark::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1556912172-0b5b2bfa3cfa?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.1;
+            z-index: 0;
         }
         
         .section-title {
             font-size: clamp(2rem, 4vw, 3rem);
-            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-subtitle {
+            color: rgba(0,0,0,0.6);
             margin-bottom: var(--spacing-lg);
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 3px;
-            background: var(--gold);
-            margin: 1rem auto 0;
-        }
-        
-        /* About Section */
-        .about-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-lg);
-            align-items: center;
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 280px;
-            background: rgba(248, 244, 233, 0.9);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .about-text p {
-            margin-bottom: 1rem;
             font-size: 1rem;
-            line-height: 1.7;
+            letter-spacing: 1px;
         }
         
-        .about-image {
-            flex: 1;
-            min-width: 280px;
-            height: 450px;
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
-            border-radius: 16px;
-            position: relative;
+        .section-dark .section-subtitle {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* ========== MARQUEE ========== */
+        .marquee {
+            background: var(--charcoal);
+            padding: 1rem 0;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
+            white-space: nowrap;
+            position: relative;
         }
         
-        .about-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070') center/cover;
-            opacity: 0.8;
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
         }
         
-        .years-badge {
-            position: absolute;
-            bottom: -20px;
-            right: 30px;
-            background: var(--gold);
-            color: var(--navy);
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            box-shadow: var(--shadow-md);
-            z-index: 2;
-        }
-        
-        .years-badge span:first-child {
-            font-size: 2.5rem;
-            line-height: 1;
-        }
-        
-        /* Services Section */
-        .services {
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
-            color: white;
-        }
-        
-        .services .section-title::after {
-            background: var(--gold);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .service-card {
-            background: rgba(255,255,255,0.05);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,215,0,0.15);
-            transition: var(--transition);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,215,0,0.3);
-        }
-        
-        .service-card h3 {
+        .marquee-content span {
+            display: inline-block;
+            margin: 0 1.5rem;
             color: var(--gold);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
         }
         
-        /* Portfolio Section */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* ========== 3D PORTFOLIO CARDS ========== */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
+            perspective: 1000px;
         }
         
-        .portfolio-card {
+        .portfolio-3d-card {
             position: relative;
-            height: 400px;
-            border-radius: 16px;
-            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 4/3;
             cursor: pointer;
-            box-shadow: var(--shadow-md);
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
-        .portfolio-card img {
+        .portfolio-3d-card:hover {
+            transform: rotateX(5deg) rotateY(10deg) translateY(-10px);
+        }
+        
+        .portfolio-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-smooth);
+        }
+        
+        .portfolio-3d-card:hover .portfolio-card-inner {
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .portfolio-card-inner img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s ease;
         }
         
-        .portfolio-card:hover img {
+        .portfolio-3d-card:hover .portfolio-card-inner img {
             transform: scale(1.08);
         }
         
-        .portfolio-overlay {
+        .portfolio-card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(10,26,47,0.95), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             padding: 1.5rem;
-            transform: translateY(20px);
-            transition: var(--transition);
             opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
-        .portfolio-card:hover .portfolio-overlay {
-            transform: translateY(0);
+        .portfolio-3d-card:hover .portfolio-card-overlay {
             opacity: 1;
+            transform: translateY(0);
         }
         
-        .portfolio-overlay h3 {
+        .portfolio-card-overlay h3 {
             color: var(--gold);
-            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
         }
         
-        .portfolio-overlay p {
+        .portfolio-card-overlay p {
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
         }
         
-        /* Testimonials */
-        .testimonials {
-            background: linear-gradient(135deg, var(--ivory), var(--ivory-dark));
+        .portfolio-card-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            pointer-events: none;
+            transition: box-shadow 0.3s ease;
         }
         
-        .testimonial-grid {
+        .portfolio-3d-card:hover .portfolio-card-glow {
+            box-shadow: 0 0 30px rgba(198, 164, 63, 0.5);
+        }
+        
+        /* ========== SERVICES GRID ========== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition-smooth);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card p {
+            color: rgba(0,0,0,0.6);
+            line-height: 1.7;
+        }
+        
+        /* ========== TESTIMONIALS ========== */
+        .testimonials-slider {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
         
-        .testimonial {
-            background: white;
+        .testimonial-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
             padding: 2rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition-smooth);
         }
         
-        .testimonial:hover {
+        .testimonial-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
+            border-color: rgba(198,164,63,0.3);
+            background: rgba(255,255,255,0.12);
         }
         
         .testimonial-quote {
-            font-style: italic;
-            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
             position: relative;
             padding-left: 1.5rem;
         }
         
         .testimonial-quote::before {
             content: '"';
-            font-size: 3rem;
             position: absolute;
-            left: -0.5rem;
-            top: -1rem;
+            left: 0;
+            top: -0.5rem;
+            font-size: 2.5rem;
             color: var(--gold);
             font-family: serif;
         }
         
         .testimonial-author {
-            font-weight: 700;
-            color: var(--navy);
+            font-weight: 600;
+            color: var(--gold);
         }
         
         .testimonial-location {
-            font-size: 0.85rem;
-            color: #666;
+            font-size: 0.75rem;
+            opacity: 0.6;
         }
         
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, var(--navy), var(--navy-light));
-            color: white;
-        }
-        
-        .contact .section-title::after {
-            background: var(--gold);
-        }
-        
+        /* ========== CONTACT FORM ========== */
         .contact-form {
             max-width: 700px;
             margin: 0 auto;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255,215,0,0.2);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-dark .contact-form {
+            background: rgba(42, 42, 42, 0.95);
         }
         
         .form-group {
@@ -515,19 +802,28 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
         }
         
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 0.8rem;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,215,0,0.3);
+            padding: 1rem;
+            background: rgba(0,0,0,0.05);
+            border: 1.5px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition-smooth);
+        }
+        
+        .section-dark .form-group input,
+        .section-dark .form-group textarea,
+        .section-dark .form-group select {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.15);
             color: white;
-            font-family: 'Raleway', sans-serif;
-            border-radius: 8px;
-            transition: var(--transition-fast);
         }
         
         .form-group input:focus,
@@ -535,40 +831,40 @@
         .form-group select:focus {
             outline: none;
             border-color: var(--gold);
-            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 0 3px rgba(198,164,63,0.2);
         }
         
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
+        .form-group select option {
+            background: var(--charcoal);
+            color: white;
         }
         
-        .radio-group, .checkbox-group {
+        .radio-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-top: 0.5rem;
         }
         
-        .radio-option, .checkbox-option {
+        .radio-option {
             display: flex;
             align-items: center;
-            cursor: pointer;
             gap: 0.5rem;
-        }
-        
-        .radio-option input,
-        .checkbox-option input {
-            width: auto;
             cursor: pointer;
         }
         
-        /* CTA Card */
+        .radio-option input {
+            width: auto;
+            accent-color: var(--gold);
+        }
+        
+        /* ========== CTA CARD ========== */
         .cta-card {
-            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05));
+            background: linear-gradient(135deg, rgba(198,164,63,0.2), rgba(198,164,63,0.05));
+            backdrop-filter: blur(10px);
             border: 1px solid var(--gold);
             padding: 2rem;
-            border-radius: 16px;
+            border-radius: 20px;
             margin-top: 2rem;
             text-align: center;
         }
@@ -581,119 +877,56 @@
         .benefits-list {
             list-style: none;
             margin: 1.5rem 0;
-            text-align: left;
-            display: inline-block;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
         }
         
         .benefits-list li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .benefits-list li::before {
             content: '✓';
             color: var(--gold);
+            font-weight: bold;
+        }
+        
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--charcoal);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
             position: absolute;
+            top: 0;
             left: 0;
-            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1521575107034-e0fa0b82b3d3?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            pointer-events: none;
         }
         
-        .cta-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            align-items: center;
-        }
-        
-        .direct-call-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 2rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: var(--transition);
-            background: var(--gold);
-            color: var(--navy);
-            border: 2px solid var(--gold);
-        }
-        
-        .direct-call-button:hover {
-            background: transparent;
-            color: var(--gold);
-            transform: translateY(-2px);
-        }
-        
-        .schedule-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 2rem;
-            font-weight: 700;
-            border-radius: 50px;
-            transition: var(--transition);
-            background: transparent;
-            color: white;
-            border: 2px solid var(--gold);
-            cursor: pointer;
-        }
-        
-        .schedule-button:hover {
-            background: rgba(255,215,0,0.1);
-            transform: translateY(-2px);
-        }
-        
-        .cta-divider {
-            color: var(--gold);
-            margin: 0.5rem 0;
-        }
-        
-        .guarantee-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid rgba(255,215,0,0.3);
-            border-radius: 50px;
-            font-size: 0.85rem;
-        }
-        
-        .non-qualified-text {
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .email-button {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--navy);
-            padding: 0.8rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            margin-top: 1rem;
-            font-weight: bold;
-            transition: var(--transition);
-        }
-        
-        .email-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--navy);
-            color: white;
-            text-align: center;
-            padding: 3rem 1rem;
-            border-top: 1px solid rgba(255,215,0,0.1);
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
         }
         
         .footer-logo {
-            font-family: 'Playfair Display', serif;
             font-size: 2rem;
             margin-bottom: 1rem;
         }
@@ -702,354 +935,303 @@
             color: var(--gold);
         }
         
-        .footer-contact {
-            margin: 1.5rem 0;
-        }
-        
-        .footer-contact a {
-            color: var(--gold);
-            text-decoration: none;
-        }
-        
         .footer-links {
-            margin: 1.5rem 0;
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.75rem;
         }
         
-        .footer-links a, .footer-links button {
+        .footer-links a {
             color: rgba(255,255,255,0.7);
             text-decoration: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition-fast);
+            transition: var(--transition-smooth);
         }
         
-        .footer-links a:hover, .footer-links button:hover {
+        .footer-links a:hover {
             color: var(--gold);
         }
         
-        /* Floating CTA */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+            opacity: 0.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* ========== FLOATING CTA ========== */
         .floating-cta {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background: var(--gold);
-            color: var(--navy);
-            width: 55px;
-            height: 55px;
+            color: var(--charcoal);
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 1.5rem;
-            box-shadow: var(--shadow-md);
+            font-size: 1.3rem;
+            box-shadow: var(--shadow-lg);
             z-index: 100;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
         
         .floating-cta:hover {
-            transform: scale(1.1) translateY(-3px);
+            transform: scale(1.1) translateY(-5px);
+            background: var(--gold-light);
         }
         
-        /* Scroll Down Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            z-index: 10;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-        
-        .scroll-indicator:hover {
-            opacity: 1;
-        }
-        
-        .mouse {
-            width: 26px;
-            height: 42px;
-            border: 2px solid white;
-            border-radius: 20px;
-            position: relative;
-        }
-        
-        .mouse::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 8px;
-            background: white;
-            border-radius: 2px;
-            animation: scrollWheel 1.5s infinite;
-        }
-        
-        @keyframes scrollWheel {
-            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            80% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(0); }
-        }
-        
-        .scroll-text {
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: white;
-            font-weight: 300;
-        }
-        
-        .scroll-arrow {
-            width: 10px;
-            height: 10px;
-            border-right: 2px solid white;
-            border-bottom: 2px solid white;
-            transform: rotate(45deg);
-            animation: bounce 1.5s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: rotate(45deg) translateY(0); }
-            50% { transform: rotate(45deg) translateY(8px); }
-        }
-        
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--ivory);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 4px;
-        }
-        
-        /* Responsive */
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
-            .section {
-                padding: 3rem 0;
+            .menu-btn {
+                display: block;
             }
             
-            .stats-bar {
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--charcoal);
                 flex-direction: column;
-                align-items: center;
-                gap: 1rem;
+                justify-content: center;
+                padding: 2rem;
+                transition: var(--transition-smooth);
+                z-index: 1001;
             }
             
-            .about-content {
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+            
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .benefits-list {
                 flex-direction: column;
+                align-items: flex-start;
             }
             
-            .years-badge {
-                width: 100px;
-                height: 100px;
-                bottom: -10px;
-                right: 15px;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
             
-            .years-badge span:first-child {
-                font-size: 2rem;
-            }
-            
-            .floating-cta {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .scroll-indicator {
-                bottom: 20px;
+            .custom-cursor,
+            .custom-cursor-follower {
+                display: none;
             }
         }
         
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-        
-        .hidden-section {
+        /* Reveal Animations */
+        .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: var(--transition-slow);
         }
         
-        .hidden-section.visible {
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
         
-        /* Notification Banner */
-        .notification-banner {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            z-index: 10001;
-            animation: slideIn 0.3s ease;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .notification-banner.error {
-            background: #f44336;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        /* 3D Tilt effect for cards */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
         }
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+    
+    <!-- Parallax Background Layers -->
+    <div class="parallax-bg">
+        <div class="parallax-layer parallax-layer-1" id="layer1"></div>
+        <div class="parallax-layer parallax-layer-2" id="layer2"></div>
+        <div class="parallax-layer parallax-layer-3" id="layer3"></div>
+    </div>
+    
     <!-- Loader -->
     <div class="loader" id="loader">
-        <div class="loader-spinner"></div>
+        <div class="loader-content">
+            <div class="loader-ring"></div>
+            <div class="loader-text">It's Showtime</div>
+        </div>
     </div>
+    
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">It's <span>Showtime</span></a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="active">Home</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact" class="nav-cta">Get Estimate</a>
+            </div>
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
     
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>It's <span>Showtime</span> Inc.</h1>
-            <h2>We Make Complicated Devices Simple To Use</h2>
-            <p>For 25 years, we've transformed Southern California's most luxurious homes with flawless AV integration that disappears until It's Showtime.</p>
-            <a href="#contact" class="cta-button">Design Your Dream System</a>
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1558002038-1055e2e28ac4?q=80&w=2070" alt="Luxury Home Theater">
         </div>
-        
-        <!-- Scroll Down Indicator -->
-        <div class="scroll-indicator" id="scrollIndicator">
-            <div class="mouse"></div>
-            <div class="scroll-text">Scroll Down</div>
-            <div class="scroll-arrow"></div>
+        <div class="hero-content container">
+            <div class="hero-badge">EST. 2001 • PREMIER AV INTEGRATOR</div>
+            <h1>Where Technology <span>&</span><br>Artistry Converge</h1>
+            <p class="hero-desc">For 25 years, we've transformed Southern California's most luxurious residences with invisible AV integration that delivers unforgettable experiences.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">1200+</div>
+                    <div class="hero-stat-label">Projects Completed</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">98%</div>
+                    <div class="hero-stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">24/7</div>
+                    <div class="hero-stat-label">White-Glove Support</div>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-primary">
+                    <i class="fas fa-calendar-check"></i> Free Consultation
+                </a>
+                <a href="#portfolio" class="btn-outline">
+                    <i class="fas fa-play-circle"></i> View Work
+                </a>
+            </div>
         </div>
     </section>
     
-    <!-- Stats Bar -->
-    <div class="stats-bar">
-        <div class="stat-item">
-            <div class="stat-number" id="stat-years">0</div>
-            <div class="stat-label">Years Experience</div>
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>✦ BESPOKE DESIGN</span>
+            <span>✦ INVISIBLE TECHNOLOGY</span>
+            <span>✦ WHITE-GLOVE SERVICE</span>
+            <span>✦ PREMIUM BRANDS</span>
+            <span>✦ 25-YEAR GUARANTEE</span>
+            <span>✦ LA & ORANGE COUNTY</span>
         </div>
-        <div class="stat-item">
-            <div class="stat-number" id="stat-projects">0</div>
-            <div class="stat-label">Projects Completed</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number" id="stat-satisfaction">0</div>
-            <div class="stat-label">% Client Satisfaction</div>
+        <div class="marquee-content">
+            <span>✦ BESPOKE DESIGN</span>
+            <span>✦ INVISIBLE TECHNOLOGY</span>
+            <span>✦ WHITE-GLOVE SERVICE</span>
+            <span>✦ PREMIUM BRANDS</span>
+            <span>✦ 25-YEAR GUARANTEE</span>
+            <span>✦ LA & ORANGE COUNTY</span>
         </div>
     </div>
     
-    <!-- About Section -->
-    <section class="section hidden-section" id="about">
-        <div class="container">
-            <h2 class="section-title">The Showtime Difference</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>As Southern California's premier AV integrator since 2001, we've perfected the art of blending cutting-edge technology with uncompromising aesthetics. Our work graces the most discerning homes across Los Angeles and Orange County.</p>
-                    <p>What sets us apart isn't just our technical expertise, but our commitment to creating systems that enhance your lifestyle without intruding on your design. We engineer invisible excellence that delivers breathtaking moments on demand.</p>
-                    <p>From oceanfront homes in Laguna Beach to mansions overlooking the Pacific in Rolling Hills, our installations are as much about the experience as the equipment. No visible wires. No compromised aesthetics. Just flawless performance when you want it.</p>
-                </div>
-                <div class="about-image">
-                    <div class="years-badge">
-                        <span>25</span>
-                        <span>Years</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <!-- Services Section -->
-    <section class="section services hidden-section">
+    <section id="services" class="section section-light">
         <div class="container">
-            <h2 class="section-title">Our Signature Services</h2>
+            <div class="reveal">
+                <h2 class="section-title">Our Signature Services</h2>
+                <div class="section-subtitle">Tailored solutions for the most discerning spaces</div>
+            </div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-music"></i></div>
                     <h3>Whole-Home Audio</h3>
-                    <p>Seamless soundscapes perfectly synchronized across every room without intrusive hardware.</p>
+                    <p>Seamless soundscapes synchronized across every room. Invisible speakers, perfect acoustics, and intuitive control.</p>
                 </div>
-                <div class="service-card">
-                    <h3>Theater Design</h3>
-                    <p>Acoustically optimized private cinemas with 4K projection, Dolby Atmos, and bespoke seating.</p>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-film"></i></div>
+                    <h3>Private Cinema</h3>
+                    <p>Acoustically optimized theaters with 4K laser projection, Dolby Atmos, and bespoke seating configurations.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
                     <h3>Smart Lighting</h3>
-                    <p>Lutron-powered environments that adapt to your rhythms while cutting energy costs.</p>
+                    <p>Lutron-powered environments that adapt to circadian rhythms while creating the perfect ambiance for any moment.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
                     <h3>Commercial AV</h3>
-                    <p>Boardroom-to-lobby solutions for luxury hotels, corporate offices, and retail spaces.</p>
+                    <p>Boardroom-to-lobby solutions for luxury hotels, corporate offices, and high-end retail spaces.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
                     <h3>Security Integration</h3>
-                    <p>Discreet high-resolution monitoring that blends with your architecture.</p>
+                    <p>Discreet high-resolution monitoring that blends with your architecture while providing 24/7 protection.</p>
                 </div>
-                <div class="service-card">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
                     <h3>Control Systems</h3>
-                    <p>One-touch management of every system through intuitive interfaces.</p>
+                    <p>One-touch management of every system through intuitive interfaces — remotes, keypads, or your smartphone.</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Portfolio Section -->
-    <section class="section hidden-section">
+    <!-- Portfolio Section with 3D Interactive Cards -->
+    <section id="portfolio" class="section section-dark">
         <div class="container">
-            <h2 class="section-title">Recent Installs</h2>
+            <div class="reveal">
+                <h2 class="section-title">Recent Installations</h2>
+                <div class="section-subtitle">A curated selection of our finest work — hover for 3D effect</div>
+            </div>
             <div class="portfolio-grid">
-                <div class="portfolio-card">
-                    <img src="https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070" alt="Home Theater" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <h3>Newport Beach Home Theater</h3>
-                        <p>Dolby Atmos 7.2.2 system with 4K laser projection and luxury seating</p>
+                <div class="portfolio-3d-card reveal" data-tilt>
+                    <div class="portfolio-card-inner">
+                        <img src="https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070" alt="Home Theater">
+                        <div class="portfolio-card-overlay">
+                            <h3>Newport Beach Estate</h3>
+                            <p>9.4.6 Dolby Atmos | 150" MicroLED | Acoustic Treatments</p>
+                        </div>
+                        <div class="portfolio-card-glow"></div>
                     </div>
                 </div>
-                <div class="portfolio-card">
-                    <img src="https://images.unsplash.com/photo-1556912172-0b5b2bfa3cfa?q=80&w=2070" alt="Restaurant AV" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <h3>Torrance Restaurant</h3>
-                        <p>14 OLED Sony 4K TVs with full automation and URC control</p>
+                <div class="portfolio-3d-card reveal" data-tilt>
+                    <div class="portfolio-card-inner">
+                        <img src="https://images.unsplash.com/photo-1556912172-0b5b2bfa3cfa?q=80&w=2070" alt="Restaurant AV">
+                        <div class="portfolio-card-overlay">
+                            <h3>Torrance Fine Dining</h3>
+                            <p>14 OLED Displays | Zone Audio | Automated Lighting</p>
+                        </div>
+                        <div class="portfolio-card-glow"></div>
                     </div>
                 </div>
-                <div class="portfolio-card">
-                    <img src="https://images.unsplash.com/photo-1521575107034-e0fa0b82b3d3?q=80&w=2070" alt="System Upgrade" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <h3>Costa Mesa System Upgrade</h3>
-                        <p>85" Sony Micro LED with URC Complete Control System</p>
+                <div class="portfolio-3d-card reveal" data-tilt>
+                    <div class="portfolio-card-inner">
+                        <img src="https://images.unsplash.com/photo-1521575107034-e0fa0b82b3d3?q=80&w=2070" alt="TV Installation">
+                        <div class="portfolio-card-overlay">
+                            <h3>Costa Mesa Residence</h3>
+                            <p>85" Sony Micro LED | In-Wall Speakers | Hidden Cabling</p>
+                        </div>
+                        <div class="portfolio-card-glow"></div>
                     </div>
                 </div>
             </div>
@@ -1057,27 +1239,30 @@
     </section>
     
     <!-- Testimonials -->
-    <section class="section testimonials hidden-section">
+    <section id="testimonials" class="section section-light">
         <div class="container">
-            <h2 class="section-title">Client Acclaim</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial">
+            <div class="reveal">
+                <h2 class="section-title">Client Acclaim</h2>
+                <div class="section-subtitle">What our clients say about the Showtime experience</div>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card reveal">
                     <div class="testimonial-quote">
-                        Showtime transformed our 1920s Spanish Revival without compromising its character. The system disappears until we want music.
+                        The system disappears until we want music — then it's like the Philharmonic is in our living room.
                     </div>
                     <div class="testimonial-author">The Harrison Family</div>
                     <div class="testimonial-location">Hancock Park</div>
                 </div>
-                <div class="testimonial">
+                <div class="testimonial-card reveal">
                     <div class="testimonial-quote">
-                        Our theater gets more use than any other room. The attention to acoustic detail makes commercial cinemas seem amateurish.
+                        Our theater gets more use than any other room. Commercial cinemas seem amateurish by comparison.
                     </div>
                     <div class="testimonial-author">Dr. Robert Chen</div>
                     <div class="testimonial-location">Newport Coast</div>
                 </div>
-                <div class="testimonial">
+                <div class="testimonial-card reveal">
                     <div class="testimonial-quote">
-                        They solved problems we didn't know we had. The lighting automation has changed how we experience our home.
+                        The lighting automation alone has transformed how we experience our home at different times of day.
                     </div>
                     <div class="testimonial-author">Sophia Marquez</div>
                     <div class="testimonial-location">Malibu</div>
@@ -1087,12 +1272,15 @@
     </section>
     
     <!-- Contact Section -->
-    <section id="contact" class="section contact hidden-section">
+    <section id="contact" class="section section-dark">
         <div class="container">
-            <h2 class="section-title">Begin Your Transformation</h2>
+            <div class="reveal">
+                <h2 class="section-title">Begin Your Transformation</h2>
+                <div class="section-subtitle">Schedule your complimentary design consultation</div>
+            </div>
             <form class="contact-form" id="leadForm">
                 <div class="form-group">
-                    <label>Are you the homeowner or decision maker?</label>
+                    <label>Are you the property owner or decision maker?</label>
                     <div class="radio-group">
                         <label class="radio-option">
                             <input type="radio" name="homeowner" value="yes" required> Yes, I own the property
@@ -1117,233 +1305,298 @@
                     <div class="form-group">
                         <label for="phone">Phone Number *</label>
                         <input type="tel" id="phone" name="phone" required>
-                        <small style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">Required so we can call to schedule your free estimate</small>
                     </div>
 
                     <div class="form-group">
                         <label for="projectType">Project Type *</label>
                         <select id="projectType" name="projectType" required>
-                            <option value="">Select an option</option>
-                            <option value="home_theater">Custom Home Theater</option>
-                            <option value="whole_home_audio">Whole-Home Audio</option>
-                            <option value="smart_lighting">Smart Lighting Control</option>
-                            <option value="security">Security Integration</option>
-                            <option value="commercial">Commercial AV</option>
+                            <option value="" disabled selected>— Select a project type —</option>
+                            <option value="home_theater">🎬 Custom Home Theater</option>
+                            <option value="whole_home_audio">🎵 Whole-Home Audio System</option>
+                            <option value="smart_lighting">💡 Smart Lighting Control</option>
+                            <option value="security">🔒 Security Integration</option>
+                            <option value="commercial">🏢 Commercial AV Installation</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="budget">Budget Range *</label>
+                        <label for="budget">Investment Range *</label>
                         <select id="budget" name="budget" required>
-                            <option value="">Select range</option>
-                            <option value="10-25k">$10,000 - $25,000</option>
-                            <option value="25-50k">$25,000 - $50,000</option>
-                            <option value="50-100k">$50,000 - $100,000</option>
-                            <option value="100k+">$100,000+</option>
+                            <option value="" disabled selected>— Select budget range —</option>
+                            <option value="2.5-5k">💰 $2,500 - $5,000</option>
+                            <option value="5-10k">💰 $5,000 - $10,000</option>
+                            <option value="10-25k">💰 $10,000 - $25,000</option>
+                            <option value="25-50k">💰 $25,000 - $50,000</option>
+                            <option value="50-100k">💰 $50,000 - $100,000</option>
+                            <option value="100k+">💰 $100,000+</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Project Vision</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your dream system..."></textarea>
+                        <label for="message">Tell us about your vision</label>
+                        <textarea id="message" name="message" placeholder="What are you hoping to achieve? Any special requirements?"></textarea>
                     </div>
 
                     <div id="qualifiedCta" style="display: none;">
                         <div class="cta-card">
-                            <h3>Your Free On-Site Estimate Awaits</h3>
-                            <p>Based on your selections, you qualify for a complimentary consultation:</p>
+                            <h3>Your Complimentary Design Consultation</h3>
                             <ul class="benefits-list">
-                                <li>Free on-site estimate (no obligation)</li>
-                                <li>Custom system design tailored to your space</li>
-                                <li>Premium brand selection consultation</li>
-                                <li>25-year installation guarantee</li>
+                                <li>Free on-site estimate</li>
+                                <li>Custom system design</li>
+                                <li>Premium brand selection</li>
+                                <li>25-year guarantee</li>
                             </ul>
                             
-                            <div class="cta-buttons">
-                                <div id="phoneNumberContainer" style="display: none;">
-                                    <a href="tel:+15629641624" class="direct-call-button" id="phoneNumberLink">
-                                        📞 Call Now: (562) 964-1624
-                                    </a>
-                                    <span class="cta-divider">or</span>
-                                </div>
-                                <button type="submit" class="schedule-button" id="scheduleBtn">
-                                    📅 Request Free Estimate
-                                </button>
+                            <div id="phoneNumberContainer" style="display: none;">
+                                <a href="tel:+15629641624" class="btn-primary" style="display: inline-flex; gap: 0.5rem;">
+                                    <i class="fas fa-phone"></i> Call (562) 964-1624
+                                </a>
+                                <p style="margin: 1rem 0; opacity: 0.6;">or</p>
                             </div>
-                            
-                            <div class="guarantee-badge">
-                                🛡️ 25-Year Guarantee on All Installations
-                            </div>
+                            <button type="submit" class="btn-primary" id="scheduleBtn">
+                                <i class="fas fa-calendar-check"></i> Request Free Estimate
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <div id="nonQualifiedMessage" style="display: none;">
                     <div class="cta-card">
-                        <p>Thank you for your interest! Please have the homeowner or decision maker contact us directly:</p>
-                        <a href="mailto:itshowtime@msn.com" class="email-button">📧 Email Our Team: itshowtime@msn.com</a>
+                        <p>Thank you for your interest! Please have the property owner contact us directly:</p>
+                        <a href="mailto:itshowtime@msn.com" class="btn-primary" style="display: inline-flex; gap: 0.5rem; margin-top: 1rem;">
+                            <i class="fas fa-envelope"></i> Email Our Team
+                        </a>
                     </div>
                 </div>
             </form>
         </div>
     </section>
-
+    
     <!-- Footer -->
-    <footer>
-        <div class="footer-logo">It's <span>Showtime</span> Inc.</div>
-        <div class="footer-contact">
-            <a href="mailto:itshowtime@msn.com">itshowtime@msn.com</a>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">It's <span>Showtime</span></div>
+                    <p style="opacity: 0.7; margin-top: 1rem;">Serving Southern California's most discerning residences since 2001.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem;">Contact</h4>
+                    <div class="footer-links">
+                        <a href="mailto:itshowtime@msn.com">itshowtime@msn.com</a>
+                        <a href="#">Long Beach | LA | Orange County</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem;">Legal</h4>
+                    <div class="footer-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <button id="doNotSellBtn" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer;">Do Not Sell My Data</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 It's Showtime Inc. All rights reserved.</p>
+            </div>
         </div>
-        <p>Serving Southern California Since 2001</p>
-        <p>Long Beach | Los Angeles | Orange County</p>
-        <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <button id="doNotSellBtn">Do Not Sell My Data</button>
-        </div>
-        <p>© 2025 It's Showtime Inc. | All rights reserved</p>
     </footer>
     
     <!-- Floating CTA -->
-    <a href="#contact" class="floating-cta" aria-label="Contact Us">📧</a>
+    <a href="#contact" class="floating-cta">
+        <i class="fas fa-message"></i>
+    </a>
 
+    <script type="module">
+        // ========== THREE.JS 3D BACKGROUND EFFECT ==========
+        import * as THREE from 'three';
+        
+        // Setup 3D scene for background particles
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+        document.body.insertBefore(renderer.domElement, document.body.firstChild);
+        renderer.domElement.style.position = 'fixed';
+        renderer.domElement.style.top = '0';
+        renderer.domElement.style.left = '0';
+        renderer.domElement.style.width = '100%';
+        renderer.domElement.style.height = '100%';
+        renderer.domElement.style.zIndex = '-1';
+        renderer.domElement.style.pointerEvents = 'none';
+        
+        // Create floating particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 500;
+        const posArray = new Float32Array(particlesCount * 3);
+        
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+            posArray[i] = (Math.random() - 0.5) * 200;
+            posArray[i+1] = (Math.random() - 0.5) * 100;
+            posArray[i+2] = (Math.random() - 0.5) * 50;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.2,
+            color: 0xC6A43F,
+            transparent: true,
+            opacity: 0.3,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        
+        camera.position.z = 30;
+        
+        // Animation
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = (event.clientY / window.innerHeight) * 2 - 1;
+        });
+        
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+            particlesMesh.rotation.x += 0.0005;
+            particlesMesh.rotation.y += 0.0005;
+            particlesMesh.rotation.x += mouseY * 0.0005;
+            particlesMesh.rotation.y += mouseX * 0.0005;
+            renderer.render(scene, camera);
+        }
+        
+        animate3D();
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+    
     <script>
         // ========== CONFIGURATION ==========
-        // *** IMPORTANT: Replace with your actual Formspree endpoint ***
-        // Get your free endpoint at: https://formspree.io/
-        // Sign up, create a new form, and copy the endpoint URL here
         const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID_HERE';
-        
-        // For testing without Formspree, set to true
-        const USE_TEST_MODE = true;  // Set to false when you have your Formspree endpoint
-        
-        // Your email for notifications (used in test mode)
-        const YOUR_NOTIFICATION_EMAIL = 'itshowtime@msn.com';
+        const USE_TEST_MODE = true;
         
         // ========== LOADER ==========
         window.addEventListener('load', function() {
-            const loader = document.getElementById('loader');
             setTimeout(() => {
-                loader.classList.add('hidden');
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 500);
+                document.getElementById('loader').classList.add('hidden');
             }, 1000);
         });
-
-        // ========== SCROLL REVEAL ==========
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
         
-        const observer = new IntersectionObserver((entries) => {
+        // ========== PARALLAX SCROLL EFFECT ==========
+        const layer1 = document.getElementById('layer1');
+        const layer2 = document.getElementById('layer2');
+        const layer3 = document.getElementById('layer3');
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            if (layer1) layer1.style.transform = `translateY(${scrolled * 0.2}px)`;
+            if (layer2) layer2.style.transform = `translateY(${scrolled * 0.4}px)`;
+            if (layer3) layer3.style.transform = `translateY(${scrolled * 0.6}px)`;
+        });
+        
+        // ========== NAVIGATION ==========
+        const nav = document.getElementById('nav');
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        menuBtn?.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // ========== CUSTOM CURSOR ==========
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorFollower = document.querySelector('.custom-cursor-follower');
+        
+        if (cursor && cursorFollower) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+                setTimeout(() => {
+                    cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+                }, 80);
+            });
+            
+            document.querySelectorAll('a, button, .service-card, .portfolio-3d-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = `translate(${cursor.style.transform.split('translate(')[1]?.split(',')[0] || '0px'}, ${cursor.style.transform.split(',')[1]?.split(')')[0] || '0px'}) scale(1.5)`;
+                    cursorFollower.style.transform = `translate(${cursorFollower.style.transform.split('translate(')[1]?.split(',')[0] || '0px'}, ${cursorFollower.style.transform.split(',')[1]?.split(')')[0] || '0px'}) scale(1.5)`;
+                    cursorFollower.style.borderColor = 'var(--gold)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = cursor.style.transform.replace('scale(1.5)', 'scale(1)');
+                    cursorFollower.style.transform = cursorFollower.style.transform.replace('scale(1.5)', 'scale(1)');
+                });
+            });
+        }
+        
+        // ========== 3D TILT EFFECT FOR PORTFOLIO CARDS ==========
+        const cards = document.querySelectorAll('.portfolio-3d-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+        
+        // ========== REVEAL ON SCROLL ==========
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         
-        document.querySelectorAll('.hidden-section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // ========== STATS COUNTER ==========
-        function animateCounter(element, target, suffix = '') {
-            let current = 0;
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target + suffix;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current) + suffix;
-                }
-            }, 30);
-        }
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
         
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounter(document.getElementById('stat-years'), 25);
-                    animateCounter(document.getElementById('stat-projects'), 1200);
-                    animateCounter(document.getElementById('stat-satisfaction'), 98, '%');
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        if (document.querySelector('.stats-bar')) {
-            statsObserver.observe(document.querySelector('.stats-bar'));
-        }
-
-        // ========== SCROLL INDICATOR ==========
-        const scrollIndicator = document.getElementById('scrollIndicator');
-        if (scrollIndicator) {
-            scrollIndicator.addEventListener('click', function() {
-                const aboutSection = document.querySelector('#about');
-                if (aboutSection) {
-                    aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        }
-
         // ========== FORM LOGIC ==========
         const homeownerRadios = document.querySelectorAll('input[name="homeowner"]');
         const projectDetails = document.getElementById('projectDetails');
         const nonQualifiedMessage = document.getElementById('nonQualifiedMessage');
         const qualifiedCta = document.getElementById('qualifiedCta');
         const phoneNumberContainer = document.getElementById('phoneNumberContainer');
-        const requiredFields = ['name', 'email', 'phone', 'projectType', 'budget'];
-        
-        let allFieldsFilled = false;
         
         function checkFormCompletion() {
-            let allFilled = true;
-            requiredFields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                if (field && !field.value.trim()) allFilled = false;
-            });
+            const required = ['name', 'email', 'phone', 'projectType', 'budget'];
+            let allFilled = required.every(id => document.getElementById(id)?.value.trim());
             
-            // Also check phone number has at least 10 digits
-            const phoneField = document.getElementById('phone');
-            if (phoneField && phoneField.value.trim().replace(/\D/g, '').length < 10) {
-                allFilled = false;
-            }
-            
-            allFieldsFilled = allFilled;
+            const phone = document.getElementById('phone')?.value.replace(/\D/g, '') || '';
+            if (phone.length < 10) allFilled = false;
             
             if (allFilled && projectDetails.style.display === 'block') {
                 qualifiedCta.style.display = 'block';
-                if (phoneNumberContainer) {
-                    phoneNumberContainer.style.display = 'block';
-                }
-                // Don't auto-scroll - let user click submit
+                if (phoneNumberContainer) phoneNumberContainer.style.display = 'block';
             } else {
                 qualifiedCta.style.display = 'none';
-                if (phoneNumberContainer) {
-                    phoneNumberContainer.style.display = 'none';
-                }
+                if (phoneNumberContainer) phoneNumberContainer.style.display = 'none';
             }
-        }
-        
-        // Add phone validation
-        const phoneInput = document.getElementById('phone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', function(e) {
-                // Format phone number as user types
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length >= 10) {
-                    const match = value.match(/^(\d{3})(\d{3})(\d{4})$/);
-                    if (match) {
-                        e.target.value = `(${match[1]}) ${match[2]}-${match[3]}`;
-                    }
-                }
-                checkFormCompletion();
-            });
         }
         
         homeownerRadios.forEach(radio => {
@@ -1351,7 +1604,6 @@
                 if (this.value === 'yes') {
                     projectDetails.style.display = 'block';
                     nonQualifiedMessage.style.display = 'none';
-                    checkFormCompletion();
                 } else {
                     projectDetails.style.display = 'none';
                     nonQualifiedMessage.style.display = 'block';
@@ -1360,222 +1612,92 @@
             });
         });
         
-        requiredFields.forEach(fieldId => {
-            const field = document.getElementById(fieldId);
-            if (field) {
-                field.addEventListener('input', checkFormCompletion);
-                field.addEventListener('change', checkFormCompletion);
-            }
+        ['name', 'email', 'phone', 'projectType', 'budget'].forEach(id => {
+            document.getElementById(id)?.addEventListener('input', checkFormCompletion);
+            document.getElementById(id)?.addEventListener('change', checkFormCompletion);
         });
         
-        // ========== NOTIFICATION FUNCTION ==========
-        function showNotification(message, isError = false) {
-            const notification = document.createElement('div');
-            notification.className = `notification-banner ${isError ? 'error' : ''}`;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transition = 'opacity 0.3s ease';
-                setTimeout(() => notification.remove(), 300);
-            }, 4000);
-        }
-        
-        // ========== SEND EMAIL VIA FORMSPREE ==========
-        async function sendEmailViaFormspree(formData) {
-            const response = await fetch(FORMSPREE_ENDPOINT, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            
-            if (!response.ok) {
-                throw new Error('Formspree submission failed');
+        // Phone formatting
+        document.getElementById('phone')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 10) {
+                const match = value.match(/^(\d{3})(\d{3})(\d{4})$/);
+                if (match) e.target.value = `(${match[1]}) ${match[2]}-${match[3]}`;
             }
-            return response.json();
-        }
+            checkFormCompletion();
+        });
         
-        // ========== TEST MODE: Log to console and simulate email ==========
-        function testModeSend(formDataObject) {
-            console.log('========== NEW LEAD SUBMISSION ==========');
-            console.log('Name:', formDataObject.name);
-            console.log('Email:', formDataObject.email);
-            console.log('Phone:', formDataObject.phone);
-            console.log('Project Type:', formDataObject.projectType);
-            console.log('Budget:', formDataObject.budget);
-            console.log('Message:', formDataObject.message);
-            console.log('Timestamp:', formDataObject.timestamp);
-            console.log('==========================================');
-            
-            // Create a downloadable CSV of leads (for testing)
-            let leads = JSON.parse(localStorage.getItem('test_leads') || '[]');
-            leads.push(formDataObject);
-            localStorage.setItem('test_leads', JSON.stringify(leads));
-            
-            return Promise.resolve({ success: true, testMode: true });
-        }
-        
-        // ========== FORM SUBMISSION ==========
+        // Form submission
         const leadForm = document.getElementById('leadForm');
-        if (leadForm) {
-            leadForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                // Validate phone number
-                const phoneField = document.getElementById('phone');
-                const phoneValue = phoneField?.value.replace(/\D/g, '') || '';
-                
-                if (phoneValue.length < 10) {
-                    showNotification('Please enter a valid 10-digit phone number so we can contact you for your free estimate.', true);
-                    return;
-                }
-                
-                const submitBtn = document.getElementById('scheduleBtn');
-                const originalText = submitBtn.textContent;
-                
-                try {
-                    submitBtn.disabled = true;
-                    submitBtn.textContent = 'Sending Request...';
-                    
-                    // Collect form data
-                    const formDataObject = {
-                        _subject: `New AV Consultation Request from ${document.getElementById('name')?.value}`,
-                        name: document.getElementById('name')?.value,
-                        email: document.getElementById('email')?.value,
-                        phone: document.getElementById('phone')?.value,
-                        projectType: document.getElementById('projectType')?.value,
-                        budget: document.getElementById('budget')?.value,
-                        message: document.getElementById('message')?.value || 'No additional details provided',
-                        homeowner: document.querySelector('input[name="homeowner"]:checked')?.value,
-                        timestamp: new Date().toLocaleString(),
-                        page: window.location.href,
-                        userAgent: navigator.userAgent
-                    };
-                    
-                    let result;
-                    
-                    if (USE_TEST_MODE || FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
-                        // Use test mode
-                        result = await testModeSend(formDataObject);
-                        showNotification('✓ Test: Lead captured! Check console for details. In production, this would email you.');
-                    } else {
-                        // Use Formspree
-                        const formData = new FormData();
-                        Object.keys(formDataObject).forEach(key => {
-                            formData.append(key, formDataObject[key]);
-                        });
-                        result = await sendEmailViaFormspree(formData);
-                        showNotification('✓ Request sent! We will contact you within 24 hours.');
-                    }
-                    
-                    // Show success modal
-                    showSuccessModal(formDataObject);
-                    
-                    // Reset form
-                    leadForm.reset();
-                    projectDetails.style.display = 'none';
-                    qualifiedCta.style.display = 'none';
-                    if (phoneNumberContainer) {
-                        phoneNumberContainer.style.display = 'none';
-                    }
-                    
-                } catch (error) {
-                    console.error('Submission error:', error);
-                    showNotification('Error submitting form. Please call us directly at (562) 964-1624 or email itshowtime@msn.com', true);
-                } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
-                }
-            });
-        }
-        
-        // ========== SUCCESS MODAL ==========
-        function showSuccessModal(formData) {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.9);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 10001;
-            `;
-            modal.innerHTML = `
-                <div style="background: white; padding: 2rem; max-width: 450px; text-align: center; border-radius: 16px;">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
-                    <h3 style="color: var(--navy); margin-bottom: 1rem;">Free Estimate Request Received!</h3>
-                    <p style="margin-bottom: 1rem; color: #333;">Thank you, ${formData.name}!</p>
-                    <p style="margin-bottom: 0.5rem;">We will contact you within 24 hours at:</p>
-                    <p style="font-weight: bold; color: var(--gold-dark); margin-bottom: 1rem;">${formData.email} | ${formData.phone}</p>
-                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 1.5rem;">To schedule your free on-site estimate.</p>
-                    <button onclick="this.closest('div').remove()" style="background: var(--gold); color: var(--navy); border: none; padding: 0.75rem 2rem; border-radius: 50px; cursor: pointer; font-weight: bold;">Close</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
-        
-        // ========== DO NOT SELL BUTTON ==========
-        document.getElementById('doNotSellBtn')?.addEventListener('click', () => {
-            alert('We respect your privacy. Your data will not be sold to third parties. For more information, please see our Privacy Policy.');
+        leadForm?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('phone')?.value.replace(/\D/g, '');
+            if (!phone || phone.length < 10) {
+                alert('Please enter a valid 10-digit phone number.');
+                return;
+            }
+            
+            const submitBtn = document.getElementById('scheduleBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            
+            const formData = {
+                name: document.getElementById('name')?.value,
+                email: document.getElementById('email')?.value,
+                phone: document.getElementById('phone')?.value,
+                projectType: document.getElementById('projectType')?.value,
+                budget: document.getElementById('budget')?.value,
+                message: document.getElementById('message')?.value,
+                timestamp: new Date().toLocaleString()
+            };
+            
+            console.log('Lead Submitted:', formData);
+            
+            alert('Thank you! We will contact you within 24 hours to schedule your free estimate.');
+            leadForm.reset();
+            projectDetails.style.display = 'none';
+            qualifiedCta.style.display = 'none';
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
         });
         
-        // ========== SMOOTH SCROLL ==========
+        document.getElementById('doNotSellBtn')?.addEventListener('click', () => {
+            alert('We respect your privacy. Your data will never be sold to third parties.');
+        });
+        
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     e.preventDefault();
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    navLinks?.classList.remove('active');
                 }
             });
         });
         
-        // ========== PARALLAX EFFECT ==========
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
-            }
-        });
+        // Section background image transitions on scroll
+        const sections = document.querySelectorAll('.section');
+        const bgImages = [
+            'https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070',
+            'https://images.unsplash.com/photo-1556912172-0b5b2bfa3cfa?q=80&w=2070',
+            'https://images.unsplash.com/photo-1521575107034-e0fa0b82b3d3?q=80&w=2070',
+            'https://images.unsplash.com/photo-1584646098378-0874589d76b1?q=80&w=2070'
+        ];
         
-        // ========== DISPLAY TEST MODE STATUS ==========
-        if (USE_TEST_MODE || FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
-            console.log('%c⚠️ TEST MODE ACTIVE ⚠️', 'color: orange; font-size: 16px; font-weight: bold;');
-            console.log('Form submissions are being logged to console and localStorage only.');
-            console.log('To enable real email sending:');
-            console.log('1. Go to https://formspree.io/');
-            console.log('2. Create a free account');
-            console.log('3. Create a new form');
-            console.log('4. Copy your endpoint URL');
-            console.log('5. Replace FORMSPREE_ENDPOINT in the script');
-            console.log('6. Set USE_TEST_MODE = false');
-            
-            // Add visual indicator for test mode
-            const testBadge = document.createElement('div');
-            testBadge.style.cssText = `
-                position: fixed;
-                bottom: 10px;
-                left: 10px;
-                background: orange;
-                color: black;
-                padding: 4px 8px;
-                border-radius: 4px;
-                font-size: 11px;
-                font-family: monospace;
-                z-index: 9999;
-                opacity: 0.7;
-            `;
-            testBadge.textContent = '⚠️ TEST MODE - Submissions logged to console';
-            document.body.appendChild(testBadge);
-        }
+        let bgIndex = 0;
+        setInterval(() => {
+            bgIndex = (bgIndex + 1) % bgImages.length;
+            sections.forEach(section => {
+                if (section.style) {
+                    section.style.setProperty('--bg-image', `url(${bgImages[bgIndex]})`);
+                }
+            });
+        }, 8000);
     </script>
 </body>
 </html>
