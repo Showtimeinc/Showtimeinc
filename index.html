@@ -10,7 +10,7 @@
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -55,7 +55,7 @@
             --shadow-inner-gold: inset 0 0 20px rgba(198, 164, 63, 0.1);
             
             --gradient-gold: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-            --gradient-gold-subtle: linear-gradient(135deg, rgba(198,164,63,0.1) 0%, rgba(198,164,63,0.05) 100%);
+            --gradient-gold-subtle: linear-gradient(135deg, rgba(198,164,63,0.15) 0%, rgba(198,164,63,0.05) 100%);
             --gradient-dark: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
             --gradient-hero: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
             --gradient-text: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
@@ -71,7 +71,7 @@
         
         body {
             font-family: var(--font-body);
-            background: var(--cream);
+            background: var(--charcoal);
             color: var(--charcoal);
             overflow-x: hidden;
             line-height: 1.6;
@@ -83,7 +83,7 @@
         }
         
         ::-webkit-scrollbar-track {
-            background: var(--cream-dark);
+            background: var(--charcoal-light);
         }
         
         ::-webkit-scrollbar-thumb {
@@ -91,33 +91,11 @@
             border-radius: 3px;
         }
         
-        /* Typography - More Stylish */
+        /* Typography */
         h1, h2, h3, .logo, .hero-badge, .section-title {
             font-family: var(--font-heading);
             font-weight: 600;
             letter-spacing: -0.02em;
-        }
-        
-        h1 {
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: none;
-        }
-        
-        .section-title {
-            position: relative;
-            display: inline-block;
-            background: var(--gradient-text);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .section-title::after {
-            background: var(--gradient-gold);
         }
         
         .container {
@@ -128,7 +106,7 @@
             z-index: 2;
         }
         
-        /* ========== PARALLAX BACKGROUND ========== */
+        /* ========== FIXED PARALLAX BACKGROUND - SINGLE VISIBLE LAYER ========== */
         .parallax-container {
             position: fixed;
             top: 0;
@@ -140,37 +118,114 @@
             pointer-events: none;
         }
         
-        .parallax-layer {
+        /* Single visible background image that transitions smoothly */
+        .parallax-base {
             position: absolute;
             top: 0;
             left: 0;
-            width: 110%;
-            height: 110%;
+            width: 100%;
+            height: 120%;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             will-change: transform;
+            transition: opacity 1.5s ease-in-out;
         }
         
+        /* Layer 1 - Primary visible background (slow scroll) */
         .parallax-layer-1 {
-            background-image: url('ChatGPT Image Apr 24, 2025, 04_07_07 PM.png');
-            background-size: cover;
-            opacity: 0.12;
+            background-image: url('https://images.unsplash.com/photo-1558002038-1055e2e28ac4?q=80&w=2070');
+            opacity: 0.25;
             transform: translateY(0px);
         }
         
+        /* Layer 2 - Secondary that fades in/out (medium scroll) */
         .parallax-layer-2 {
-            background-image: url('');
-            background-size: cover;
-            opacity: 0.1;
+            background-image: url('https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070');
+            opacity: 0;
             transform: translateY(0px);
         }
         
+        /* Layer 3 - Tertiary that fades in/out (fastest scroll) */
         .parallax-layer-3 {
-            background-image: url('');
-            background-size: cover;
-            opacity: 0.08;
+            background-image: url('https://images.unsplash.com/photo-1556912172-0b5b2bfa3cfa?q=80&w=2070');
+            opacity: 0;
             transform: translateY(0px);
+        }
+        
+        /* ========== SECTION CONTAINERS WITH SPACING ========== */
+        .section {
+            padding: var(--spacing-2xl) 0;
+            position: relative;
+            z-index: 1;
+            margin: 1rem 0;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-light {
+            background: rgba(245, 240, 232, 0.88);
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-lg), var(--shadow-inner-gold);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .section-dark {
+            background: rgba(26, 26, 26, 0.88);
+            backdrop-filter: blur(8px);
+            color: var(--white);
+            border: 1px solid rgba(198,164,63,0.2);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Hero section - no container styling to keep it full width */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
+            overflow: hidden;
+            margin-top: 0;
+            border-radius: 0;
+            width: 100%;
+            padding: 0;
+        }
+        
+        /* First section after hero needs top spacing */
+        .section:first-of-type {
+            margin-top: 2rem;
+        }
+        
+        /* Last section needs bottom spacing */
+        .section:last-of-type {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-subtitle {
+            color: rgba(0,0,0,0.6);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: 400;
+        }
+        
+        .section-dark .section-subtitle {
+            color: rgba(255,255,255,0.6);
         }
         
         /* ========== LOADER ========== */
@@ -332,7 +387,7 @@
             display: flex;
             align-items: center;
             position: relative;
-            background: var(--gradient-hero);
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
             overflow: hidden;
         }
         
@@ -375,6 +430,10 @@
             line-height: 1.05;
             margin-bottom: 1.5rem;
             max-width: 900px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .hero h1 span {
@@ -496,6 +555,7 @@
             position: relative;
             border-top: 1px solid rgba(198,164,63,0.2);
             border-bottom: 1px solid rgba(198,164,63,0.2);
+            width: 100%;
         }
         
         .marquee-content {
@@ -520,43 +580,6 @@
             100% { transform: translateX(-50%); }
         }
         
-        /* ========== SECTIONS ========== */
-        .section {
-            padding: var(--spacing-2xl) 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .section-light {
-            background: rgba(245, 240, 232, 0.92);
-            backdrop-filter: blur(2px);
-        }
-        
-        .section-dark {
-            background: rgba(26, 26, 26, 0.92);
-            backdrop-filter: blur(2px);
-            color: var(--white);
-        }
-        
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-        
-        .section-subtitle {
-            color: rgba(0,0,0,0.6);
-            margin-bottom: var(--spacing-lg);
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-align: center;
-            font-weight: 400;
-        }
-        
-        .section-dark .section-subtitle {
-            color: rgba(255,255,255,0.6);
-        }
-        
         /* ========== SERVICES GRID ========== */
         .services-grid {
             display: grid;
@@ -567,7 +590,7 @@
         }
         
         .service-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 20px;
@@ -575,7 +598,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
         }
         
         .service-card::before {
@@ -638,7 +661,7 @@
             font-size: 0.9rem;
         }
         
-        /* ========== 3D PORTFOLIO CARDS WITH EDGE LIGHTING ========== */
+        /* ========== 3D PORTFOLIO CARDS ========== */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -667,7 +690,7 @@
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             transition: box-shadow 0.3s ease;
-            border: 1px solid rgba(198,164,63,0.1);
+            border: 1px solid rgba(198,164,63,0.2);
         }
         
         .portfolio-3d-card:hover .portfolio-card-inner {
@@ -754,7 +777,7 @@
         }
         
         .testimonial-card {
-            background: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 20px;
@@ -781,8 +804,8 @@
         }
         
         .section-dark .testimonial-card {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.15);
         }
         
         .testimonial-card:hover {
@@ -835,13 +858,14 @@
             padding: 3rem;
             border-radius: 24px;
             box-shadow: var(--shadow-xl);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
             position: relative;
             z-index: 2;
         }
         
         .section-dark .contact-form {
             background: rgba(42, 42, 42, 0.95);
+            border: 1px solid rgba(198,164,63,0.2);
         }
         
         .form-group {
@@ -983,6 +1007,8 @@
             padding: 4rem 0 2rem;
             position: relative;
             border-top: 1px solid rgba(198,164,63,0.2);
+            width: 100%;
+            margin-top: 2rem;
         }
         
         .footer::before {
@@ -1002,6 +1028,10 @@
             margin-bottom: 3rem;
             position: relative;
             z-index: 2;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 88%;
         }
         
         .footer-logo {
@@ -1047,6 +1077,10 @@
             opacity: 0.6;
             position: relative;
             z-index: 2;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 88%;
         }
         
         /* ========== FLOATING CTA ========== */
@@ -1125,6 +1159,11 @@
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+            
+            .section {
+                width: 95%;
+                padding: var(--spacing-xl) 0;
+            }
         }
         
         /* Reveal Animations */
@@ -1141,11 +1180,11 @@
     </style>
 </head>
 <body>
-    <!-- Parallax Background Container -->
+    <!-- Fixed Parallax Background Container - Single visible layer at all times -->
     <div class="parallax-container">
-        <div class="parallax-layer parallax-layer-1" id="layer1"></div>
-        <div class="parallax-layer parallax-layer-2" id="layer2"></div>
-        <div class="parallax-layer parallax-layer-3" id="layer3"></div>
+        <div class="parallax-base parallax-layer-1" id="layer1"></div>
+        <div class="parallax-base parallax-layer-2" id="layer2"></div>
+        <div class="parallax-base parallax-layer-3" id="layer3"></div>
     </div>
     
     <!-- Loader -->
@@ -1447,31 +1486,29 @@
     
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo">It's <span>Showtime</span></div>
-                    <p style="opacity: 0.7; margin-top: 1rem;">Serving Southern California's most discerning residences since 2001.</p>
-                </div>
-                <div>
-                    <h4 style="margin-bottom: 1rem; font-family: var(--font-heading);">Contact</h4>
-                    <div class="footer-links">
-                        <a href="mailto:itshowtime@msn.com">itshowtime@msn.com</a>
-                        <a href="#">Long Beach | LA | Orange County</a>
-                    </div>
-                </div>
-                <div>
-                    <h4 style="margin-bottom: 1rem; font-family: var(--font-heading);">Legal</h4>
-                    <div class="footer-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
-                        <button id="doNotSellBtn" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer;">Do Not Sell My Data</button>
-                    </div>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">It's <span>Showtime</span></div>
+                <p style="opacity: 0.7; margin-top: 1rem;">Serving Southern California's most discerning residences since 2001.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem; font-family: var(--font-heading);">Contact</h4>
+                <div class="footer-links">
+                    <a href="mailto:itshowtime@msn.com">itshowtime@msn.com</a>
+                    <a href="#">Long Beach | LA | Orange County</a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2025 It's Showtime Inc. All rights reserved.</p>
+            <div>
+                <h4 style="margin-bottom: 1rem; font-family: var(--font-heading);">Legal</h4>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <button id="doNotSellBtn" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer;">Do Not Sell My Data</button>
+                </div>
             </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 It's Showtime Inc. All rights reserved.</p>
         </div>
     </footer>
     
@@ -1491,16 +1528,44 @@
             }, 1000);
         });
         
-        // ========== PARALLAX SCROLL EFFECT ==========
+        // ========== PARALLAX SCROLL WITH CROSSFADE ==========
         const layer1 = document.getElementById('layer1');
         const layer2 = document.getElementById('layer2');
         const layer3 = document.getElementById('layer3');
         
+        // Track scroll position for crossfade between layers
+        let lastScrollY = 0;
+        
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = scrolled / maxScroll;
+            
+            // Parallax movement - different speeds
             if (layer1) layer1.style.transform = `translateY(${scrolled * 0.15}px)`;
             if (layer2) layer2.style.transform = `translateY(${scrolled * 0.3}px)`;
-            if (layer3) layer3.style.transform = `translateY(${scrolled * 0.5}px)`;
+            if (layer3) layer3.style.transform = `translateY(${scrolled * 0.45}px)`;
+            
+            // Crossfade layers based on scroll position
+            // Layer 1 always visible, layers 2 and 3 fade in at different scroll points
+            if (scrollPercent < 0.33) {
+                // Top section - Layer 1 dominant
+                if (layer2) layer2.style.opacity = '0';
+                if (layer3) layer3.style.opacity = '0';
+                if (layer1) layer1.style.opacity = '0.25';
+            } else if (scrollPercent < 0.66) {
+                // Middle section - Layer 2 becomes visible
+                const fadeAmount = (scrollPercent - 0.33) / 0.33;
+                if (layer2) layer2.style.opacity = fadeAmount * 0.2;
+                if (layer1) layer1.style.opacity = 0.25 - (fadeAmount * 0.1);
+                if (layer3) layer3.style.opacity = '0';
+            } else {
+                // Bottom section - Layer 3 becomes visible
+                const fadeAmount = (scrollPercent - 0.66) / 0.34;
+                if (layer2) layer2.style.opacity = 0.2 - (fadeAmount * 0.1);
+                if (layer3) layer3.style.opacity = fadeAmount * 0.15;
+                if (layer1) layer1.style.opacity = 0.15 - (fadeAmount * 0.05);
+            }
         });
         
         // ========== NAVIGATION ==========
