@@ -2,584 +2,2285 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>It's Showtime Inc. | We Make Complicated Devices Easy to Use.</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>It's Showtime Inc. | Luxury AV Design & Installation</title>
+    <meta name="description" content="Luxury AV design and installation for Southern California homes and businesses since 1999. Custom home theaters, smart home automation, and commercial AV solutions.">
+    <meta name="theme-color" content="#0A1A2F">
+    
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '714428277637150');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=714428277637150&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code --> 
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ========== RESET & VARIABLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --gold: #C6A43F;
+            --gold-light: #E2C268;
+            --gold-dark: #9E7E2E;
+            --gold-glow: rgba(198, 164, 63, 0.4);
+            --charcoal: #1A1A1A;
+            --charcoal-light: #2A2A2A;
+            --charcoal-lighter: #3A3A3A;
+            --cream: #F5F0E8;
+            --cream-dark: #E8E0D4;
+            --white: #FFFFFF;
+            --black: #000000;
+            
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+            --spacing-2xl: 8rem;
+            
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-slow: all 0.6s ease-out;
+            
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.2);
+            --shadow-gold: 0 0 30px rgba(198, 164, 63, 0.3);
+            --shadow-gold-strong: 0 0 50px rgba(198, 164, 63, 0.5);
+            --shadow-inner-gold: inset 0 0 20px rgba(198, 164, 63, 0.1);
+            
+            --gradient-gold: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            --gradient-gold-subtle: linear-gradient(135deg, rgba(198,164,63,0.15) 0%, rgba(198,164,63,0.05) 100%);
+            --gradient-dark: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+            --gradient-text: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Plus Jakarta Sans', 'Inter', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--charcoal);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--charcoal-light);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 3px;
+        }
+        
+        /* Typography */
+        h1, h2, h3, .logo, .hero-badge, .section-title {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        .container {
+            width: 88%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* ========== PARALLAX BACKGROUND ========== */
+        .parallax-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .parallax-base {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            will-change: transform;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .parallax-layer-1 {
+            background-image: url('ChatGPT Image Apr 24, 2025, 04_07_07 PM.png?q=80&w=2070');
+            opacity: 0.25;
+            transform: translateY(0px);
+        }
+        
+        .parallax-layer-2 {
+            background-image: url('https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070');
+            opacity: 0;
+            transform: translateY(0px);
+        }
+        
+        .parallax-layer-3 {
+            background-image: url('https://images.unsplash.com/photo-1556912172-0b5b2bfa3cfa?q=80&w=2070');
+            opacity: 0;
+            transform: translateY(0px);
+        }
+        
+        /* ========== SECTION CONTAINERS ========== */
+        .section {
+            padding: var(--spacing-2xl) 0;
+            position: relative;
+            z-index: 1;
+            margin: 1rem 0;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-light {
+            background: rgba(245, 240, 232, 0.88);
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow-lg), var(--shadow-inner-gold);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .section-dark {
+            background: rgba(26, 26, 26, 0.88);
+            backdrop-filter: blur(8px);
+            color: var(--white);
+            border: 1px solid rgba(198,164,63,0.2);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .section:first-of-type {
+            margin-top: 2rem;
+        }
+        
+        .section:last-of-type {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-subtitle {
+            color: rgba(0,0,0,0.6);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-align: center;
+            font-weight: 400;
+        }
+        
+        .section-dark .section-subtitle {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* ========== LOADER ========== */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--charcoal);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader-ring {
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(198, 164, 63, 0.2);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-gold);
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loader-text {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            background: transparent;
+        }
+        
+        .nav.scrolled {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow-md);
+            border-bottom: 1px solid rgba(198, 164, 63, 0.2);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(198,164,63,0.3);
+        }
+        
+        .logo span {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-style: italic;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+        
+        .nav-cta {
+            background: var(--gradient-gold);
+            color: var(--charcoal) !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            box-shadow: var(--shadow-gold);
+            transition: var(--transition-smooth);
+        }
+        
+        .nav-cta::after {
+            display: none;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold-strong);
+            color: var(--charcoal) !important;
+        }
+        
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* ========== HERO SECTION ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+        
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            padding: var(--spacing-xl) var(--spacing-md);
+            width: 100%;
+            color: var(--white);
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(198, 164, 63, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(198, 164, 63, 0.4);
+            font-weight: 500;
+            text-transform: uppercase;
+            box-shadow: var(--shadow-inner-gold);
+        }
+        
+        .hero h1 {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero h1 span {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-style: italic;
+        }
+        
+        .hero-desc {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            max-width: 550px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            text-align: left;
+        }
+        
+        .hero-stat-number {
+            font-size: clamp(1.2rem, 1.8vw, 2rem);
+            font-weight: 700;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: var(--font-heading);
+        }
+        
+        .hero-stat-label {
+            font-size: 0.65rem;
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: var(--charcoal);
+            padding: 1rem 2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition-smooth);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-gold);
+            position: relative;
+            overflow: hidden;
+            font-family: var(--font-body);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold-strong);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition-smooth);
+            border: 1.5px solid var(--white);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+            font-family: var(--font-body);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-gold);
+        }
+        
+        /* ========== MARQUEE ========== */
+        .marquee {
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
+            padding: 1rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            border-top: 1px solid rgba(198,164,63,0.2);
+            border-bottom: 1px solid rgba(198,164,63,0.2);
+            width: 100%;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+        }
+        
+        .marquee-content span {
+            display: inline-block;
+            margin: 0 1.5rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* ========== SERVICES GRID ========== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(198,164,63,0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition-smooth);
+        }
+        
+        .service-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg), var(--shadow-gold);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-heading);
+        }
+        
+        .service-card p {
+            color: rgba(0,0,0,0.6);
+            line-height: 1.7;
+            font-size: 0.9rem;
+        }
+        
+        /* ========== 3D PORTFOLIO CARDS ========== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            perspective: 1200px;
+        }
+        
+        .portfolio-3d-card {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        
+        .portfolio-3d-card:hover {
+            transform: perspective(1200px) rotateX(2deg) rotateY(3deg) translateY(-5px);
+        }
+        
+        .portfolio-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: box-shadow 0.3s ease;
+            border: 1px solid rgba(198,164,63,0.2);
+        }
+        
+        .portfolio-3d-card:hover .portfolio-card-inner {
+            box-shadow: var(--shadow-xl), 0 0 0 2px rgba(198,164,63,0.3);
+        }
+        
+        .portfolio-card-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-3d-card:hover .portfolio-card-inner img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+        }
+        
+        .portfolio-3d-card:hover .portfolio-card-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .portfolio-card-overlay h3 {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.05s;
+            opacity: 0;
+        }
+        
+        .portfolio-3d-card:hover .portfolio-card-overlay h3 {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .portfolio-card-overlay p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.1s;
+            line-height: 1.5;
+        }
+        
+        .portfolio-3d-card:hover .portfolio-card-overlay p {
+            transform: translateY(0);
+            opacity: 0.9;
+        }
+        
+        .portfolio-card-glow {
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            pointer-events: none;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .portfolio-3d-card:hover .portfolio-card-glow {
+            box-shadow: inset 0 0 30px rgba(198,164,63,0.2), 0 0 30px rgba(198,164,63,0.3);
+        }
+        
+        /* ========== TESTIMONIALS ========== */
+        .testimonials-slider {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 0% 0%, rgba(198,164,63,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .testimonial-card:hover::before {
+            opacity: 1;
+        }
+        
+        .section-dark .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.15);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-lg), var(--shadow-gold);
+        }
+        
+        .testimonial-quote {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+            font-weight: 400;
+        }
+        
+        .testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -0.5rem;
+            font-size: 2.5rem;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: serif;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .testimonial-location {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+        
+        /* ========== CONTACT FORM ========== */
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255,255,255,0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-dark .contact-form {
+            background: rgba(42, 42, 42, 0.95);
+            border: 1px solid rgba(198,164,63,0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0,0,0,0.05);
+            border: 1.5px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            font-family: var(--font-body);
+            transition: var(--transition-smooth);
+        }
+        
+        .section-dark .form-group input,
+        .section-dark .form-group textarea,
+        .section-dark .form-group select {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.15);
+            color: white;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(198,164,63,0.2);
+        }
+        
+        .form-group select option {
+            background: var(--charcoal);
+            color: white;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .radio-option input {
+            width: auto;
+            accent-color: var(--gold);
+        }
+        
+        /* ========== CTA CARD ========== */
+        .cta-card {
+            background: var(--gradient-gold-subtle);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--gold);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(198,164,63,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .cta-card h3 {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            margin: 1.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .benefits-list li::before {
+            content: '✓';
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        /* ========== FOOTER ========== */
+        .footer {
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+            border-top: 1px solid rgba(198,164,63,0.2);
+            width: 100%;
+            margin-top: 2rem;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gradient-gold);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 88%;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-logo span {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+        
+        .footer-links a:hover {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+            opacity: 0.6;
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 88%;
+        }
+        
+        /* ========== FLOATING CTA ========== */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-gold);
+            color: var(--charcoal);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-gold);
+            z-index: 100;
+            transition: var(--transition-smooth);
+        }
+        
+        .floating-cta:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: var(--shadow-gold-strong);
+        }
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--charcoal);
+                flex-direction: column;
+                justify-content: center;
+                padding: 2rem;
+                transition: var(--transition-smooth);
+                z-index: 1001;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 1.5rem;
+            }
+            
+            .benefits-list {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .section {
+                width: 95%;
+                padding: var(--spacing-xl) 0;
+            }
+        }
+        
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-slow);
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <!-- Ultra-Premium Parallax Text & Background System -->
-<div class="parallax-universe">
-    <!-- Background Layers -->
-    <div class="parallax-layer cosmic-layer" 
-         data-images='[
-            "https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80",
-            "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-            "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=1511&q=80"
-         ]'
-         data-speed="0.2">
-    </div>
-    
-    <div class="parallax-layer theater-layer" 
-         data-images='[
-            "https://images.unsplash.com/photo-1586899028174-e09c81c6c6a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-            "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1025&q=80",
-            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
-         ]'
-         data-speed="0.4">
-    </div>
-    
-    <!-- "It's Showtime" + Subtitle (Sliding Between Layers) -->
-    <div class="parallax-text-container">
-        <h1 class="main-title">IT'S SHOWTIME</h1>
-        <p class="subtitle">We make complicated devices easy to use</p>
-    </div>
-</div>
-    <!-- Video Background -->
-    <div class="video-background">
-        <div class="video-wrapper">
-            <video autoplay muted loop id="parallaxVideo" src="Movie.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class="video-overlay"></div>
-    </div>
-    
-    <!-- Parallax Background Layers -->
+    <!-- Fixed Parallax Background Container -->
     <div class="parallax-container">
-        <div class="parallax-layer layer-1" data-image="Marketing-Resources-Social-Post-2.jpg"></div>
-        <div class="parallax-layer layer-2" data-image="20250122_094038.jpg"></div>
-        <div class="parallax-layer layer-3" data-image="20211007_102241.jpg"></div>
+        <div class="parallax-base parallax-layer-1" id="layer1"></div>
+        <div class="parallax-base parallax-layer-2" id="layer2"></div>
+        <div class="parallax-base parallax-layer-3" id="layer3"></div>
     </div>
     
-    <!-- Header -->
-    <header id="mainHeader">
-        <div class="logo-container">
-            <img src="ChatGPT Image Apr 24, 2025, 04_07_07 PM.png" alt="It's Showtime Inc. Logo" class="logo">
-            <span class="brand-text">It's Showtime Inc.</span>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-ring"></div>
+            <div class="loader-text">It's Showtime Inc.</div>
         </div>
-
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
-            <i class="fas fa-bars"></i>
-        </button>
-        <nav id="mainNav">
-            <ul>
-                <li><a href="#showcase">Portfolio</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">It's <span>Showtime</span></a>
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="active">Home</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact" class="nav-cta">Get Estimate</a>
+            </div>
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
     
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content glass-card">
-            <h1>Modern Home Theater Experiences</h1>
-            <p>It's Showtime Inc. We Make Complicated Devices Easy to Use.</p>
-            <a href="#" class="cta-button" id="mainCtaButton">
-                Get Your Custom Design
-                <i class="fas fa-arrow-right"></i>
-            </a>
+    <section id="home" class="hero">
+        <div class="hero-bg">
         </div>
-    </section>
-    
-    <!-- Showcase Carousel -->
-    <section class="showcase" id="showcase">
-        <div class="section-header lazy-load">
-            <h2>Our Signature Installations</h2>
-            <p>Each theater is thoughtfully crafted to deliver an entertainment ambiance that reflects your style.</p>
-        </div>
-        
-        <div class="carousel-container">
-            <div class="carousel">
-                <div class="carousel-item lazy-load">
-                    <img src="URC-Lifestyle-Image-Residential-07.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" alt="Luxury Home Theater" loading="lazy">
+        <div class="hero-content container">
+            <div class="hero-badge">EST. 2001 • PREMIER AV INTEGRATOR</div>
+            <h1>Where Technology <span>&</span><br>Artistry Converge</h1>
+            <p class="hero-desc">For over 25 years, we've transformed Southern California's most luxurious residences with invisible AV integration that delivers unforgettable experiences.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">1200+</div>
+                    <div class="hero-stat-label">Projects Completed</div>
                 </div>
-                <div class="carousel-item lazy-load">
-                    <img src="URC-Lifestyle-Image-Residential-05.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Modern Home Cinema" loading="lazy">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">Always</div>
+                    <div class="hero-stat-label">We Answer Your Calls</div>
                 </div>
-                <div class="carousel-item lazy-load">
-                    <img src="URC-Lifestyle-Image-Residential-04.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Custom Theater Seating" loading="lazy">
-                </div>
-                <div class="carousel-item lazy-load">
-                    <img src="URC-Lifestyle-Image-Residential-02.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="High-End Audio System" loading="lazy">
-                </div>
-                <div class="carousel-item lazy-load">
-                    <img src="URC-Lifestyle-Image-Residential-01.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Theater Lighting" loading="lazy">
-                </div>
-                <div class="carousel-item lazy-load">
-                    <img src="Marketing-Resources-Social-Post-2.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Remote Display" loading="lazy">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">25+</div>
+                    <div class="hero-stat-label">Years Experience</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="carousel-nav">
-            <div class="carousel-dot active"></div>
-            <div class="carousel-dot"></div>
-            <div class="carousel-dot"></div>
-            <div class="carousel-dot"></div>
-            <div class="carousel-dot"></div>
-            <div class="carousel-dot"></div>
-        </div>
-    </section>
-    
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="section-header lazy-load">
-            <h2>Home Theater Solutions</h2>
-            <p>From concept to curtain call, we handle every detail of your home entertainment systems.</p>
-        </div>
-        
-        <div class="services-grid">
-            <div class="service-card glass-card">
-                <div class="service-icon">
-                    <i class="fas fa-couch"></i>
-                </div>
-                <h3>Fortress Luxury Seating</h3>
-                <p>Let's create your custom theater seating with features like motorized recline, LED lighting, and built-in cup holders.</p>
-                <ul class="service-features">
-                    <li>Custom upholstery options</li>
-                    <li>Ergonomic seating configurations</li>
-                    <li>Integrated tray tables</li>
-                    <li>Personal climate control for you and your beverage</li>
-                </ul>
-            </div>
-            
-            <div class="service-card glass-card">
-                <div class="service-icon">
-                    <i class="fas fa-volume-up"></i>
-                </div>
-                <h3>High Quality Audio Systems</h3>
-                <p>Experience sound that moves you with our selection of in-ceiling, in-wall, or outdoor speakers installed at ideal locations for ultimate audio experience.</p>
-                <ul class="service-features">
-                    <li>Dolby Atmos and DTS:X systems</li>
-                    <li>Custom speaker installation</li>
-                    <li>Sound quality testing</li>
-                    <li>Whole-home audio integration</li>
-                    <li>Definitive outdoor music systems crafted for music where you want it</li>
-                </ul>
-            </div>
-            
-            <div class="service-card glass-card">
-                <div class="service-icon">
-                    <i class="fas fa-film"></i>
-                </div>
-                <h3>Single Touch Universal Remotes and Touch Screen Keypads</h3>
-                <p>Choose from our stylish Catalog Line</p>
-                <ul class="service-features">
-                    <li>Effortless Control: Seamlessly Manage Your Entire Smart Home with One URC Remote</li>
-                    <li>Luxury Meets Simplicity: URC Interfaces Blend Elegance with Cutting-Edge Tech</li>
-                    <li>Voice, App, or Touchscreen - URC Lets You Choose How You Control Your World</li>
-                    <li>Trusted by Integrators Nationwide: Discover Why URC Is the Pro's Choice</li>
-                </ul>
-            </div>
-        
-            <div class="service-card glass-card">
-                <div class="service-icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3>Lutron RadioRA 3 Lighting Control</h3>
-                <p>Modernize your home with intelligent, wireless lighting systems from Lutron.</p>
-                <ul class="service-features">
-                    <li>Sleek Sunnata dimmer keypads with LED sliders</li>
-                    <li>Whole-home lighting control via mobile app</li>
-                    <li>Voice assistant integration (Alexa, Siri, Google)</li>
-                    <li>Automated scenes, schedules, and smart dimming</li>
-                    <li>Ideal for new builds or retrofits</li>
-                </ul>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-primary">
+                    <i class="fas fa-calendar-check"></i> Free Consultation
+                </a>
+                <a href="#portfolio" class="btn-outline">
+                    <i class="fas fa-play-circle"></i> View Work
+                </a>
             </div>
         </div>
     </section>
     
-    <!-- Contact Form Section -->
-    <section class="contact-form-section" id="contact">
-        <div class="section-header lazy-load">
-            <h2>Contact Us</h2>
-            <p>Fill out the form below and we'll get back to you shortly</p>
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>✦ BESPOKE DESIGN</span>
+            <span>✦ INVISIBLE TECHNOLOGY</span>
+            <span>✦ PROFESSIONAL SERVICE</span>
+            <span>✦ PREMIUM BRANDS</span>
+            <span>✦ 25+ YEARS</span>
+            <span>✦ LA & ORANGE COUNTY</span>
         </div>
-       
-        <div class="form-container glass-card">
-            <form id="contactForm" action="https://formspree.io/f/itshowtime@msn.com" method="POST">
-                <div class="form-group">
-                    <label for="form-name">Your Name*</label>
-                    <input type="text" id="form-name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="form-email">Email*</label>
-                    <input type="email" id="form-email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="form-phone">Phone Number</label>
-                    <input type="tel" id="form-phone" name="phone-number">
-                </div>
-                
-                <div class="form-group">
-                    <label for="form-service">Service Interested In</label>
-                    <select id="form-service" name="service">
-                        <option value="">Select a service</option>
-                        <option value="Custom Theater">Custom Theater</option>
-                        <option value="Audio Systems">Audio Systems</option>
-                        <option value="Home Automation">Home Automation</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="form-message">Your Message*</label>
-                    <textarea id="form-message" name="message" required></textarea>
-                </div>
-                
-                <div id="form-status" class="form-status"></div>
-                
-                <button type="submit" class="cta-button">
-                    Send Message
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Video Background Modal -->
-    <div class="video-modal" id="videoModal">
-        <div class="video-modal-content">
-            <button class="close-video-modal" id="closeVideoModal" aria-label="Close video modal">&times;</button>
-            <div class="video-container">
-                <iframe id="featureVideo" width="100%" height="100%" src="Movie.mp4" frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen></iframe>
-            </div>
+        <div class="marquee-content">
+            <span>✦ BESPOKE DESIGN</span>
+            <span>✦ INVISIBLE TECHNOLOGY</span>
+            <span>✦ PROFESSIONAL SERVICE</span>
+            <span>✦ PREMIUM BRANDS</span>
+            <span>✦ 25+ YEARS</span>
+            <span>✦ LA & ORANGE COUNTY</span>
         </div>
     </div>
-
-    <!-- Technology Partners Section -->
-    <section class="partners">
-        <div class="section-header lazy-load">
-            <h2>We Bring Your Home Up to Speed With Popular Products that deliver exceptional sound and visuals</h2>
-            <p>We work with the industry's leading brands to deliver only the best quality.</p>
+    
+    <!-- Services Section -->
+    <section id="services" class="section section-light">
+        <div class="container">
+            <div class="reveal">
+                <h2 class="section-title">Our Signature Services</h2>
+                <div class="section-subtitle">Tailored solutions for the most discerning spaces</div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-music"></i></div>
+                    <h3>Whole-Home Audio</h3>
+                    <p>Seamless soundscapes synchronized across every room. Invisible speakers, perfect acoustics, and intuitive control.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-film"></i></div>
+                    <h3>Private Cinema</h3>
+                    <p>Acoustically optimized theaters with 4K laser projection, Dolby Atmos, and bespoke seating configurations.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Smart Lighting</h3>
+                    <p>Lutron-powered environments that adapt to circadian rhythms while creating the perfect ambiance for any moment.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
+                    <h3>Commercial AV</h3>
+                    <p>Boardroom-to-lobby solutions for luxury hotels, corporate offices, and high-end retail spaces.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Security Integration</h3>
+                    <p>Discreet high-resolution monitoring that blends with your architecture while providing 24/7 protection.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Control Systems</h3>
+                    <p>One-touch management of every system through intuitive interfaces — remotes, keypads, or your smartphone.</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="partners-carousel">
-            <div class="partner-logo">
-                <img src="dolby-logo.png" alt="Dolby" loading="lazy">
+    </section>
+    
+    <!-- AV Nightmare Fixer Section -->
+    <section class="section section-dark" style="padding: 3rem 0;">
+        <div class="container">
+            <div class="reveal" style="text-align: center;">
+                <div class="hero-badge" style="display: inline-block; margin-bottom: 1rem;">🎯 WE FIX BROKEN SYSTEMS</div>
+                <h2 style="font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 1rem;">From <span style="color: var(--gold);">"It Never Worked Right"</span> to <span style="color: var(--gold);">"It Just Works"</span></h2>
+                <p style="max-width: 800px; margin: 0 auto; opacity: 0.8;">Had a bad AV installation? Wrong wiring? Devices that don't talk to each other? We troubleshoot, correct, reprogram, and restore — leaving you with a system that finally works as promised.</p>
             </div>
-            <div class="partner-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Sonos_logo_black.svg" alt="Sonos" loading="lazy">
+            
+            <div class="services-grid" style="margin-top: 3rem;">
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-bug"></i></div>
+                    <h3>Troubleshoot Nightmare Installs</h3>
+                    <p>We diagnose what's wrong, why it never worked, and create a roadmap to fix everything.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Reprogram & Replace</h3>
+                    <p>Bad programming? Wrong devices? We correct, replace, and reprogram until everything works perfectly.</p>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-check-double"></i></div>
+                    <h3>Leave You Smiling</h3>
+                    <p>Our work isn't done until you're confident, happy, and finally enjoying your system.</p>
+                </div>
             </div>
-            <div class="partner-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Bang_%26_Olufsen_logo.svg" alt="Bang & Olufsen" loading="lazy">
+            <div class="reveal" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 3rem;">
+                <div style="flex: 0 1 auto; max-width: 400px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid rgba(198,164,63,0.2);">
+                    <img src="assets/images/photo-1.jpg" alt="Project photo 1" style="width: 100%; height: auto; display: block;">
+                </div>
+                <div style="flex: 0 1 auto; max-width: 400px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid rgba(198,164,63,0.2);">
+                    <img src="assets/images/photo-2.jpg" alt="Project photo 2" style="width: 100%; height: auto; display: block;">
+                </div>
             </div>
-            <div class="partner-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Lutron_logo.svg" alt="Lutron" loading="lazy">
+        </div>
+    </section>
+    
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section section-dark">
+        <div class="container">
+            <div class="reveal">
+                <h2 class="section-title">Recent Installations</h2>
+                <div class="section-subtitle">Hover over any image — watch the details emerge from within</div>
             </div>
-            <div class="partner-logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Sony_logo.svg" alt="Sony" loading="lazy">
+            <div class="portfolio-grid">
+                <div class="portfolio-3d-card reveal">
+                    <div class="portfolio-card-inner">
+                        <img src="PicMa_2245795_1748083793412.jpg?q=80&w=2070" alt="Home Theater">
+                        <div class="portfolio-card-overlay">
+                            <h3>Newport Beach Estate</h3>
+                            <p>9.4.6 Dolby Atmos | Sony Laser Projection | Custom Seating</p>
+                        </div>
+                        <div class="portfolio-card-glow"></div>
+                    </div>
+                </div>
+                <div class="portfolio-3d-card reveal">
+                    <div class="portfolio-card-inner">
+                        <img src="20211007_102241.jpg?q=80&w=2070" alt="Restaurant AV">
+                        <div class="portfolio-card-overlay">
+                            <h3>Torrance Gastro Pub</h3>
+                            <p>14 Sony OLED Displays | 40 TruAudio Speakers | URC Total Control</p>
+                        </div>
+                        <div class="portfolio-card-glow"></div>
+                    </div>
+                </div>
+                <div class="portfolio-3d-card reveal">
+                    <div class="portfolio-card-inner">
+                        <img src="20250122_094038.jpg?q=80&w=2070" alt="TV Installation">
+                        <div class="portfolio-card-overlay">
+                            <h3>Dana Point Residence</h3>
+                            <p>85" Sony Mini LED | Chief Articulating Mount | 5.1 Surround</p>
+                        </div>
+                        <div class="portfolio-card-glow"></div>
+                    </div>
+                </div>
+                <div class="portfolio-3d-card reveal">
+                    <div class="portfolio-card-inner">
+                        <img src="20250812_114226.jpg?q=80&w=2070" alt="Desert Mirage">
+                        <div class="portfolio-card-overlay">
+                            <h3>Desert Mirage | Palm Springs</h3>
+                            <p>65" OLED in Stone Alcove | 7-Zone Sonos | Savant Control</p>
+                        </div>
+                        <div class="portfolio-card-glow"></div>
+                    </div>
+                </div>
+                <div class="portfolio-3d-card reveal">
+                    <div class="portfolio-card-inner">
+                        <img src="20250430_162427.jpg?q=80&w=2070" alt="Lido Island">
+                        <div class="portfolio-card-overlay">
+                            <h3>Lido Island | Newport Beach</h3>
+                            <p>65" Sony Mini OLED | Sonos Arc + Sub | 5-Zone Audio | Lutron RA3</p>
+                        </div>
+                        <div class="portfolio-card-glow"></div>
+                    </div>
+                </div>
+                <div class="portfolio-3d-card reveal">
+                    <div class="portfolio-card-inner">
+                        <img src="Upfoto_9XelvIYdfUYSna1LlnGAWtBVgmX4ZCItki2X1nfw5mCqP.jpg?q=80&w=2070" alt="Samsung Frame">
+                        <div class="portfolio-card-overlay">
+                            <h3>Broadmoor Estates | Fullerton</h3>
+                            <p>75" Samsung Frame TV | Art Mode | Hides in Plain Sight</p>
+                        </div>
+                        <div class="portfolio-card-glow"></div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section id="testimonials" class="section section-light">
+        <div class="container">
+            <div class="reveal">
+                <h2 class="section-title">Client Acclaim</h2>
+                <div class="section-subtitle">What our clients say about the Showtime experience</div>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-quote">
+                        The system disappears until we want music — then it's like the Philharmonic is in our living room.
+                    </div>
+                    <div class="testimonial-author">The Harrison Family</div>
+                    <div class="testimonial-location">Hancock Park</div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-quote">
+                        Our theater gets more use than any other room. Commercial cinemas seem amateurish by comparison.
+                    </div>
+                    <div class="testimonial-author">Dr. Robert Chen</div>
+                    <div class="testimonial-location">Newport Coast</div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-quote">
+                        The lighting automation alone has transformed how we experience our home at different times of day.
+                    </div>
+                    <div class="testimonial-author">Sophia Marquez</div>
+                    <div class="testimonial-location">Malibu</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section section-dark">
+        <div class="container">
+            <div class="reveal">
+                <h2 class="section-title">Begin Your Transformation</h2>
+                <div class="section-subtitle">Schedule your complimentary design consultation</div>
+            </div>
+            
+            <form class="contact-form" id="leadForm" method="POST">
+                <input type="hidden" name="_subject" value="New AV Consultation Request" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_next" value="" />
+
+                <div data-fs-success style="display: none; text-align: center; padding: 2rem;">
+                    <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--gold); margin-bottom: 1rem;"></i>
+                    <h3 style="font-family: var(--font-heading); font-style: italic; color: var(--gold);">Thank You!</h3>
+                    <p style="color: rgba(255,255,255,0.7);">Your consultation request has been received. We'll contact you within 24 hours.</p>
+                </div>
+
+                <div data-fs-error style="display: none; background: rgba(255,0,0,0.1); border: 1px solid #ff6b6b; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; color: #ff6b6b;"></div>
+
+                <div class="form-group">
+                    <label>Are you the property owner or decision maker?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="homeowner" value="yes" data-fs-field required> Yes, I own the property
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="homeowner" value="no" data-fs-field> No, I'm just inquiring
+                        </label>
+                    </div>
+                </div>
+
+                <div id="projectDetails" style="display: none;">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" data-fs-field required>
+                        <span data-fs-error="name" style="color: #ff6b6b; font-size: 0.8rem;"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" data-fs-field required>
+                        <span data-fs-error="email" style="color: #ff6b6b; font-size: 0.8rem;"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" data-fs-field required>
+                        <span data-fs-error="phone" style="color: #ff6b6b; font-size: 0.8rem;"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectType">Project Type *</label>
+                        <select id="projectType" name="projectType" data-fs-field required>
+                            <option value="" disabled selected>— Select a project type —</option>
+                            <option value="home_theater">🎬 Custom Home Theater</option>
+                            <option value="whole_home_audio">🎵 Whole-Home Audio</option>
+                            <option value="smart_lighting">💡 Smart Lighting Control</option>
+                            <option value="security">🔒 Security Integration</option>
+                            <option value="commercial">🏢 Commercial AV</option>
+                            <option value="nightmare_fix">🔧 Fixing a Nightmare</option>
+                        </select>
+                        <span data-fs-error="projectType" style="color: #ff6b6b; font-size: 0.8rem;"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Investment Range *</label>
+                        <select id="budget" name="budget" data-fs-field required>
+                            <option value="" disabled selected>— Select budget range —</option>
+                            <option value="2.5-5k">💰 $2,500 - $5,000</option>
+                            <option value="5-10k">💰 $5,000 - $10,000</option>
+                            <option value="10-25k">💰 $10,000 - $25,000</option>
+                            <option value="25-50k">💰 $25,000 - $50,000</option>
+                            <option value="50-100k">💰 $50,000 - $100,000</option>
+                            <option value="100k+">💰 $100,000+</option>
+                        </select>
+                        <span data-fs-error="budget" style="color: #ff6b6b; font-size: 0.8rem;"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Tell us about your vision</label>
+                        <textarea id="message" name="message" data-fs-field placeholder="What are you hoping to achieve?"></textarea>
+                        <span data-fs-error="message" style="color: #ff6b6b; font-size: 0.8rem;"></span>
+                    </div>
+
+                    <div id="qualifiedCta" style="display: none;">
+                        <div class="cta-card">
+                            <h3>Your Complimentary Design Consultation</h3>
+                            <ul class="benefits-list">
+                                <li>Free on-site estimate</li>
+                                <li>Custom system design</li>
+                                <li>Premium brand selection</li>
+                                <li>We fix nightmares</li>
+                            </ul>
+                            
+                            <div id="phoneNumberContainer" style="display: none;">
+                                <div class="cta-buttons" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+                                    <a href="tel:+15629641624" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2.5rem; font-family: var(--font-body); font-weight: 600; font-size: 1rem; background: var(--gradient-gold); color: var(--charcoal); border: none; border-radius: 50px; text-decoration: none; box-shadow: var(--shadow-gold); transition: var(--transition-smooth); cursor: pointer; width: 100%; max-width: 450px; justify-content: center;">
+                                        <i class="fas fa-phone-alt"></i>
+                                        <span>Call Us: (562) 964-1624</span>
+                                    </a>
+                                    <a href="sms:+15629641624" class="btn-outline" style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.9rem 2.5rem; font-family: var(--font-body); font-weight: 500; font-size: 0.95rem; background: transparent; color: var(--white); border: 1.5px solid var(--gold); border-radius: 50px; text-decoration: none; transition: var(--transition-smooth); cursor: pointer; width: 100%; max-width: 450px; justify-content: center;">
+                                        <i class="fas fa-sms"></i>
+                                        <span>Text Us: (562) 964-1624</span>
+                                    </a>
+                                </div>
+                                <p style="color: rgba(255,255,255,0.3); font-size: 0.7rem; letter-spacing: 1px; margin: 0.5rem 0 0 0;">
+                                    <i class="fas fa-check-circle" style="color: var(--gold); font-size: 0.6rem;"></i> We answer live
+                                    <span style="margin: 0 0.5rem; opacity: 0.3;">|</span>
+                                    <i class="fas fa-check-circle" style="color: var(--gold); font-size: 0.6rem;"></i> Free estimate
+                                    <span style="margin: 0 0.5rem; opacity: 0.3;">|</span>
+                                    <i class="fas fa-check-circle" style="color: var(--gold); font-size: 0.6rem;"></i> No obligation
+                                </p>
+                            </div>
+                            <button type="submit" class="btn-primary" id="scheduleBtn" data-fs-submit-btn style="margin-top: 1rem; width: 100%; max-width: 450px; justify-content: center;">
+                                <i class="fas fa-calendar-check"></i> Request Free Estimate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="nonQualifiedMessage" style="display: none;">
+                    <div class="cta-card">
+                        <p>Thank you for your interest! Please have the property owner contact us directly:</p>
+                        <a href="mailto:itshowtime@msn.com" class="btn-primary" style="display: inline-flex; gap: 0.5rem; margin-top: 1rem;">
+                            <i class="fas fa-envelope"></i> Email Our Team
+                        </a>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
     
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <a href="#" class="footer-logo">It's <span>Showtime</span></a>
-                <p class="footer-text">Premium home theater design and installation for Home Owners throughout LA and Orange County.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">It's <span>Showtime</span></div>
+                <p style="opacity: 0.7; margin-top: 1rem;">Serving Southern California since 2001.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem; font-family: var(--font-heading);">Contact</h4>
+                <div class="footer-links">
+                    <a href="mailto:itshowtime@msn.com">itshowtime@msn.com</a>
+                    <a href="tel:+15629641624">(562) 964-1624</a>
+                    <a href="#">Long Beach | LA | Orange County</a>
                 </div>
             </div>
-            
-            <div class="footer-col">
-                <h3 class="footer-heading">Services</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Custom Theater Design</a></li>
-                    <li><a href="#">Premium Audio Systems Indoor/Outdoor</a></li>
-                    <li><a href="#">Home Automation</a></li>
-                    <li><a href="#">Lighting Control</a></li>
-                    <li><a href="#">System Maintenance</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3 class="footer-heading">Company</h3>
-                <ul class="footer-links">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Our Process</a></li>
-                    <li><a href="#">Business Credentials</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3 class="footer-heading">Contact</h3>
-                <ul class="footer-links">
-                    <li><a href="mailto:itshowtime@msn.com">itshowtime@msn.com</a></li>
-                    <li>Long Beach, CA 90807</li>
-                </ul>
+            <div>
+                <h4 style="margin-bottom: 1rem; font-family: var(--font-heading);">Legal</h4>
+                <div class="footer-links">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-of-service.html">Terms of Service</a>
+                    <button id="doNotSellBtn" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer;">Do Not Sell My Data</button>
+                </div>
             </div>
         </div>
-        
         <div class="footer-bottom">
-            <div class="legal-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms-of-service.html">Terms of Service</a>
-                <a href="sitemap.html">Sitemap</a>
-                <a href="accessibility.html">Accessibility</a>
-            </div>
-            <p class="copyright">© 2025 It's Showtime Inc. All rights reserved. | CA License #--------</p>
+            <p>© 2025 It's Showtime Inc. All rights reserved.</p>
         </div>
     </footer>
     
-    <!-- Floating CTA Button -->
-    <div class="floating-cta">
-        <a href="#" class="cta-button" id="floatingCtaButton">
-            Get Started
-            <i class="fas fa-arrow-right"></i>
-        </a>
-    </div>
-    
-    <!-- Qualification Flow Modal -->
-    <div class="qualification-modal" id="qualificationModal">
-        <div class="qualification-flow">
-            <button class="close-qualification" id="closeQualification" aria-label="Close qualification modal">&times;</button>
+    <!-- Floating CTA -->
+    <a href="#contact" class="floating-cta">
+        <i class="fas fa-message"></i>
+    </a>
+
+    <!-- ========== FORMSPREE AJAX SCRIPT ========== -->
+    <script>
+        window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+        formspree('initForm', { formElement: '#leadForm', formId: 'maqgqrao' });
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+    <script>
+        // ========== LOADER ==========
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+        
+        // ========== PARALLAX SCROLL ==========
+        const layer1 = document.getElementById('layer1');
+        const layer2 = document.getElementById('layer2');
+        const layer3 = document.getElementById('layer3');
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = scrolled / maxScroll;
             
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+            if (layer1) layer1.style.transform = `translateY(${scrolled * 0.15}px)`;
+            if (layer2) layer2.style.transform = `translateY(${scrolled * 0.3}px)`;
+            if (layer3) layer3.style.transform = `translateY(${scrolled * 0.45}px)`;
+            
+            if (scrollPercent < 0.33) {
+                if (layer2) layer2.style.opacity = '0';
+                if (layer3) layer3.style.opacity = '0';
+                if (layer1) layer1.style.opacity = '0.25';
+            } else if (scrollPercent < 0.66) {
+                const fadeAmount = (scrollPercent - 0.33) / 0.33;
+                if (layer2) layer2.style.opacity = fadeAmount * 0.2;
+                if (layer1) layer1.style.opacity = 0.25 - (fadeAmount * 0.1);
+                if (layer3) layer3.style.opacity = '0';
+            } else {
+                const fadeAmount = (scrollPercent - 0.66) / 0.34;
+                if (layer2) layer2.style.opacity = 0.2 - (fadeAmount * 0.1);
+                if (layer3) layer3.style.opacity = fadeAmount * 0.15;
+                if (layer1) layer1.style.opacity = 0.15 - (fadeAmount * 0.05);
+            }
+        });
+        
+        // ========== NAVIGATION ==========
+        const nav = document.getElementById('nav');
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        menuBtn?.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // ========== 3D TILT EFFECT ==========
+        const cards = document.querySelectorAll('.portfolio-3d-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * 1.5;
+                const rotateY = ((centerX - x) / centerX) * 1.5;
+                card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+        
+        // ========== REVEAL ON SCROLL ==========
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        
+        // ========== FORM LOGIC ==========
+        const homeownerRadios = document.querySelectorAll('input[name="homeowner"]');
+        const projectDetails = document.getElementById('projectDetails');
+        const nonQualifiedMessage = document.getElementById('nonQualifiedMessage');
+        const qualifiedCta = document.getElementById('qualifiedCta');
+        const phoneNumberContainer = document.getElementById('phoneNumberContainer');
+        
+        function checkFormCompletion() {
+            const required = ['name', 'email', 'phone', 'projectType', 'budget'];
+            let allFilled = required.every(id => document.getElementById(id)?.value.trim());
+            
+            const phone = document.getElementById('phone')?.value.replace(/\D/g, '') || '';
+            if (phone.length < 10) allFilled = false;
+            
+            if (allFilled && projectDetails.style.display === 'block') {
+                qualifiedCta.style.display = 'block';
+                if (phoneNumberContainer) phoneNumberContainer.style.display = 'block';
+            } else {
+                qualifiedCta.style.display = 'none';
+                if (phoneNumberContainer) phoneNumberContainer.style.display = 'none';
+            }
+        }
+        
+        homeownerRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'yes') {
+                    projectDetails.style.display = 'block';
+                    nonQualifiedMessage.style.display = 'none';
+                    checkFormCompletion();
+                } else {
+                    projectDetails.style.display = 'none';
+                    nonQualifiedMessage.style.display = 'block';
+                    qualifiedCta.style.display = 'none';
+                }
+            });
+        });
+        
+        ['name', 'email', 'phone', 'projectType', 'budget'].forEach(id => {
+            document.getElementById(id)?.addEventListener('input', checkFormCompletion);
+            document.getElementById(id)?.addEventListener('change', checkFormCompletion);
+        });
+        
+        // Phone formatting
+        document.getElementById('phone')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 10) {
+                const match = value.match(/^(\d{3})(\d{3})(\d{4})$/);
+                if (match) e.target.value = `(${match[1]}) ${match[2]}-${match[3]}`;
+            }
+            checkFormCompletion();
+        });
+        
+        // ========== DO NOT SELL BUTTON ==========
+        document.getElementById('doNotSellBtn')?.addEventListener('click', () => {
+            alert('We respect your privacy. Your data will never be sold to third parties.');
+        });
+        
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    navLinks?.classList.remove('active');
+                }
+            });
+        });
+        
+        // ========== SERVICE CARD MOUSE TRACKING ==========
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--x', `${x}%`);
+                card.style.setProperty('--y', `${y}%`);
+            });
+        });
+    </script>
+
+    <!-- ========== SMART CHAT BUBBLE ========== -->
+    <div class="chat-bubble-container" id="chatBubble">
+        <button class="chat-bubble-btn" id="chatBubbleBtn" aria-label="Contact us">
+            <div class="chat-bubble-icon">
+                <i class="fas fa-comment-dots"></i>
             </div>
-            
-            <!-- Step 1: Homeowner Verification -->
-            <div class="qualification-step active" data-step="1">
-                <div class="qualification-header">
-                    <h3>Let's Find Your Perfect Theater Solution</h3>
-                    <p>Answer a few quick questions to help us tailor our recommendations</p>
-                </div>
-                
-                <div class="qualification-options">
-                    <button class="qualification-btn" data-answer="yes">
-                        <i class="fas fa-home"></i>
-                        <span>Yes, I own the home</span>
-                    </button>
-                    <button class="qualification-btn" data-answer="authorized">
-                        <i class="fas fa-user-tie"></i>
-                        <span>I'm authorized by the owner</span>
-                    </button>
-                    <button class="qualification-btn" data-answer="no">
-                        <i class="fas fa-user"></i>
-                        <span>No, just exploring options</span>
-                    </button>
-                </div>
-            
-                <div class="qualification-navigation">
-                    <button class="nav-btn btn-next" disabled>Next <i class="fas fa-arrow-right"></i></button>
-                </div>
+            <span class="chat-bubble-text">Contact Us</span>
+        </button>
+        
+        <div class="chat-options-panel" id="chatOptionsPanel">
+            <div class="chat-options-header">
+                <span>Contact Us</span>
+                <button class="chat-options-close" id="chatOptionsClose">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            
-            <!-- Step 2: Project Scope -->
-            <div class="qualification-step" data-step="2">
-                <div class="qualification-header">
-                    <h3>What type of installation are you interested in?</h3>
-                    <p>Select all that apply to your project</p>
+            <div class="chat-options-body">
+                <div class="chat-status" id="chatStatus">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span class="status-text" id="statusText">Loading...</span>
                 </div>
                 
-                <div class="qualification-options">
-                    <label class="qualification-btn checkbox-option">
-                        <input type="checkbox" name="services" value="custom-theater">
-                        <i class="fas fa-film"></i>
-                        <span>Custom Home Theater</span>
-                    </label>
-                    <label class="qualification-btn checkbox-option">
-                        <input type="checkbox" name="services" value="media-room">
-                        <i class="fas fa-tv"></i>
-                        <span>Media Room</span>
-                    </label>
-                    <label class="qualification-btn checkbox-option">
-                        <input type="checkbox" name="services" value="whole-home-audio">
-                        <i class="fas fa-music"></i>
-                        <span>Whole Home Audio</span>
-                    </label>
-                    <label class="qualification-btn checkbox-option">
-                        <input type="checkbox" name="services" value="smart-lighting">
-                        <i class="fas fa-lightbulb"></i>
-                        <span>Smart Lighting Control</span>
-                    </label>
-                    <label class="qualification-btn checkbox-option">
-                        <input type="checkbox" name="services" value="home-automation">
-                        <i class="fas fa-robot"></i>
-                        <span>Home Automation</span>
-                    </label>
-                    <label class="qualification-btn checkbox-option">
-                        <input type="checkbox" name="services" value="not-sure">
-                        <i class="fas fa-question"></i>
-                        <span>Not sure yet</span>
-                    </label>
-                </div>
-                
-                <div class="qualification-navigation">
-                    <button class="nav-btn btn-back"><i class="fas fa-arrow-left"></i> Back</button>
-                    <button class="nav-btn btn-next">Next <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-            
-            <!-- Step 3: Budget -->
-            <div class="qualification-step" data-step="3">
-                <div class="qualification-header">
-                    <h3>What's your estimated budget for this project?</h3>
-                    <p>This helps us recommend appropriate solutions</p>
-                </div>
-                
-                <div class="qualification-options">
-                    <button class="qualification-btn" data-answer="15-30k">
-                        <i class="fas fa-dollar-sign"></i>
-                        <span>$15,000 - $30,000</span>
-                    </button>
-                    <button class="qualification-btn" data-answer="30-50k">
-                        <i class="fas fa-dollar-sign"></i>
-                        <span>$30,000 - $50,000</span>
-                    </button>
-                    <button class="qualification-btn" data-answer="50k+">
-                        <i class="fas fa-dollar-sign"></i>
-                        <span>$50,000+</span>
-                    </button>
-                    <button class="qualification-btn" data-answer="unsure">
-                        <i class="fas fa-question"></i>
-                        <span>Not sure yet</span>
-                    </button>
-                </div>
-                
-                <div class="qualification-navigation">
-                    <button class="nav-btn btn-back"><i class="fas fa-arrow-left"></i> Back</button>
-                    <button class="nav-btn btn-next">Next <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-            
-            <!-- Step 4: Timeline -->
-            <div class="qualification-step" data-step="4">
-                <div class="qualification-header">
-                    <h3>When are you looking to start your project?</h3>
-                    <p>This helps us schedule your consultation appropriately</p>
-                </div>
-                
-                <div class="qualification-options">
-                    <button class="qualification-btn" data-answer="1month">
-                        <i class="fas fa-bolt"></i>
-                        <span>Within 1 month</span>
-                    </button>
-                    <button class="qualification-btn" data-answer="3months">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>1-3 months</span>
-                    </button>
-                    <button class="qualification-btn" data-answer="6months">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>3-6 months</span>
-                    </button>
-                    <button class="qualification-btn" data-answer="planning">
-                        <i class="fas fa-lightbulb"></i>
-                        <span>Just planning/exploring</span>
-                    </button>
-                </div>
-                
-                <div class="qualification-navigation">
-                    <button class="nav-btn btn-back"><i class="fas fa-arrow-left"></i> Back</button>
-                    <button class="nav-btn btn-next">Next <i class="fas fa-arrow-right"></i></button>
-                </div>
-            </div>
-            
-            <!-- Step 5: Contact Information - Simplified Version -->
-            <div class="qualification-step" data-step="5">
-                <div class="qualification-header">
-                    <h3>Just Two Final Details</h3>
-                    <p>We only need your name and number to get started</p>
-                </div>
-                
-                <form class="qualification-form" id="qualificationForm">
-                    <div class="form-group required">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" class="form-control" required autocomplete="given-name">
-                    </div>
+                <div class="chat-contact-options">
+                    <a href="tel:+15629641624" class="chat-option" id="callOption">
+                        <div class="chat-option-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="chat-option-info">
+                            <span class="chat-option-title">Call Us</span>
+                            <span class="chat-option-desc">Speak with a real person</span>
+                        </div>
+                        <span class="chat-option-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </a>
                     
-                    <div class="form-group required">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" class="form-control" required autocomplete="tel">
-                    </div>
+                    <a href="sms:+15629641624" class="chat-option" id="textOption">
+                        <div class="chat-option-icon">
+                            <i class="fas fa-sms"></i>
+                        </div>
+                        <div class="chat-option-info">
+                            <span class="chat-option-title">Text Us</span>
+                            <span class="chat-option-desc">Quick replies via SMS</span>
+                        </div>
+                        <span class="chat-option-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </a>
                     
-                    <div class="form-group">
-                        <label for="email">Email (optional)</label>
-                        <input type="email" id="email" class="form-control" autocomplete="email">
-                        <p class="optional-note">For appointment reminders only</p>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="notes">Anything else we should know? (optional)</label>
-                        <textarea id="notes" class="form-control" rows="2"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="nav-btn btn-submit">
-                        Get My Free Consultation
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                    
-                    <div class="loading-spinner" id="formSpinner"></div>
-                </form>
-                
-                <div class="qualification-navigation">
-                    <button class="nav-btn btn-back"><i class="fas fa-arrow-left"></i> Back</button>
-                </div>
-            </div>
-            
-            <!-- Success Screen -->
-            <div class="qualification-success" id="qualifiedLead">
-                <div class="qualification-header">
-                    <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--success); margin-bottom: 1rem;"></i>
-                    <h3>You're Exactly Who We Love To Work With!</h3>
-                    <p>Our design specialist will contact you within 24 hours to schedule your free consultation.</p>
+                    <a href="mailto:itshowtime@msn.com" class="chat-option" id="emailOption">
+                        <div class="chat-option-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="chat-option-info">
+                            <span class="chat-option-title">Email Us</span>
+                            <span class="chat-option-desc">We respond within 24 hours</span>
+                        </div>
+                        <span class="chat-option-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </a>
                 </div>
                 
-                <div class="qualification-options" style="margin-top: 2rem;">
-                    <button class="qualification-btn" id="closeSuccess" style="background: var(--accent); color: white; text-align: center;">
-                        <i class="fas fa-thumbs-up"></i>
-                        <span>Got It - Close This Window</span>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Disqualification Screen -->
-            <div class="qualification-disqualify" id="disqualifiedLead">
-                <div class="qualification-header">
-                    <i class="fas fa-info-circle" style="font-size: 4rem; color: var(--warning); margin-bottom: 1rem;"></i>
-                    <h3>Thanks For Your Interest!</h3>
-                    <p>We usually respond within 24 hours (48 hours at the latest).</p>
-                    <p>Thank You.</p>
-                </div>
-                
-                <div class="qualification-options" style="margin-top: 2rem;">
-                    <button class="qualification-btn" id="closeDisqualified" style="text-align: center;">
-                        <i class="fas fa-times"></i>
-                        <span>Close This Window</span>
-                    </button>
+                <div class="chat-hours-notice" id="hoursNotice" style="display: none;">
+                    <i class="fas fa-clock"></i>
+                    <span>Our business hours are <strong>7am - 7pm</strong>.<br>Please email us and we'll respond within 24 hours.</span>
                 </div>
             </div>
         </div>
     </div>
+
+    <style>
+        /* ========== CHAT BUBBLE STYLES ========== */
+        .chat-bubble-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .chat-bubble-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px 12px 16px;
+            background: var(--gradient-gold, linear-gradient(135deg, #C6A43F, #E2C268));
+            color: var(--charcoal, #1A1A1A);
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 25px rgba(198, 164, 63, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+            font-weight: 600;
+            position: relative;
+            z-index: 10;
+            min-height: 56px;
+        }
+        
+        .chat-bubble-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 35px rgba(198, 164, 63, 0.5);
+        }
+        
+        .chat-bubble-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .chat-bubble-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .chat-bubble-text {
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        
+        .chat-bubble-btn.active-hours .chat-bubble-icon {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(198, 164, 63, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(198, 164, 63, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(198, 164, 63, 0); }
+        }
+        
+        .chat-bubble-btn.off-hours {
+            background: rgba(60, 60, 60, 0.9);
+            color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chat-bubble-btn.off-hours .chat-bubble-icon {
+            background: rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        .chat-bubble-btn.off-hours:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .chat-options-panel {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 340px;
+            max-width: calc(100vw - 40px);
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(198, 164, 63, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform-origin: bottom right;
+            z-index: 9;
+        }
+        
+        .chat-options-panel.active {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .chat-options-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .chat-options-header span {
+            font-family: var(--font-heading, 'Cormorant Garamond', serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold, #C6A43F);
+        }
+        
+        .chat-options-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-options-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .chat-options-body {
+            padding: 16px 20px 20px;
+        }
+        
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 16px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        
+        .status-dot.open {
+            background: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .status-dot.closed {
+            background: #ff6b6b;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+        
+        .status-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .chat-contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .chat-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+            font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+        }
+        
+        .chat-option:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(4px);
+        }
+        
+        .chat-option:active {
+            transform: scale(0.98);
+        }
+        
+        .chat-option-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        
+        .chat-option:nth-child(1) .chat-option-icon {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+        
+        .chat-option:nth-child(2) .chat-option-icon {
+            background: rgba(33, 150, 243, 0.2);
+            color: #2196F3;
+        }
+        
+        .chat-option:nth-child(3) .chat-option-icon {
+            background: rgba(255, 152, 0, 0.2);
+            color: #FF9800;
+        }
+        
+        .chat-option-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-option-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .chat-option-desc {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .chat-option-arrow {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-option:hover .chat-option-arrow {
+            color: var(--gold, #C6A43F);
+            transform: translateX(4px);
+        }
+        
+        .chat-hours-notice {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .chat-hours-notice i {
+            color: #ff6b6b;
+            font-size: 1.1rem;
+        }
+        
+        .chat-hours-notice strong {
+            color: var(--gold, #C6A43F);
+        }
+        
+        @media (max-width: 480px) {
+            .chat-bubble-btn {
+                padding: 10px 16px 10px 14px;
+                min-height: 48px;
+                border-radius: 40px;
+            }
+            
+            .chat-bubble-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+            
+            .chat-bubble-text {
+                font-size: 0.8rem;
+            }
+            
+            .chat-options-panel {
+                width: calc(100vw - 30px);
+                right: 0;
+                bottom: 60px;
+                border-radius: 16px;
+            }
+        }
+    </style>
+
+    <script>
+        // ========== SMART CHAT BUBBLE LOGIC ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatBubbleBtn = document.getElementById('chatBubbleBtn');
+            const chatOptionsPanel = document.getElementById('chatOptionsPanel');
+            const chatOptionsClose = document.getElementById('chatOptionsClose');
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const hoursNotice = document.getElementById('hoursNotice');
+            const callOption = document.getElementById('callOption');
+            const textOption = document.getElementById('textOption');
+            const emailOption = document.getElementById('emailOption');
+            
+            const BUSINESS_HOURS_START = 7;
+            const BUSINESS_HOURS_END = 19;
+            
+            function isBusinessHours() {
+                const now = new Date();
+                const hours = now.getHours();
+                return hours >= BUSINESS_HOURS_START && hours < BUSINESS_HOURS_END;
+            }
+            
+            function updateStatus() {
+                const open = isBusinessHours();
+                
+                if (open) {
+                    statusDot.className = 'status-dot open';
+                    statusText.textContent = 'We\'re open! Call or text us now.';
+                    chatBubbleBtn.classList.add('active-hours');
+                    chatBubbleBtn.classList.remove('off-hours');
+                    hoursNotice.style.display = 'none';
+                    document.querySelector('.chat-option:nth-child(1) .chat-option-desc').textContent = 'Speak with a real person';
+                    document.querySelector('.chat-option:nth-child(2) .chat-option-desc').textContent = 'Quick replies via SMS';
+                } else {
+                    statusDot.className = 'status-dot closed';
+                    statusText.textContent = 'We\'re closed. Please email us.';
+                    chatBubbleBtn.classList.remove('active-hours');
+                    chatBubbleBtn.classList.add('off-hours');
+                    hoursNotice.style.display = 'flex';
+                    document.querySelector('.chat-option:nth-child(1) .chat-option-desc').textContent = 'Leave a voicemail';
+                    document.querySelector('.chat-option:nth-child(2) .chat-option-desc').textContent = 'We\'ll respond later';
+                }
+                
+                const bubbleText = chatBubbleBtn.querySelector('.chat-bubble-text');
+                if (open) {
+                    bubbleText.textContent = 'Contact Us';
+                    let badge = chatBubbleBtn.querySelector('.hours-badge');
+                    if (!badge) {
+                        badge = document.createElement('span');
+                        badge.className = 'hours-badge';
+                        badge.style.cssText = `
+                            background: #4CAF50;
+                            color: white;
+                            font-size: 0.5rem;
+                            padding: 2px 8px;
+                            border-radius: 10px;
+                            margin-left: 4px;
+                            font-weight: 700;
+                            text-transform: uppercase;
+                        `;
+                        badge.textContent = 'Open';
+                        chatBubbleBtn.appendChild(badge);
+                    }
+                } else {
+                    const badge = chatBubbleBtn.querySelector('.hours-badge');
+                    if (badge) badge.remove();
+                    bubbleText.textContent = 'Leave a Message';
+                }
+            }
+            
+            function togglePanel() {
+                chatOptionsPanel.classList.toggle('active');
+            }
+            
+            function closePanel() {
+                chatOptionsPanel.classList.remove('active');
+            }
+            
+            chatBubbleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePanel();
+            });
+            
+            chatOptionsClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closePanel();
+            });
+            
+            document.addEventListener('click', function(e) {
+                const container = document.getElementById('chatBubble');
+                if (!container.contains(e.target)) {
+                    closePanel();
+                }
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closePanel();
+                }
+            });
+            
+            callOption.addEventListener('click', function(e) {
+                const open = isBusinessHours();
+                if (!open) {
+                    e.preventDefault();
+                    alert('Our business hours are 7am - 7pm.\n\nYou can leave a voicemail and we\'ll call back.\n\nOr email us at: itshowtime@msn.com');
+                    window.location.href = 'tel:+15629641624';
+                }
+                closePanel();
+            });
+            
+            textOption.addEventListener('click', function(e) {
+                const open = isBusinessHours();
+                if (!open) {
+                    e.preventDefault();
+                    alert('Our business hours are 7am - 7pm.\n\nWe\'ll respond during business hours.\n\nOr email us at: itshowtime@msn.com');
+                    window.location.href = 'sms:+15629641624';
+                }
+                closePanel();
+            });
+            
+            emailOption.addEventListener('click', function() {
+                closePanel();
+            });
+            
+            updateStatus();
+            setInterval(updateStatus, 60000);
+        });
+    </script>
+    <!-- ========== END CHAT BUBBLE ========== -->
 </body>
 </html>
