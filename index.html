@@ -1311,15 +1311,21 @@
     </style>
 </head>
 <body>
-    <!-- ===== INTRO VIDEO - PROPERLY SIZED ===== -->
+    <!-- ===== INTRO VIDEO WITH PARALLAX - FIXED BACKGROUND ===== -->
 <section id="intro-hero">
-    <video id="intro-video" autoplay muted playsinline preload="auto">
-        <source src="Marque video.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-    <div class="content">
-        <h1 class="title" id="main-title">It's Showtime</h1>
-        <p class="subtitle" id="sub-title">We make complicated devices easy to use</p>
+    <div class="parallax-bg"></div>
+    <div class="video-wrapper">
+        <video id="intro-video" autoplay muted playsinline preload="auto" loop>
+            <source src="Marque video.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="scroll-text" id="scroll-text">
+        <span>We make complicated devices</span>
+        <span class="gold-text">easy to use</span>
+    </div>
+    <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="arrow"><div class="dot"></div></div>
     </div>
 </section>
 
@@ -1331,132 +1337,161 @@
         height: 100dvh;
         overflow: hidden;
         z-index: 10;
-        background: #0f172a;
+        background: #1A1A1A; /* Charcoal - matches your theme */
     }
 
-    #intro-hero video {
+    /* Parallax Background - NO BLUE */
+    .parallax-bg {
         position: absolute;
-        top: 0;
-        left: 0;
+        inset: 0;
+        z-index: 0;
+        background: 
+            radial-gradient(ellipse at 30% 40%, rgba(198, 164, 63, 0.06) 0%, transparent 60%),
+            radial-gradient(ellipse at 70% 60%, rgba(198, 164, 63, 0.04) 0%, transparent 50%),
+            #1A1A1A; /* Solid charcoal background */
+    }
+
+    /* Video Container */
+    .video-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 1100px;
+        height: 80vh;
+        max-height: 700px;
+        z-index: 1;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(198, 164, 63, 0.05);
+        border: 1px solid rgba(198, 164, 63, 0.08);
+        background: #1A1A1A;
+    }
+
+    .video-wrapper video {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        background: #0f172a;
-        opacity: 0;
-        transition: opacity 1.5s ease;
+        background: #1A1A1A;
+        display: block;
     }
 
-    #intro-hero .overlay {
+    /* Scroll Text */
+    .scroll-text {
         position: absolute;
-        inset: 0;
-        background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.1) 50%, rgba(15, 23, 42, 0.6) 100%);
-        pointer-events: none;
-        z-index: 2;
-    }
-
-    #intro-hero .content {
-        position: relative;
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        padding: 0 1.5rem;
+        bottom: 8rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
         text-align: center;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+        pointer-events: none;
+        width: 90%;
+        max-width: 700px;
     }
 
-    #intro-hero .title {
-        font-size: clamp(2.5rem, 6vw, 5rem);
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        opacity: 0;
-        transition: opacity 1s ease;
-        background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+    .scroll-text.visible {
+        opacity: 1;
+    }
+
+    .scroll-text span {
+        display: block;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(1.5rem, 3.5vw, 3rem);
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.2;
+    }
+
+    .scroll-text .gold-text {
+        background: linear-gradient(135deg, #C6A43F 0%, #E2C268 50%, #C6A43F 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
+        font-style: italic;
+        font-size: clamp(1.8rem, 4vw, 3.5rem);
     }
 
-    #intro-hero .subtitle {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: clamp(0.9rem, 1.2vw, 1.3rem);
-        max-width: 500px;
-        margin-top: 0.75rem;
-        opacity: 0;
-        transition: opacity 1s ease;
-        font-weight: 400;
-    }
-
-    #intro-hero .bottom-text {
+    /* Scroll Indicator */
+    .scroll-indicator {
         position: absolute;
-        bottom: 5rem;
+        bottom: 2rem;
         left: 50%;
         transform: translateX(-50%);
-        text-align: center;
-        opacity: 0;
-        transition: opacity 1s ease;
-        z-index: 10;
-        width: 90%;
-        max-width: 500px;
-    }
-
-    #intro-hero .bottom-text p {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: clamp(0.7rem, 0.8vw, 0.9rem);
-    }
-
-    #intro-hero .scroll-indicator {
-        position: absolute;
-        bottom: 1.5rem;
-        left: 50%;
-        transform: translateX(-50%);
+        z-index: 5;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.4rem;
-        opacity: 0;
-        transition: opacity 1s ease;
-        z-index: 10;
+        gap: 0.3rem;
+        opacity: 0.4;
+        transition: opacity 0.3s ease;
     }
 
-    #intro-hero .scroll-indicator span {
-        color: rgba(255, 255, 255, 0.3);
-        font-size: 0.6rem;
+    .scroll-indicator span {
+        color: rgba(255, 255, 255, 0.25);
+        font-size: 0.55rem;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
+        font-weight: 400;
     }
 
-    #intro-hero .scroll-indicator .arrow {
+    .scroll-indicator .arrow {
         width: 1.2rem;
         height: 2rem;
-        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
         border-radius: 9999px;
         display: flex;
         justify-content: center;
     }
 
-    #intro-hero .scroll-indicator .arrow .dot {
+    .scroll-indicator .arrow .dot {
         width: 0.2rem;
         height: 0.2rem;
-        background: #38bdf8;
+        background: #C6A43F;
         border-radius: 50%;
         margin-top: 0.4rem;
-        animation: scroll-dot 1.5s ease-in-out infinite;
+        animation: scroll-dot 1.8s ease-in-out infinite;
     }
 
     @keyframes scroll-dot {
         0% { transform: translateY(0); opacity: 1; }
-        50% { transform: translateY(0.6rem); opacity: 0.3; }
+        50% { transform: translateY(0.7rem); opacity: 0.2; }
         100% { transform: translateY(0); opacity: 1; }
     }
 
-    @media (max-width: 640px) {
-        #intro-hero .bottom-text {
-            bottom: 4rem;
+    /* Mobile */
+    @media (max-width: 768px) {
+        .video-wrapper {
+            width: 95%;
+            height: 60vh;
+            max-height: 400px;
+            border-radius: 16px;
         }
-        #intro-hero .scroll-indicator {
-            bottom: 1rem;
+        .scroll-text {
+            bottom: 6rem;
+        }
+        .scroll-text span {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+        }
+        .scroll-text .gold-text {
+            font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+        }
+        .scroll-indicator {
+            bottom: 1.2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .video-wrapper {
+            height: 45vh;
+            max-height: 300px;
+            border-radius: 12px;
+        }
+        .scroll-text {
+            bottom: 5rem;
         }
     }
 </style>
@@ -1464,48 +1499,25 @@
 <script>
     (function() {
         const video = document.getElementById('intro-video');
-        const title = document.getElementById('main-title');
-        const subtitle = document.getElementById('sub-title');
-        const bottomText = document.getElementById('bottom-text');
-        const scrollIndicator = document.getElementById('scroll-indicator');
+        const scrollText = document.getElementById('scroll-text');
 
         video.play().catch(() => {
             document.addEventListener('click', () => video.play(), { once: true });
         });
 
-        setTimeout(() => {
-            video.style.opacity = '1';
-        }, 300);
+        let textShown = false;
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            const triggerPoint = window.innerHeight * 0.3;
 
-        video.addEventListener('ended', function() {
-            video.style.opacity = '0';
-            title.style.opacity = '1';
-            setTimeout(() => {
-                subtitle.style.opacity = '1';
-            }, 800);
-            setTimeout(() => {
-                bottomText.style.opacity = '1';
-                scrollIndicator.style.opacity = '1';
-            }, 1600);
-        });
-
-        setTimeout(() => {
-            if (video.style.opacity !== '0') {
-                video.style.opacity = '0';
-                title.style.opacity = '1';
-                setTimeout(() => {
-                    subtitle.style.opacity = '1';
-                }, 800);
-                setTimeout(() => {
-                    bottomText.style.opacity = '1';
-                    scrollIndicator.style.opacity = '1';
-                }, 1600);
+            if (scrollY > triggerPoint && !textShown) {
+                scrollText.classList.add('visible');
+                textShown = true;
             }
-        }, 12000);
+        }, { passive: true });
     })();
 </script>
 <!-- ===== END INTRO VIDEO ===== -->
-
     <!-- Fixed Parallax Background Container -->
     <div class="parallax-container">
         <div class="parallax-base parallax-layer-1" id="layer1"></div>
