@@ -1311,82 +1311,207 @@
     </style>
 </head>
 <body>
-    <!-- ===== INTRO VIDEO WITH SEQUENCE ===== -->
-    <section id="intro-hero">
-        <video id="intro-video" autoplay muted playsinline preload="auto">
-            <source src="Marque video.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <div class="content">
-            <h1 class="title" id="main-title">It's Showtime</h1>
-            <p class="subtitle" id="sub-title">We make complicated devices easy to use</p>
-        </div>
-        <div class="bottom-text" id="bottom-text">
-            <p>Scroll down to learn more or schedule a free estimate for any project</p>
-        </div>
-        <div class="scroll-indicator" id="scroll-indicator">
-            <span>Scroll Down</span>
-            <div class="arrow"><div class="dot"></div></div>
-        </div>
-    </section>
+    <!-- ===== INTRO VIDEO - PROPERLY SIZED ===== -->
+<section id="intro-hero">
+    <video id="intro-video" autoplay muted playsinline preload="auto">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <div class="content">
+        <h1 class="title" id="main-title">It's Showtime</h1>
+        <p class="subtitle" id="sub-title">We make complicated devices easy to use</p>
+    </div>
+    <div class="bottom-text" id="bottom-text">
+        <p>Scroll down to learn more or schedule a free estimate for any project</p>
+    </div>
+    <div class="scroll-indicator" id="scroll-indicator">
+        <span>Scroll Down</span>
+        <div class="arrow"><div class="dot"></div></div>
+    </div>
+</section>
 
-    <script>
-        (function() {
-            const video = document.getElementById('intro-video');
-            const title = document.getElementById('main-title');
-            const subtitle = document.getElementById('sub-title');
-            const bottomText = document.getElementById('bottom-text');
-            const scrollIndicator = document.getElementById('scroll-indicator');
-            
-            // --- VIDEO PLAYS ---
-            video.play().catch(() => {
-                document.addEventListener('click', () => video.play(), { once: true });
-            });
-            
-            // --- VIDEO FADES IN ---
+<style>
+    #intro-hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        z-index: 10;
+        background: #0f172a;
+    }
+
+    #intro-hero video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #0f172a;
+        opacity: 0;
+        transition: opacity 1.5s ease;
+    }
+
+    #intro-hero .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.1) 50%, rgba(15, 23, 42, 0.6) 100%);
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    #intro-hero .content {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0 1.5rem;
+        text-align: center;
+    }
+
+    #intro-hero .title {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        opacity: 0;
+        transition: opacity 1s ease;
+        background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    #intro-hero .subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+        max-width: 500px;
+        margin-top: 0.75rem;
+        opacity: 0;
+        transition: opacity 1s ease;
+        font-weight: 400;
+    }
+
+    #intro-hero .bottom-text {
+        position: absolute;
+        bottom: 5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1s ease;
+        z-index: 10;
+        width: 90%;
+        max-width: 500px;
+    }
+
+    #intro-hero .bottom-text p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: clamp(0.7rem, 0.8vw, 0.9rem);
+    }
+
+    #intro-hero .scroll-indicator {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        opacity: 0;
+        transition: opacity 1s ease;
+        z-index: 10;
+    }
+
+    #intro-hero .scroll-indicator span {
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    #intro-hero .scroll-indicator .arrow {
+        width: 1.2rem;
+        height: 2rem;
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        border-radius: 9999px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #intro-hero .scroll-indicator .arrow .dot {
+        width: 0.2rem;
+        height: 0.2rem;
+        background: #38bdf8;
+        border-radius: 50%;
+        margin-top: 0.4rem;
+        animation: scroll-dot 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scroll-dot {
+        0% { transform: translateY(0); opacity: 1; }
+        50% { transform: translateY(0.6rem); opacity: 0.3; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 640px) {
+        #intro-hero .bottom-text {
+            bottom: 4rem;
+        }
+        #intro-hero .scroll-indicator {
+            bottom: 1rem;
+        }
+    }
+</style>
+
+<script>
+    (function() {
+        const video = document.getElementById('intro-video');
+        const title = document.getElementById('main-title');
+        const subtitle = document.getElementById('sub-title');
+        const bottomText = document.getElementById('bottom-text');
+        const scrollIndicator = document.getElementById('scroll-indicator');
+
+        video.play().catch(() => {
+            document.addEventListener('click', () => video.play(), { once: true });
+        });
+
+        setTimeout(() => {
+            video.style.opacity = '1';
+        }, 300);
+
+        video.addEventListener('ended', function() {
+            video.style.opacity = '0';
+            title.style.opacity = '1';
             setTimeout(() => {
-                video.style.opacity = '1';
-            }, 500);
-            
-            // --- WAIT FOR VIDEO TO FINISH (using 'ended' event) ---
-            video.addEventListener('ended', function() {
-                // Video finished playing
+                subtitle.style.opacity = '1';
+            }, 800);
+            setTimeout(() => {
+                bottomText.style.opacity = '1';
+                scrollIndicator.style.opacity = '1';
+            }, 1600);
+        });
+
+        setTimeout(() => {
+            if (video.style.opacity !== '0') {
                 video.style.opacity = '0';
                 title.style.opacity = '1';
-                
-                // --- SUBTITLE FADES IN ---
                 setTimeout(() => {
                     subtitle.style.opacity = '1';
-                }, 1000);
-                
-                // --- BOTTOM TEXT & SCROLL INDICATOR FADE IN ---
+                }, 800);
                 setTimeout(() => {
                     bottomText.style.opacity = '1';
                     scrollIndicator.style.opacity = '1';
-                }, 2000);
-            });
-            
-            // --- FALLBACK: If video doesn't end (looping or error), fade out after 10 seconds ---
-            setTimeout(() => {
-                if (video.style.opacity !== '0') {
-                    video.style.opacity = '0';
-                    title.style.opacity = '1';
-                    
-                    setTimeout(() => {
-                        subtitle.style.opacity = '1';
-                    }, 1000);
-                    
-                    setTimeout(() => {
-                        bottomText.style.opacity = '1';
-                        scrollIndicator.style.opacity = '1';
-                    }, 2000);
-                }
-            }, 10000);
-            
-            console.log('🎬 Intro sequence started - video will play fully before fading');
-        })();
-    </script>
-    <!-- ===== END INTRO VIDEO ===== -->
+                }, 1600);
+            }
+        }, 12000);
+    })();
+</script>
+<!-- ===== END INTRO VIDEO ===== -->
 
     <!-- Fixed Parallax Background Container -->
     <div class="parallax-container">
