@@ -131,22 +131,21 @@
             transition: opacity 1.5s ease-in-out;
         }
         
-        /* Fixed: Removed inline image URLs that were breaking, using proper background colors */
         .parallax-layer-1 {
-            background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 50%, #1A1A1A 100%);
-            opacity: 0.3;
+            background-image: url('ChatGPT Image Apr 24, 2025, 04_07_07 PM.png?q=80&w=2070');
+            opacity: 0.25;
             transform: translateY(0px);
         }
         
         .parallax-layer-2 {
-            background: radial-gradient(ellipse at 30% 40%, rgba(198, 164, 63, 0.08) 0%, transparent 70%);
-            opacity: 0.5;
+            background-image: url('https://images.unsplash.com/photo-1579547944212-c4f4963a5c34?q=80&w=2070');
+            opacity: 0;
             transform: translateY(0px);
         }
         
         .parallax-layer-3 {
-            background: radial-gradient(ellipse at 70% 60%, rgba(198, 164, 63, 0.05) 0%, transparent 60%);
-            opacity: 0.3;
+            background-image: url('https://images.unsplash.com/photo-1556912172-0b5b2bfa3cfa?q=80&w=2070');
+            opacity: 0;
             transform: translateY(0px);
         }
         
@@ -224,12 +223,6 @@
         .loader.hidden {
             opacity: 0;
             visibility: hidden;
-        }
-        
-        .loader-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
         
         .loader-ring {
@@ -368,23 +361,194 @@
             cursor: pointer;
         }
         
+        /* ========== INTRO VIDEO SECTION ========== */
+        #intro-video-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            z-index: 10;
+            background: var(--charcoal);
+        }
+
+        #intro-video-section .video-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 30% 40%, rgba(198, 164, 63, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(198, 164, 63, 0.04) 0%, transparent 50%),
+                var(--charcoal);
+        }
+
+        #intro-video-section .video-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 1100px;
+            height: 80vh;
+            max-height: 700px;
+            z-index: 1;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(198, 164, 63, 0.05);
+            border: 1px solid rgba(198, 164, 63, 0.08);
+            background: var(--charcoal);
+        }
+
+        #intro-video-section .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: var(--charcoal);
+            display: block;
+        }
+
+        #intro-video-section .scroll-text {
+            position: absolute;
+            bottom: 8rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            width: 90%;
+            max-width: 700px;
+        }
+
+        #intro-video-section .scroll-text.visible {
+            opacity: 1;
+        }
+
+        #intro-video-section .scroll-text span {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 3.5vw, 3rem);
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.2;
+        }
+
+        #intro-video-section .scroll-text .gold-text {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-style: italic;
+            font-size: clamp(1.8rem, 4vw, 3.5rem);
+        }
+
+        #intro-video-section .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        #intro-video-section .scroll-indicator span {
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 400;
+        }
+
+        #intro-video-section .scroll-indicator .arrow {
+            width: 1.2rem;
+            height: 2rem;
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #intro-video-section .scroll-indicator .arrow .dot {
+            width: 0.2rem;
+            height: 0.2rem;
+            background: var(--gold);
+            border-radius: 50%;
+            margin-top: 0.4rem;
+            animation: scroll-dot 1.8s ease-in-out infinite;
+        }
+
+        @keyframes scroll-dot {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(0.7rem); opacity: 0.2; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            #intro-video-section .video-wrapper {
+                width: 95%;
+                height: 60vh;
+                max-height: 400px;
+                border-radius: 16px;
+            }
+            #intro-video-section .scroll-text {
+                bottom: 6rem;
+            }
+            #intro-video-section .scroll-text span {
+                font-size: clamp(1.2rem, 4vw, 1.8rem);
+            }
+            #intro-video-section .scroll-text .gold-text {
+                font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+            }
+            #intro-video-section .scroll-indicator {
+                bottom: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #intro-video-section .video-wrapper {
+                height: 45vh;
+                max-height: 300px;
+                border-radius: 12px;
+            }
+            #intro-video-section .scroll-text {
+                bottom: 5rem;
+            }
+        }
+        
         /* ========== HERO SECTION ========== */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
             overflow: hidden;
         }
         
-        /* Fixed: Removed hero-bg img reference since we're using the video section above */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+        
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         .hero-content {
             position: relative;
             padding: var(--spacing-xl) var(--spacing-md);
             width: 100%;
             color: var(--white);
-            z-index: 2;
         }
         
         .hero-badge {
@@ -538,13 +702,12 @@
             width: 100%;
         }
         
-        .marquee-track {
-            display: flex;
-            width: max-content;
+        .marquee-content {
+            display: inline-block;
             animation: marquee 25s linear infinite;
         }
         
-        .marquee-track span {
+        .marquee-content span {
             display: inline-block;
             margin: 0 1.5rem;
             background: var(--gradient-gold);
@@ -554,7 +717,6 @@
             font-size: 0.85rem;
             letter-spacing: 3px;
             font-weight: 600;
-            flex-shrink: 0;
         }
         
         @keyframes marquee {
@@ -872,7 +1034,6 @@
             border-radius: 12px;
             font-family: var(--font-body);
             transition: var(--transition-smooth);
-            color: var(--charcoal);
         }
         
         .section-dark .form-group input,
@@ -883,22 +1044,17 @@
             color: white;
         }
         
-        .section-dark .form-group input::placeholder,
-        .section-dark .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.4);
-        }
-        
-        .section-dark .form-group select option {
-            background: var(--charcoal);
-            color: white;
-        }
-        
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
             border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(198,164,63,0.2);
+        }
+        
+        .form-group select option {
+            background: var(--charcoal);
+            color: white;
         }
         
         .radio-group {
@@ -956,11 +1112,6 @@
             background-clip: text;
             color: transparent;
             margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .cta-card > * {
             position: relative;
             z-index: 1;
         }
@@ -1079,7 +1230,7 @@
         /* ========== FLOATING CTA ========== */
         .floating-cta {
             position: fixed;
-            bottom: 100px;
+            bottom: 30px;
             right: 30px;
             background: var(--gradient-gold);
             color: var(--charcoal);
@@ -1157,14 +1308,6 @@
                 width: 95%;
                 padding: var(--spacing-xl) 0;
             }
-            
-            .floating-cta {
-                bottom: 85px;
-                right: 20px;
-                width: 48px;
-                height: 48px;
-                font-size: 1rem;
-            }
         }
         
         /* Reveal Animations */
@@ -1178,500 +1321,12 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* ========== INTRO VIDEO - FIXED VERSION ========== */
-        #intro-hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            overflow: hidden;
-            z-index: 10;
-            background: #1A1A1A;
-        }
-
-        /* Parallax Background */
-        .parallax-bg {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            background: 
-                radial-gradient(ellipse at 30% 40%, rgba(198, 164, 63, 0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 60%, rgba(198, 164, 63, 0.04) 0%, transparent 50%),
-                #1A1A1A;
-        }
-
-        /* Video Container */
-        .video-wrapper {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 1100px;
-            height: 80vh;
-            max-height: 700px;
-            z-index: 1;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(198, 164, 63, 0.05);
-            border: 1px solid rgba(198, 164, 63, 0.08);
-            background: #1A1A1A;
-        }
-
-        .video-wrapper video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: #1A1A1A;
-            display: block;
-        }
-
-        /* Scroll Text */
-        .scroll-text {
-            position: absolute;
-            bottom: 8rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 5;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-            pointer-events: none;
-            width: 90%;
-            max-width: 700px;
-        }
-
-        .scroll-text.visible {
-            opacity: 1;
-        }
-
-        .scroll-text span {
-            display: block;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.5rem, 3.5vw, 3rem);
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.2;
-        }
-
-        .scroll-text .gold-text {
-            background: linear-gradient(135deg, #C6A43F 0%, #E2C268 50%, #C6A43F 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-style: italic;
-            font-size: clamp(1.8rem, 4vw, 3.5rem);
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.3rem;
-            opacity: 0.4;
-            transition: opacity 0.3s ease;
-        }
-
-        .scroll-indicator span {
-            color: rgba(255, 255, 255, 0.25);
-            font-size: 0.55rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 400;
-        }
-
-        .scroll-indicator .arrow {
-            width: 1.2rem;
-            height: 2rem;
-            border: 1.5px solid rgba(255, 255, 255, 0.12);
-            border-radius: 9999px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .scroll-indicator .arrow .dot {
-            width: 0.2rem;
-            height: 0.2rem;
-            background: #C6A43F;
-            border-radius: 50%;
-            margin-top: 0.4rem;
-            animation: scroll-dot 1.8s ease-in-out infinite;
-        }
-
-        @keyframes scroll-dot {
-            0% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(0.7rem); opacity: 0.2; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .video-wrapper {
-                width: 95%;
-                height: 60vh;
-                max-height: 400px;
-                border-radius: 16px;
-            }
-            .scroll-text {
-                bottom: 6rem;
-            }
-            .scroll-text span {
-                font-size: clamp(1.2rem, 4vw, 1.8rem);
-            }
-            .scroll-text .gold-text {
-                font-size: clamp(1.4rem, 4.5vw, 2.2rem);
-            }
-            .scroll-indicator {
-                bottom: 1.2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .video-wrapper {
-                height: 45vh;
-                max-height: 300px;
-                border-radius: 12px;
-            }
-            .scroll-text {
-                bottom: 5rem;
-            }
-        }
-
-        /* ========== CHAT BUBBLE STYLES ========== */
-        .chat-bubble-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        
-        .chat-bubble-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 20px 12px 16px;
-            background: var(--gradient-gold);
-            color: var(--charcoal);
-            border: none;
-            border-radius: 50px;
-            box-shadow: 0 4px 25px rgba(198, 164, 63, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: var(--font-body);
-            font-weight: 600;
-            position: relative;
-            z-index: 10;
-            min-height: 56px;
-        }
-        
-        .chat-bubble-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 35px rgba(198, 164, 63, 0.5);
-        }
-        
-        .chat-bubble-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .chat-bubble-icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-        
-        .chat-bubble-text {
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-        
-        .chat-bubble-btn.active-hours .chat-bubble-icon {
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(198, 164, 63, 0.4); }
-            70% { box-shadow: 0 0 0 12px rgba(198, 164, 63, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(198, 164, 63, 0); }
-        }
-        
-        .chat-bubble-btn.off-hours {
-            background: rgba(60, 60, 60, 0.9);
-            color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .chat-bubble-btn.off-hours .chat-bubble-icon {
-            background: rgba(255, 255, 255, 0.1);
-            color: #aaa;
-        }
-        
-        .chat-bubble-btn.off-hours:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-        }
-        
-        .hours-badge {
-            background: #4CAF50;
-            color: white;
-            font-size: 0.5rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            margin-left: 4px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        
-        .chat-options-panel {
-            position: absolute;
-            bottom: 70px;
-            right: 0;
-            width: 340px;
-            max-width: calc(100vw - 40px);
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border: 1px solid rgba(198, 164, 63, 0.2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            transform: translateY(20px) scale(0.95);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            transform-origin: bottom right;
-            z-index: 9;
-        }
-        
-        .chat-options-panel.active {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .chat-options-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .chat-options-header span {
-            font-family: var(--font-heading);
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--gold);
-        }
-        
-        .chat-options-close {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .chat-options-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-        
-        .chat-options-body {
-            padding: 16px 20px 20px;
-        }
-        
-        .chat-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            margin-bottom: 16px;
-        }
-        
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-            flex-shrink: 0;
-        }
-        
-        .status-dot.open {
-            background: #4CAF50;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
-        }
-        
-        .status-dot.closed {
-            background: #ff6b6b;
-            box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
-        }
-        
-        .status-text {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .chat-contact-options {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .chat-option {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 12px 16px;
-            border-radius: 14px;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            background: transparent;
-            width: 100%;
-            text-align: left;
-            font-family: var(--font-body);
-        }
-        
-        .chat-option:hover {
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateX(4px);
-        }
-        
-        .chat-option:active {
-            transform: scale(0.98);
-        }
-        
-        .chat-option-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-        
-        .chat-option:nth-child(1) .chat-option-icon {
-            background: rgba(76, 175, 80, 0.2);
-            color: #4CAF50;
-        }
-        
-        .chat-option:nth-child(2) .chat-option-icon {
-            background: rgba(33, 150, 243, 0.2);
-            color: #2196F3;
-        }
-        
-        .chat-option:nth-child(3) .chat-option-icon {
-            background: rgba(255, 152, 0, 0.2);
-            color: #FF9800;
-        }
-        
-        .chat-option-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .chat-option-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: white;
-        }
-        
-        .chat-option-desc {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .chat-option-arrow {
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
-        }
-        
-        .chat-option:hover .chat-option-arrow {
-            color: var(--gold);
-            transform: translateX(4px);
-        }
-        
-        .chat-hours-notice {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 12px;
-            padding: 10px 14px;
-            border-radius: 12px;
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid rgba(255, 107, 107, 0.2);
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .chat-hours-notice i {
-            color: #ff6b6b;
-            font-size: 1.1rem;
-        }
-        
-        .chat-hours-notice strong {
-            color: var(--gold);
-        }
-        
-        @media (max-width: 480px) {
-            .chat-bubble-btn {
-                padding: 10px 16px 10px 14px;
-                min-height: 48px;
-                border-radius: 40px;
-            }
-            
-            .chat-bubble-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 1rem;
-            }
-            
-            .chat-bubble-text {
-                font-size: 0.8rem;
-            }
-            
-            .chat-options-panel {
-                width: calc(100vw - 30px);
-                right: 0;
-                bottom: 60px;
-                border-radius: 16px;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- ===== INTRO VIDEO ===== -->
-    <section id="intro-hero">
-        <div class="parallax-bg"></div>
+    <!-- ===== INTRO VIDEO SECTION ===== -->
+    <section id="intro-video-section">
+        <div class="video-bg"></div>
         <div class="video-wrapper">
             <video id="intro-video" autoplay muted playsinline preload="auto" loop>
                 <source src="Marque video.mp4" type="video/mp4">
@@ -1713,7 +1368,7 @@
                 <a href="#testimonials">Testimonials</a>
                 <a href="#contact" class="nav-cta">Get Estimate</a>
             </div>
-            <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation menu">
+            <button class="menu-btn" id="menuBtn">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -1721,6 +1376,8 @@
     
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-bg">
+        </div>
         <div class="hero-content container">
             <div class="hero-badge">EST. 2001 • PREMIER AV INTEGRATOR</div>
             <h1>Where Technology <span>&</span><br>Artistry Converge</h1>
@@ -1752,13 +1409,15 @@
     
     <!-- Marquee -->
     <div class="marquee">
-        <div class="marquee-track">
+        <div class="marquee-content">
             <span>✦ BESPOKE DESIGN</span>
             <span>✦ INVISIBLE TECHNOLOGY</span>
             <span>✦ PROFESSIONAL SERVICE</span>
             <span>✦ PREMIUM BRANDS</span>
             <span>✦ 25+ YEARS</span>
             <span>✦ LA & ORANGE COUNTY</span>
+        </div>
+        <div class="marquee-content">
             <span>✦ BESPOKE DESIGN</span>
             <span>✦ INVISIBLE TECHNOLOGY</span>
             <span>✦ PROFESSIONAL SERVICE</span>
@@ -1838,10 +1497,10 @@
             </div>
             <div class="reveal" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 3rem;">
                 <div style="flex: 0 1 auto; max-width: 400px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid rgba(198,164,63,0.2);">
-                    <img src="assets/images/photo-1.jpg" alt="Project photo 1" style="width: 100%; height: auto; display: block;" onerror="this.style.display='none'">
+                    <img src="assets/images/photo-1.jpg" alt="Project photo 1" style="width: 100%; height: auto; display: block;">
                 </div>
                 <div style="flex: 0 1 auto; max-width: 400px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid rgba(198,164,63,0.2);">
-                    <img src="assets/images/photo-2.jpg" alt="Project photo 2" style="width: 100%; height: auto; display: block;" onerror="this.style.display='none'">
+                    <img src="assets/images/photo-2.jpg" alt="Project photo 2" style="width: 100%; height: auto; display: block;">
                 </div>
             </div>
         </div>
@@ -1857,7 +1516,7 @@
             <div class="portfolio-grid">
                 <div class="portfolio-3d-card reveal">
                     <div class="portfolio-card-inner">
-                        <img src="PicMa_2245795_1748083793412.jpg" alt="Home Theater" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%232A2A2A%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23C6A43F%22 font-family=%22serif%22 font-size=%2220%22%3EHome Theater%3C/text%3E%3C/svg%3E'">
+                        <img src="PicMa_2245795_1748083793412.jpg?q=80&w=2070" alt="Home Theater">
                         <div class="portfolio-card-overlay">
                             <h3>Newport Beach Estate</h3>
                             <p>9.4.6 Dolby Atmos | Sony Laser Projection | Custom Seating</p>
@@ -1867,7 +1526,7 @@
                 </div>
                 <div class="portfolio-3d-card reveal">
                     <div class="portfolio-card-inner">
-                        <img src="20211007_102241.jpg" alt="Restaurant AV" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%232A2A2A%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23C6A43F%22 font-family=%22serif%22 font-size=%2220%22%3ERestaurant AV%3C/text%3E%3C/svg%3E'">
+                        <img src="20211007_102241.jpg?q=80&w=2070" alt="Restaurant AV">
                         <div class="portfolio-card-overlay">
                             <h3>Torrance Gastro Pub</h3>
                             <p>14 Sony OLED Displays | 40 TruAudio Speakers | URC Total Control</p>
@@ -1877,7 +1536,7 @@
                 </div>
                 <div class="portfolio-3d-card reveal">
                     <div class="portfolio-card-inner">
-                        <img src="20250122_094038.jpg" alt="TV Installation" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%232A2A2A%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23C6A43F%22 font-family=%22serif%22 font-size=%2220%22%3ETV Installation%3C/text%3E%3C/svg%3E'">
+                        <img src="20250122_094038.jpg?q=80&w=2070" alt="TV Installation">
                         <div class="portfolio-card-overlay">
                             <h3>Dana Point Residence</h3>
                             <p>85" Sony Mini LED | Chief Articulating Mount | 5.1 Surround</p>
@@ -1887,7 +1546,7 @@
                 </div>
                 <div class="portfolio-3d-card reveal">
                     <div class="portfolio-card-inner">
-                        <img src="20250812_114226.jpg" alt="Desert Mirage" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%232A2A2A%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23C6A43F%22 font-family=%22serif%22 font-size=%2220%22%3EDesert Mirage%3C/text%3E%3C/svg%3E'">
+                        <img src="20250812_114226.jpg?q=80&w=2070" alt="Desert Mirage">
                         <div class="portfolio-card-overlay">
                             <h3>Desert Mirage | Palm Springs</h3>
                             <p>65" OLED in Stone Alcove | 7-Zone Sonos | Savant Control</p>
@@ -1897,7 +1556,7 @@
                 </div>
                 <div class="portfolio-3d-card reveal">
                     <div class="portfolio-card-inner">
-                        <img src="20250430_162427.jpg" alt="Lido Island" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%232A2A2A%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23C6A43F%22 font-family=%22serif%22 font-size=%2220%22%3ELido Island%3C/text%3E%3C/svg%3E'">
+                        <img src="20250430_162427.jpg?q=80&w=2070" alt="Lido Island">
                         <div class="portfolio-card-overlay">
                             <h3>Lido Island | Newport Beach</h3>
                             <p>65" Sony Mini OLED | Sonos Arc + Sub | 5-Zone Audio | Lutron RA3</p>
@@ -1907,7 +1566,7 @@
                 </div>
                 <div class="portfolio-3d-card reveal">
                     <div class="portfolio-card-inner">
-                        <img src="Upfoto_9XelvIYdfUYSna1LlnGAWtBVgmX4ZCItki2X1nfw5mCqP.jpg" alt="Samsung Frame" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Crect fill=%22%232A2A2A%22 width=%22400%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23C6A43F%22 font-family=%22serif%22 font-size=%2220%22%3ESamsung Frame%3C/text%3E%3C/svg%3E'">
+                        <img src="Upfoto_9XelvIYdfUYSna1LlnGAWtBVgmX4ZCItki2X1nfw5mCqP.jpg?q=80&w=2070" alt="Samsung Frame">
                         <div class="portfolio-card-overlay">
                             <h3>Broadmoor Estates | Fullerton</h3>
                             <p>75" Samsung Frame TV | Art Mode | Hides in Plain Sight</p>
@@ -1960,7 +1619,7 @@
                 <div class="section-subtitle">Schedule your complimentary design consultation</div>
             </div>
             
-            <form class="contact-form" id="leadForm" action="https://formspree.io/f/maqgqrao" method="POST">
+            <form class="contact-form" id="leadForm" method="POST">
                 <input type="hidden" name="_subject" value="New AV Consultation Request" />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="_next" value="" />
@@ -1977,10 +1636,10 @@
                     <label>Are you the property owner or decision maker?</label>
                     <div class="radio-group">
                         <label class="radio-option">
-                            <input type="radio" name="homeowner" value="yes" required> Yes, I own the property
+                            <input type="radio" name="homeowner" value="yes" data-fs-field required> Yes, I own the property
                         </label>
                         <label class="radio-option">
-                            <input type="radio" name="homeowner" value="no"> No, I'm just inquiring
+                            <input type="radio" name="homeowner" value="no" data-fs-field> No, I'm just inquiring
                         </label>
                     </div>
                 </div>
@@ -1988,22 +1647,25 @@
                 <div id="projectDetails" style="display: none;">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" data-fs-field required>
+                        <span data-fs-error="name" style="color: #ff6b6b; font-size: 0.8rem;"></span>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" data-fs-field required>
+                        <span data-fs-error="email" style="color: #ff6b6b; font-size: 0.8rem;"></span>
                     </div>
                     
                     <div class="form-group">
                         <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <input type="tel" id="phone" name="phone" data-fs-field required>
+                        <span data-fs-error="phone" style="color: #ff6b6b; font-size: 0.8rem;"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="projectType">Project Type *</label>
-                        <select id="projectType" name="projectType" required>
+                        <select id="projectType" name="projectType" data-fs-field required>
                             <option value="" disabled selected>— Select a project type —</option>
                             <option value="home_theater">🎬 Custom Home Theater</option>
                             <option value="whole_home_audio">🎵 Whole-Home Audio</option>
@@ -2012,11 +1674,12 @@
                             <option value="commercial">🏢 Commercial AV</option>
                             <option value="nightmare_fix">🔧 Fixing a Nightmare</option>
                         </select>
+                        <span data-fs-error="projectType" style="color: #ff6b6b; font-size: 0.8rem;"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="budget">Investment Range *</label>
-                        <select id="budget" name="budget" required>
+                        <select id="budget" name="budget" data-fs-field required>
                             <option value="" disabled selected>— Select budget range —</option>
                             <option value="2.5-5k">💰 $2,500 - $5,000</option>
                             <option value="5-10k">💰 $5,000 - $10,000</option>
@@ -2025,11 +1688,13 @@
                             <option value="50-100k">💰 $50,000 - $100,000</option>
                             <option value="100k+">💰 $100,000+</option>
                         </select>
+                        <span data-fs-error="budget" style="color: #ff6b6b; font-size: 0.8rem;"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="message">Tell us about your vision</label>
-                        <textarea id="message" name="message" placeholder="What are you hoping to achieve?"></textarea>
+                        <textarea id="message" name="message" data-fs-field placeholder="What are you hoping to achieve?"></textarea>
+                        <span data-fs-error="message" style="color: #ff6b6b; font-size: 0.8rem;"></span>
                     </div>
 
                     <div id="qualifiedCta" style="display: none;">
@@ -2061,7 +1726,7 @@
                                     <i class="fas fa-check-circle" style="color: var(--gold); font-size: 0.6rem;"></i> No obligation
                                 </p>
                             </div>
-                            <button type="submit" class="btn-primary" id="scheduleBtn" style="margin-top: 1rem; width: 100%; max-width: 450px; justify-content: center;">
+                            <button type="submit" class="btn-primary" id="scheduleBtn" data-fs-submit-btn style="margin-top: 1rem; width: 100%; max-width: 450px; justify-content: center;">
                                 <i class="fas fa-calendar-check"></i> Request Free Estimate
                             </button>
                         </div>
@@ -2100,7 +1765,7 @@
                 <div class="footer-links">
                     <a href="privacy-policy.html">Privacy Policy</a>
                     <a href="terms-of-service.html">Terms of Service</a>
-                    <button id="doNotSellBtn" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; font-family: var(--font-body); font-size: 1rem; text-align: left;">Do Not Sell My Data</button>
+                    <button id="doNotSellBtn" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer;">Do Not Sell My Data</button>
                 </div>
             </div>
         </div>
@@ -2110,9 +1775,16 @@
     </footer>
     
     <!-- Floating CTA -->
-    <a href="#contact" class="floating-cta" aria-label="Contact us">
+    <a href="#contact" class="floating-cta">
         <i class="fas fa-message"></i>
     </a>
+
+    <!-- ========== FORMSPREE AJAX SCRIPT ========== -->
+    <script>
+        window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+        formspree('initForm', { formElement: '#leadForm', formId: 'maqgqrao' });
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
     <script>
         // ========== LOADER ==========
@@ -2130,7 +1802,7 @@
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const maxScroll = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = maxScroll > 0 ? scrolled / maxScroll : 0;
+            const scrollPercent = scrolled / maxScroll;
             
             if (layer1) layer1.style.transform = `translateY(${scrolled * 0.15}px)`;
             if (layer2) layer2.style.transform = `translateY(${scrolled * 0.3}px)`;
@@ -2139,16 +1811,16 @@
             if (scrollPercent < 0.33) {
                 if (layer2) layer2.style.opacity = '0';
                 if (layer3) layer3.style.opacity = '0';
-                if (layer1) layer1.style.opacity = '0.3';
+                if (layer1) layer1.style.opacity = '0.25';
             } else if (scrollPercent < 0.66) {
                 const fadeAmount = (scrollPercent - 0.33) / 0.33;
-                if (layer2) layer2.style.opacity = fadeAmount * 0.3;
-                if (layer1) layer1.style.opacity = 0.3 - (fadeAmount * 0.15);
+                if (layer2) layer2.style.opacity = fadeAmount * 0.2;
+                if (layer1) layer1.style.opacity = 0.25 - (fadeAmount * 0.1);
                 if (layer3) layer3.style.opacity = '0';
             } else {
                 const fadeAmount = (scrollPercent - 0.66) / 0.34;
-                if (layer2) layer2.style.opacity = 0.3 - (fadeAmount * 0.15);
-                if (layer3) layer3.style.opacity = fadeAmount * 0.2;
+                if (layer2) layer2.style.opacity = 0.2 - (fadeAmount * 0.1);
+                if (layer3) layer3.style.opacity = fadeAmount * 0.15;
                 if (layer1) layer1.style.opacity = 0.15 - (fadeAmount * 0.05);
             }
         });
@@ -2169,8 +1841,16 @@
         menuBtn?.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
-        
-        // Close nav when clicking a link
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const isNavClick = nav.contains(e.target);
+            if (!isNavClick && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -2215,19 +1895,11 @@
         const phoneNumberContainer = document.getElementById('phoneNumberContainer');
         
         function checkFormCompletion() {
-            const name = document.getElementById('name');
-            const email = document.getElementById('email');
-            const phone = document.getElementById('phone');
-            const projectType = document.getElementById('projectType');
-            const budget = document.getElementById('budget');
+            const required = ['name', 'email', 'phone', 'projectType', 'budget'];
+            let allFilled = required.every(id => document.getElementById(id)?.value.trim());
             
-            const required = [name, email, phone, projectType, budget];
-            let allFilled = required.every(el => el && el.value && el.value.trim());
-            
-            if (phone) {
-                const phoneDigits = phone.value.replace(/\D/g, '');
-                if (phoneDigits.length < 10) allFilled = false;
-            }
+            const phone = document.getElementById('phone')?.value.replace(/\D/g, '') || '';
+            if (phone.length < 10) allFilled = false;
             
             if (allFilled && projectDetails.style.display === 'block') {
                 qualifiedCta.style.display = 'block';
@@ -2253,25 +1925,19 @@
         });
         
         ['name', 'email', 'phone', 'projectType', 'budget'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('input', checkFormCompletion);
-                el.addEventListener('change', checkFormCompletion);
-            }
+            document.getElementById(id)?.addEventListener('input', checkFormCompletion);
+            document.getElementById(id)?.addEventListener('change', checkFormCompletion);
         });
         
         // Phone formatting
-        const phoneInput = document.getElementById('phone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length >= 10) {
-                    const match = value.match(/^(\d{3})(\d{3})(\d{4})$/);
-                    if (match) e.target.value = `(${match[1]}) ${match[2]}-${match[3]}`;
-                }
-                checkFormCompletion();
-            });
-        }
+        document.getElementById('phone')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 10) {
+                const match = value.match(/^(\d{3})(\d{3})(\d{4})$/);
+                if (match) e.target.value = `(${match[1]}) ${match[2]}-${match[3]}`;
+            }
+            checkFormCompletion();
+        });
         
         // ========== DO NOT SELL BUTTON ==========
         document.getElementById('doNotSellBtn')?.addEventListener('click', () => {
@@ -2323,9 +1989,389 @@
                 }
             }, { passive: true });
         })();
+    </script>
 
+    <!-- ========== SMART CHAT BUBBLE ========== -->
+    <div class="chat-bubble-container" id="chatBubble">
+        <button class="chat-bubble-btn" id="chatBubbleBtn" aria-label="Contact us">
+            <div class="chat-bubble-icon">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <span class="chat-bubble-text">Contact Us</span>
+        </button>
+        
+        <div class="chat-options-panel" id="chatOptionsPanel">
+            <div class="chat-options-header">
+                <span>Contact Us</span>
+                <button class="chat-options-close" id="chatOptionsClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-options-body">
+                <div class="chat-status" id="chatStatus">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span class="status-text" id="statusText">Loading...</span>
+                </div>
+                
+                <div class="chat-contact-options">
+                    <a href="tel:+15629641624" class="chat-option" id="callOption">
+                        <div class="chat-option-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="chat-option-info">
+                            <span class="chat-option-title">Call Us</span>
+                            <span class="chat-option-desc">Speak with a real person</span>
+                        </div>
+                        <span class="chat-option-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </a>
+                    
+                    <a href="sms:+15629641624" class="chat-option" id="textOption">
+                        <div class="chat-option-icon">
+                            <i class="fas fa-sms"></i>
+                        </div>
+                        <div class="chat-option-info">
+                            <span class="chat-option-title">Text Us</span>
+                            <span class="chat-option-desc">Quick replies via SMS</span>
+                        </div>
+                        <span class="chat-option-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </a>
+                    
+                    <a href="mailto:itshowtime@msn.com" class="chat-option" id="emailOption">
+                        <div class="chat-option-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="chat-option-info">
+                            <span class="chat-option-title">Email Us</span>
+                            <span class="chat-option-desc">We respond within 24 hours</span>
+                        </div>
+                        <span class="chat-option-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </a>
+                </div>
+                
+                <div class="chat-hours-notice" id="hoursNotice" style="display: none;">
+                    <i class="fas fa-clock"></i>
+                    <span>Our business hours are <strong>7am - 7pm</strong>.<br>Please email us and we'll respond within 24 hours.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* ========== CHAT BUBBLE STYLES ========== */
+        .chat-bubble-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .chat-bubble-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px 12px 16px;
+            background: var(--gradient-gold, linear-gradient(135deg, #C6A43F, #E2C268));
+            color: var(--charcoal, #1A1A1A);
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 25px rgba(198, 164, 63, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+            font-weight: 600;
+            position: relative;
+            z-index: 10;
+            min-height: 56px;
+        }
+        
+        .chat-bubble-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 35px rgba(198, 164, 63, 0.5);
+        }
+        
+        .chat-bubble-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .chat-bubble-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .chat-bubble-text {
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        
+        .chat-bubble-btn.active-hours .chat-bubble-icon {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(198, 164, 63, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(198, 164, 63, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(198, 164, 63, 0); }
+        }
+        
+        .chat-bubble-btn.off-hours {
+            background: rgba(60, 60, 60, 0.9);
+            color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .chat-bubble-btn.off-hours .chat-bubble-icon {
+            background: rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        .chat-bubble-btn.off-hours:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .chat-options-panel {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 340px;
+            max-width: calc(100vw - 40px);
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(198, 164, 63, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform-origin: bottom right;
+            z-index: 9;
+        }
+        
+        .chat-options-panel.active {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .chat-options-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .chat-options-header span {
+            font-family: var(--font-heading, 'Cormorant Garamond', serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold, #C6A43F);
+        }
+        
+        .chat-options-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-options-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .chat-options-body {
+            padding: 16px 20px 20px;
+        }
+        
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 16px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        
+        .status-dot.open {
+            background: #4CAF50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .status-dot.closed {
+            background: #ff6b6b;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+        
+        .status-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .chat-contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .chat-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: left;
+            font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+        }
+        
+        .chat-option:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(4px);
+        }
+        
+        .chat-option:active {
+            transform: scale(0.98);
+        }
+        
+        .chat-option-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        
+        .chat-option:nth-child(1) .chat-option-icon {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+        
+        .chat-option:nth-child(2) .chat-option-icon {
+            background: rgba(33, 150, 243, 0.2);
+            color: #2196F3;
+        }
+        
+        .chat-option:nth-child(3) .chat-option-icon {
+            background: rgba(255, 152, 0, 0.2);
+            color: #FF9800;
+        }
+        
+        .chat-option-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-option-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .chat-option-desc {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .chat-option-arrow {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-option:hover .chat-option-arrow {
+            color: var(--gold, #C6A43F);
+            transform: translateX(4px);
+        }
+        
+        .chat-hours-notice {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .chat-hours-notice i {
+            color: #ff6b6b;
+            font-size: 1.1rem;
+        }
+        
+        .chat-hours-notice strong {
+            color: var(--gold, #C6A43F);
+        }
+        
+        @media (max-width: 480px) {
+            .chat-bubble-btn {
+                padding: 10px 16px 10px 14px;
+                min-height: 48px;
+                border-radius: 40px;
+            }
+            
+            .chat-bubble-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+            
+            .chat-bubble-text {
+                font-size: 0.8rem;
+            }
+            
+            .chat-options-panel {
+                width: calc(100vw - 30px);
+                right: 0;
+                bottom: 60px;
+                border-radius: 16px;
+            }
+        }
+    </style>
+
+    <script>
         // ========== SMART CHAT BUBBLE LOGIC ==========
-        (function() {
+        document.addEventListener('DOMContentLoaded', function() {
             const chatBubbleBtn = document.getElementById('chatBubbleBtn');
             const chatOptionsPanel = document.getElementById('chatOptionsPanel');
             const chatOptionsClose = document.getElementById('chatOptionsClose');
@@ -2348,111 +2394,110 @@
             function updateStatus() {
                 const open = isBusinessHours();
                 
-                if (statusDot) {
-                    statusDot.className = `status-dot ${open ? 'open' : 'closed'}`;
+                if (open) {
+                    statusDot.className = 'status-dot open';
+                    statusText.textContent = 'We\'re open! Call or text us now.';
+                    chatBubbleBtn.classList.add('active-hours');
+                    chatBubbleBtn.classList.remove('off-hours');
+                    hoursNotice.style.display = 'none';
+                    document.querySelector('.chat-option:nth-child(1) .chat-option-desc').textContent = 'Speak with a real person';
+                    document.querySelector('.chat-option:nth-child(2) .chat-option-desc').textContent = 'Quick replies via SMS';
+                } else {
+                    statusDot.className = 'status-dot closed';
+                    statusText.textContent = 'We\'re closed. Please email us.';
+                    chatBubbleBtn.classList.remove('active-hours');
+                    chatBubbleBtn.classList.add('off-hours');
+                    hoursNotice.style.display = 'flex';
+                    document.querySelector('.chat-option:nth-child(1) .chat-option-desc').textContent = 'Leave a voicemail';
+                    document.querySelector('.chat-option:nth-child(2) .chat-option-desc').textContent = 'We\'ll respond later';
                 }
                 
-                if (statusText) {
-                    statusText.textContent = open ? 'We\'re open! Call or text us now.' : 'We\'re closed. Please email us.';
-                }
-                
-                if (chatBubbleBtn) {
-                    chatBubbleBtn.classList.toggle('active-hours', open);
-                    chatBubbleBtn.classList.toggle('off-hours', !open);
-                    
-                    const bubbleText = chatBubbleBtn.querySelector('.chat-bubble-text');
-                    if (bubbleText) {
-                        bubbleText.textContent = open ? 'Contact Us' : 'Leave a Message';
-                    }
-                    
+                const bubbleText = chatBubbleBtn.querySelector('.chat-bubble-text');
+                if (open) {
+                    bubbleText.textContent = 'Contact Us';
                     let badge = chatBubbleBtn.querySelector('.hours-badge');
-                    if (open) {
-                        if (!badge) {
-                            badge = document.createElement('span');
-                            badge.className = 'hours-badge';
-                            badge.textContent = 'Open';
-                            chatBubbleBtn.appendChild(badge);
-                        }
-                    } else {
-                        if (badge) badge.remove();
+                    if (!badge) {
+                        badge = document.createElement('span');
+                        badge.className = 'hours-badge';
+                        badge.style.cssText = `
+                            background: #4CAF50;
+                            color: white;
+                            font-size: 0.5rem;
+                            padding: 2px 8px;
+                            border-radius: 10px;
+                            margin-left: 4px;
+                            font-weight: 700;
+                            text-transform: uppercase;
+                        `;
+                        badge.textContent = 'Open';
+                        chatBubbleBtn.appendChild(badge);
                     }
-                }
-                
-                if (hoursNotice) {
-                    hoursNotice.style.display = open ? 'none' : 'flex';
-                }
-                
-                const descs = document.querySelectorAll('.chat-option-desc');
-                if (descs.length >= 2) {
-                    descs[0].textContent = open ? 'Speak with a real person' : 'Leave a voicemail';
-                    descs[1].textContent = open ? 'Quick replies via SMS' : 'We\'ll respond later';
+                } else {
+                    const badge = chatBubbleBtn.querySelector('.hours-badge');
+                    if (badge) badge.remove();
+                    bubbleText.textContent = 'Leave a Message';
                 }
             }
             
             function togglePanel() {
-                if (chatOptionsPanel) chatOptionsPanel.classList.toggle('active');
+                chatOptionsPanel.classList.toggle('active');
             }
             
             function closePanel() {
-                if (chatOptionsPanel) chatOptionsPanel.classList.remove('active');
+                chatOptionsPanel.classList.remove('active');
             }
             
-            if (chatBubbleBtn) {
-                chatBubbleBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    togglePanel();
-                });
-            }
+            chatBubbleBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePanel();
+            });
             
-            if (chatOptionsClose) {
-                chatOptionsClose.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    closePanel();
-                });
-            }
+            chatOptionsClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closePanel();
+            });
             
             document.addEventListener('click', function(e) {
                 const container = document.getElementById('chatBubble');
-                if (container && !container.contains(e.target)) {
+                if (!container.contains(e.target)) {
                     closePanel();
                 }
             });
             
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') closePanel();
+                if (e.key === 'Escape') {
+                    closePanel();
+                }
             });
             
-            if (callOption) {
-                callOption.addEventListener('click', function(e) {
-                    const open = isBusinessHours();
-                    if (!open) {
-                        e.preventDefault();
-                        alert('Our business hours are 7am - 7pm.\n\nYou can leave a voicemail and we\'ll call back.\n\nOr email us at: itshowtime@msn.com');
-                        window.location.href = 'tel:+15629641624';
-                    }
-                    closePanel();
-                });
-            }
+            callOption.addEventListener('click', function(e) {
+                const open = isBusinessHours();
+                if (!open) {
+                    e.preventDefault();
+                    alert('Our business hours are 7am - 7pm.\n\nYou can leave a voicemail and we\'ll call back.\n\nOr email us at: itshowtime@msn.com');
+                    window.location.href = 'tel:+15629641624';
+                }
+                closePanel();
+            });
             
-            if (textOption) {
-                textOption.addEventListener('click', function(e) {
-                    const open = isBusinessHours();
-                    if (!open) {
-                        e.preventDefault();
-                        alert('Our business hours are 7am - 7pm.\n\nWe\'ll respond during business hours.\n\nOr email us at: itshowtime@msn.com');
-                        window.location.href = 'sms:+15629641624';
-                    }
-                    closePanel();
-                });
-            }
+            textOption.addEventListener('click', function(e) {
+                const open = isBusinessHours();
+                if (!open) {
+                    e.preventDefault();
+                    alert('Our business hours are 7am - 7pm.\n\nWe\'ll respond during business hours.\n\nOr email us at: itshowtime@msn.com');
+                    window.location.href = 'sms:+15629641624';
+                }
+                closePanel();
+            });
             
-            if (emailOption) {
-                emailOption.addEventListener('click', closePanel);
-            }
+            emailOption.addEventListener('click', function() {
+                closePanel();
+            });
             
             updateStatus();
             setInterval(updateStatus, 60000);
-        })();
+        });
     </script>
+    <!-- ========== END CHAT BUBBLE ========== -->
 </body>
 </html>
