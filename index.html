@@ -1160,9 +1160,197 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ========== INTRO VIDEO OVERRIDES ========== */
+        #intro-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        #intro-hero video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            background: #0f172a;
+        }
+
+        #intro-hero .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.3) 50%, rgba(15, 23, 42, 0.8) 100%);
+            pointer-events: none;
+        }
+
+        #intro-hero .content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+
+        #intro-hero .title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        #intro-hero .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: clamp(1rem, 1.5vw, 1.5rem);
+            max-width: 600px;
+            margin-top: 1rem;
+            opacity: 0;
+            transition: opacity 1s ease;
+            font-weight: 400;
+        }
+
+        #intro-hero .bottom-text {
+            position: absolute;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        #intro-hero .bottom-text p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: clamp(0.8rem, 1vw, 1rem);
+            max-width: 400px;
+        }
+
+        #intro-hero .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        #intro-hero .scroll-indicator span {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #intro-hero .scroll-indicator .arrow {
+            width: 1.5rem;
+            height: 2.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 9999px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #intro-hero .scroll-indicator .arrow .dot {
+            width: 0.25rem;
+            height: 0.25rem;
+            background: #38bdf8;
+            border-radius: 50%;
+            margin-top: 0.5rem;
+            animation: scroll-dot 1.5s ease-in-out infinite;
+        }
+
+        @keyframes scroll-dot {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(0.75rem); opacity: 0.3; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 640px) {
+            #intro-hero .bottom-text {
+                bottom: 5rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- ===== INTRO VIDEO WITH SEQUENCE ===== -->
+    <section id="intro-hero">
+        <video id="intro-video" autoplay muted playsinline preload="auto">
+            <source src="Marque video.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+        <div class="content">
+            <h1 class="title" id="main-title">It's Showtime</h1>
+            <p class="subtitle" id="sub-title">We make complicated devices easy to use</p>
+        </div>
+        <div class="bottom-text" id="bottom-text">
+            <p>Scroll down to learn more or schedule a free estimate for any project</p>
+        </div>
+        <div class="scroll-indicator" id="scroll-indicator">
+            <span>Scroll Down</span>
+            <div class="arrow"><div class="dot"></div></div>
+        </div>
+    </section>
+
+    <script>
+        (function() {
+            const video = document.getElementById('intro-video');
+            const title = document.getElementById('main-title');
+            const subtitle = document.getElementById('sub-title');
+            const bottomText = document.getElementById('bottom-text');
+            const scrollIndicator = document.getElementById('scroll-indicator');
+            
+            // --- VIDEO PLAYS ---
+            video.play().catch(() => {
+                document.addEventListener('click', () => video.play(), { once: true });
+            });
+            
+            // --- VIDEO FADES IN ---
+            setTimeout(() => {
+                video.style.opacity = '1';
+            }, 100);
+            
+            // --- VIDEO FADES OUT + TITLE FADES IN ---
+            setTimeout(() => {
+                video.style.opacity = '0';
+                title.style.opacity = '1';
+            }, 3500);
+            
+            // --- SUBTITLE FADES IN ---
+            setTimeout(() => {
+                subtitle.style.opacity = '1';
+            }, 4500);
+            
+            // --- BOTTOM TEXT & SCROLL INDICATOR FADE IN ---
+            setTimeout(() => {
+                bottomText.style.opacity = '1';
+                scrollIndicator.style.opacity = '1';
+            }, 5500);
+            
+            console.log('🎬 Intro sequence started');
+        })();
+    </script>
+    <!-- ===== END INTRO VIDEO ===== -->
+
     <!-- Fixed Parallax Background Container -->
     <div class="parallax-container">
         <div class="parallax-base parallax-layer-1" id="layer1"></div>
