@@ -1469,7 +1469,7 @@
         </div>
     </section>
     
-   <!-- AV Nightmare Fixer Section -->
+<!-- AV Nightmare Fixer Section -->
 <section class="section section-dark" style="padding: 3rem 0;">
     <div class="container">
         <div class="reveal" style="text-align: center;">
@@ -1496,16 +1496,17 @@
             </div>
         </div>
         
-        <!-- ====== VIDEO SNIPPET (WITHOUT IMAGES BELOW) ====== -->
+        <!-- ====== VIDEO SECTION - FIXED ====== -->
         <div class="reveal" style="margin-top: 3rem; text-align: center;">
-            <div class="video-container" style="position: relative; max-width: 800px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg), var(--shadow-gold); border: 1px solid rgba(198,164,63,0.3); background: var(--charcoal-light); cursor: pointer;">
+            <div class="video-container" style="position: relative; max-width: 800px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg), var(--shadow-gold); border: 1px solid rgba(198,164,63,0.3); background: var(--charcoal-light);">
                 
-                <video id="nightmareVideo" preload="metadata" style="width: 100%; height: auto; display: block; background: var(--charcoal-light);">
+                <video id="nightmareVideo" preload="metadata" playsinline style="width: 100%; height: auto; display: block; background: var(--charcoal-light); cursor: pointer;">
                     <source src="SHOWTIME ADD-20260625-154908-8775.mp4" type="video/mp4">
                     Your browser does not support HTML5 video.
                 </video>
                 
-                <div id="videoPlayOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); transition: opacity 0.5s ease; pointer-events: none;">
+                <!-- Play Button Overlay - CLICKABLE -->
+                <div id="videoPlayOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); transition: opacity 0.5s ease; cursor: pointer; z-index: 5;">
                     <div style="width: 90px; height: 90px; background: var(--gradient-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-gold); transition: transform 0.3s ease;">
                         <i class="fas fa-play" style="font-size: 2.2rem; color: var(--charcoal); margin-left: 6px;"></i>
                     </div>
@@ -1517,56 +1518,72 @@
                 See how we transform AV nightmares into seamless systems
             </p>
         </div>
-        <!-- ====================================================== -->
+        <!-- ========================================= -->
         
     </div>
 </section>
 
 <script>
-    // ========== VIDEO PLAY BUTTON LOGIC ==========
+    // ========== VIDEO PLAY BUTTON LOGIC - FIXED ==========
     document.addEventListener('DOMContentLoaded', function() {
         const video = document.getElementById('nightmareVideo');
         const overlay = document.getElementById('videoPlayOverlay');
-        const container = video?.closest('.video-container');
         
-        if (video && overlay && container) {
-            container.addEventListener('click', function(e) {
-                if (e.target.tagName === 'VIDEO') return;
+        if (video && overlay) {
+            // Function to toggle play/pause
+            function toggleVideo(e) {
+                e.stopPropagation();
                 if (video.paused) {
                     video.play();
                 } else {
                     video.pause();
                 }
-            });
+            }
             
+            // Click on overlay plays video
+            overlay.addEventListener('click', toggleVideo);
+            
+            // Click on video itself also works
+            video.addEventListener('click', toggleVideo);
+            
+            // When video starts playing, hide overlay
             video.addEventListener('play', function() {
                 overlay.style.opacity = '0';
-                overlay.style.pointerEvents = 'none';
+                overlay.style.cursor = 'default';
             });
             
+            // When video pauses (not ended), show overlay
             video.addEventListener('pause', function() {
                 if (!video.ended) {
                     overlay.style.opacity = '1';
-                    overlay.style.pointerEvents = 'none';
+                    overlay.style.cursor = 'pointer';
+                    // Change icon back to play
+                    const icon = overlay.querySelector('.fa-play, .fa-redo, .fa-pause');
+                    if (icon) {
+                        icon.className = 'fas fa-play';
+                    }
                 }
             });
             
+            // When video ends, show overlay with replay
             video.addEventListener('ended', function() {
                 overlay.style.opacity = '1';
-                overlay.style.pointerEvents = 'none';
-                const playIcon = overlay.querySelector('.fa-play, .fa-redo');
-                if (playIcon) {
-                    playIcon.className = 'fas fa-redo';
+                overlay.style.cursor = 'pointer';
+                const icon = overlay.querySelector('.fa-play, .fa-redo, .fa-pause');
+                if (icon) {
+                    icon.className = 'fas fa-redo';
                 }
             });
             
+            // Reset when video loads
             video.addEventListener('loadedmetadata', function() {
-                const playIcon = overlay.querySelector('.fa-play, .fa-redo');
-                if (playIcon) {
-                    playIcon.className = 'fas fa-play';
+                const icon = overlay.querySelector('.fa-play, .fa-redo, .fa-pause');
+                if (icon) {
+                    icon.className = 'fas fa-play';
                 }
             });
             
+            // Hover effects on overlay
             overlay.addEventListener('mouseenter', function() {
                 const btn = this.querySelector('div');
                 if (btn) btn.style.transform = 'scale(1.08)';
@@ -1575,6 +1592,20 @@
             overlay.addEventListener('mouseleave', function() {
                 const btn = this.querySelector('div');
                 if (btn) btn.style.transform = 'scale(1)';
+            });
+            
+            // Error handling - shows in console if video fails
+            video.addEventListener('error', function(e) {
+                console.warn('⚠️ Video failed to load. Check file path and format.');
+                console.warn('File should be in the same folder as index.html: SHOWTIME ADD-20260625-154908-8775.mp4');
+                // Show a message on screen
+                overlay.innerHTML = `
+                    <div style="text-align: center; padding: 1rem; background: rgba(0,0,0,0.7); border-radius: 12px; max-width: 80%;">
+                        <i class="fas fa-exclamation-triangle" style="color: var(--gold); font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                        <p style="color: white; font-size: 0.9rem; margin: 0;">Video not found.<br>Please check the file name and location.</p>
+                    </div>
+                `;
+                overlay.style.cursor = 'default';
             });
         }
     });
